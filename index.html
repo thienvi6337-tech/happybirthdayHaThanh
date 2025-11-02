@@ -1,409 +1,616 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Home Sweet Home</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Home Sweet Home</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 
-  <style>
-    /* ===== Tokens (light only) ===== */
-    :root{
-      --bg1:#ffe6f0; --bg2:#ffd6eb; --ink:#ff4d94;
-      --card:#fff7fb; --shadow:0 6px 16px rgba(255,105,180,.25);
-      --radius:18px; --maxw:1100px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:linear-gradient(180deg,var(--bg1),var(--bg2));
-      color:var(--ink); font-family:"Montserrat",system-ui,Arial,sans-serif;
-      line-height:1.65; text-align:center; overflow-x:hidden;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--maxw); margin:0 auto; padding:24px 16px}
-    .section{padding:32px 0}
-    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
+<style>
+/* ===== THEME (pink only) ===== */
+:root{
+  --bg1:#ffe6f0; --bg2:#ffd6eb;
+  --ink:#ff4d94; --ink-2:#ff66a3; --ink-3:#ff8fb3;
+  --card:#fff7fb; --soft:#ffe5f3;
+  --shadow:0 10px 30px rgba(255,105,180,.25);
+  --radius:18px; --max:1100px;
+}
+*{box-sizing:border-box}
+html,body{margin:0; padding:0}
+body{
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#b14b7b; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.65; overflow-x:hidden; text-align:center; cursor:auto;
+}
 
-    /* ===== Topbar / Nav (cân khoảng cách đều) ===== */
-    .topbar{position:sticky; top:0; z-index:50; backdrop-filter:blur(10px);
-      background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.25)); padding:8px 12px}
-    .nav{max-width:var(--maxw); margin:0 auto;
-      display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px}
-    .nav-left,.nav-right{display:flex; gap:10px; align-items:center}
-    .nav-left{justify-content:flex-start}
-    .nav-right{justify-content:flex-end}
-    .pill{display:inline-block; font-weight:800; background:#ffe5f3; padding:8px 12px; border-radius:999px; box-shadow:var(--shadow)}
-    .brand{font-family:'Pacifico', cursive; font-size:clamp(22px,4vw,30px); color:#ff66a3}
+/* floating cute icons background */
+.bg-decor{pointer-events:none; position:fixed; inset:0; z-index:-1; opacity:.25}
+.bg-decor span{position:absolute; color:#ff76b4; animation:drift 14s linear infinite; font-size:22px; filter:blur(.2px)}
+@keyframes drift{from{transform:translateY(110vh)} to{transform:translateY(-15vh)}}
 
-    /* ===== Album (no-crop + auto-swipe) ===== */
-    .album { position: relative; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 10px 10px 18px; overflow: hidden; }
-    .album-track { display: flex; gap: 8px; scroll-snap-type: x mandatory; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-    .album-track::-webkit-scrollbar{ display:none }
-    .album-slide { flex: 0 0 100%; scroll-snap-align: center; display: grid; place-items: center; padding: 6px; }
-    .album-slide img { max-height: min(72vh, 650px); width: 100%; height: auto; object-fit: contain !important; border-radius: 14px; box-shadow: var(--shadow); }
-    .album-dots{display:flex; gap:6px; justify-content:center; margin-top:8px}
-    .album-dots button{ width:8px; height:8px; border-radius:999px; border:0; opacity:.35; background: var(--ink); cursor:pointer }
-    .album-dots button[aria-current="true"]{ opacity:1 }
+/* layout helpers */
+.container{max-width:var(--max); margin:0 auto; padding:24px 16px}
+.section{padding:32px 0}
+.card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
+h1,h2{font-family:"Comic Sans MS",cursive; margin:0}
+h1{font-size:clamp(28px,4vw,48px); color:var(--ink-2); font-weight:800}
+h2{font-size:clamp(16px,2.2vw,22px); color:var(--ink-3); font-weight:400}
+a{color:#ff4d94}
 
-    /* ===== Sweet letter / hero ===== */
-    .hero{display:grid; gap:24px; align-items:center; grid-template-columns:1fr}
-    .hero .media{display:flex; justify-content:center}
-    .hero .img-wrap{width:100%; max-width:420px; aspect-ratio:3/4; border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:linear-gradient(180deg,#ffddea,#ffeaf3)}
-    .hero img{width:100%; height:100%; object-fit:cover}
-    .hero .copy{text-align:left; max-width:680px; margin:0 auto}
-    .hero .label{display:inline-block; padding:6px 12px; border-radius:999px; background:#ffe5f3; font-weight:800; margin-bottom:8px; box-shadow:var(--shadow)}
-    .hero h3{margin:4px 0 6px; font-weight:800; font-size:28px}
-    @media(min-width:900px){ .hero{grid-template-columns:420px 1fr} .hero .copy{margin:0} }
+/* ===== NAV (4 buttons + centered brand) ===== */
+.nav{
+  position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
+  background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.35));
+  box-shadow:0 8px 22px rgba(255,105,180,.18);
+}
+.navwrap{max-width:1200px; margin:auto; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; padding:10px 12px}
+.nav .group{display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+.nav a.btn{
+  display:inline-flex; gap:8px; align-items:center; font-weight:800; text-decoration:none; color:#b14b7b;
+  background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow)
+}
+/* Brand text (Pacifico) + pulse hover */
+.brand{
+  font-family:'Pacifico', cursive; font-size:clamp(22px,3.2vw,34px); color:#ff66a3; text-shadow:0 1px 0 #fff;
+  display:inline-block; transition:transform .25s ease;
+}
+.brand:hover{ animation:pulse 1.2s ease-in-out infinite alternate }
+@keyframes pulse{ from{transform:scale(1)} to{transform:scale(1.02)} }
 
-    /* ===== Calendar ===== */
-    .cal{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px}
-    .cal-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px}
-    .cal-head .navs button{border:0; background:#ffe5f3; border-radius:999px; padding:6px 10px; font-weight:800; box-shadow:var(--shadow); cursor:pointer}
-    .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; font-weight:700}
-    .cal-cell{padding:8px 0; border-radius:10px; background:rgba(255,255,255,.5)}
-    .cal-day{opacity:.55; font-size:12px}
-    .cal-date{position:relative; background:#fff; box-shadow:var(--shadow)}
-    .cal-date.today{outline:3px solid #ff8fb3}
-    .cal-date .emoji{position:absolute; right:6px; top:4px}
+/* hero (Sweet Letter block) */
+.hero{display:grid; gap:24px; align-items:center; grid-template-columns:1fr}
+.hero .media{display:flex; justify-content:center}
+.img-wrap{width:100%; max-width:420px; aspect-ratio:3/4; border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:linear-gradient(180deg,#ffddea,#ffeaf3)}
+.hero img{width:100%; height:100%; object-fit:cover; display:block}
+.hero .copy{text-align:left; max-width:680px; margin:0 auto}
+.label{display:inline-block; padding:6px 12px; border-radius:999px; background:#ffe5f3; font-weight:800; margin-bottom:8px; box-shadow:var(--shadow); letter-spacing:.5px}
+.hero h3{margin:4px 0 6px; font-weight:800; font-size:28px; color:#ff4d94}
+.hero p{margin:8px 0 0}
+.countdown{margin-top:12px; font-weight:800; font-size:clamp(18px,3vw,32px); color:var(--ink-2)}
+@media(min-width:900px){ .hero{grid-template-columns:420px 1fr} .hero .copy{margin:0} }
 
-    /* ===== GIF rows ===== */
-    .gifs-row{display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap}
-    .gifs-row img{width:min(220px,30vw); border-radius:20px; box-shadow:0 0 25px rgba(255,192,203,.6)}
+/* vertical carousel (HT1..Tinkerbell1) */
+.vcarousel{position:relative; overflow:hidden; border-radius:22px; box-shadow:var(--shadow)}
+.vtrack{display:flex; transition:transform .6s ease}
+.vslide{min-width:100%; display:flex; justify-content:center; align-items:center; background:#fffdfc}
+.vslide img{max-height:70vh; width:auto; height:auto; object-fit:contain; display:block}
+.vnav{position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none}
+.vnav button{pointer-events:auto; border:0; width:42px; height:42px; border-radius:999px; background:#fff; box-shadow:var(--shadow); color:#ff4d94; font-weight:800}
 
-    /* ===== Postcard / Wish ===== */
-    .postcard{background:#fffdfc; border-radius:20px; padding:28px 22px; box-shadow:0 12px 30px rgba(255,170,200,.35), inset 0 0 0 2px rgba(255,160,200,.25)}
-    .wish-title{ font-weight:800; margin:0 0 10px; font-size:clamp(18px,2.4vw,22px) }
-    .wish-list{display:grid; gap:12px; text-align:left}
-    .wish-item{background:var(--card); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); position:relative; padding-left:44px}
-    .wish-item::before{content: attr(data-emo); position:absolute; left:12px; top:50%; transform:translateY(-50%) rotate(-8deg); font-weight:800}
+/* micro copy under carousel */
+.note{font-size:14px; color:#b14b7b}
 
-    /* ===== Marquee gallery ===== */
-    .gallery-wrap{overflow:hidden}
-    .gallery{display:flex; gap:12px; width:max-content; margin:22px auto 0; animation:scroll 25s linear infinite}
-    .gallery img{height:200px; width:auto; border-radius:15px; box-shadow:var(--shadow)}
-    @keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
-    @media(prefers-reduced-motion:reduce){ .gallery{animation:none} }
+/* === Calendar === */
+h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); color:#ff4d94}
+.cal-wrap{background:var(--card); padding:20px; border-radius:22px; box-shadow:var(--shadow)}
+.cal-head{display:flex; align-items:center; justify-content:space-between}
+.cal-head h4{margin:6px 0 14px; font-size:clamp(18px,3.2vw,28px); color:#ff4d94}
+.cal-head button{border:0; background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow); font-weight:800; color:#b14b7b}
+.grid{display:grid; grid-template-columns:repeat(7,1fr); gap:14px}
+.cell,.dow{background:#fff; border-radius:16px; padding:18px 0; box-shadow:var(--shadow)}
+.dow{background:linear-gradient(180deg,#fff,#fff0); font-weight:800; color:#ff66a3}
+.cell{font-weight:800; color:#ff3e8a}
+.cell.today{outline:3px solid #ffc0da}
+.cell .mark{margin-left:6px}
 
-    /* ===== Envelope / Birthday letter (paws css) ===== */
-    .envelope{position:relative; margin:0 auto; max-width:var(--maxw); background:#fff7fb; border-radius:18px; box-shadow:var(--shadow); overflow:hidden}
-    .envelope .flap{position:absolute; left:0; right:0; top:0; height:0; padding-bottom:32%; background:linear-gradient(180deg,#ffd8ea,#ffeaf5); clip-path:polygon(0 0, 100% 0, 50% 100%); transition:transform .6s ease, opacity .6s ease; transform-origin:50% 0; z-index:2}
-    .envelope.open .flap{ transform:rotateX(180deg); opacity:.35 }
-    .flap .hint{position:absolute; left:50%; top:18%; transform:translate(-50%,-50%); font-weight:800; font-size:14px; color:#b14b7b; text-shadow:0 1px 0 rgba(255,255,255,.8)}
-    .paper-wrap{margin-top:28%; background:#fffdfd; border-top-left-radius:18px; border-top-right-radius:18px; position:relative}
-    .paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease; padding:0 22px 0; text-align:left}
-    .paper-inner::after{content:""; display:block; height:12px} /* giảm đệm cuối */
+/* GIF strips */
+.gifs-row{display:flex; gap:16px; justify-content:center; align-items:center; flex-wrap:wrap}
+.gifs-row img{width:min(260px,32vw); border-radius:20px; box-shadow:0 0 25px rgba(255,192,203,.6); transform:translateY(0); transition:transform .35s}
+.gifs-row img:hover{transform:translateY(-6px) rotate(-1.5deg)}
 
-    /* Paw (màu hồng) */
-    .paw{position:absolute; width:28px; height:28px; pointer-events:none; opacity:0; transform:translate(-50%,0) scale(.9)}
-    .paw i{position:absolute; background:#ff9ac1; border-radius:50%; box-shadow:0 2px 6px rgba(255,120,170,.35)}
-    .paw .pad{width:16px; height:14px; left:6px; bottom:2px}
-    .paw .toe1{width:7px; height:7px; left:2px; top:2px}
-    .paw .toe2{width:7px; height:7px; left:10px; top:0}
-    .paw .toe3{width:7px; height:7px; left:18px; top:2px}
-    .paw.show{animation:paw-pop 900ms ease forwards}
-    @keyframes paw-pop{
-      0%{opacity:0; transform:translateY(6px) scale(.82)}
-      30%{opacity:1; transform:translateY(-6px) scale(1.05)}
-      60%{opacity:1; transform:translateY(-10px) scale(1)}
-      100%{opacity:0; transform:translateY(-26px) scale(.98)}
-    }
+/* candle */
+.candle-section{margin-top:30px; background:var(--card); padding:44px 0; border-top-left-radius:50px; border-top-right-radius:50px; box-shadow:0 -5px 20px rgba(255,182,193,.3)}
+.candle{position:relative; width:40px; height:80px; background:#fff0f5; border-radius:10px; margin:26px auto; box-shadow:var(--shadow); cursor:pointer}
+.flame{position:absolute; top:-25px; left:50%; transform:translateX(-50%); width:25px; height:25px; background:radial-gradient(circle,#ffd966,#ffb347,#ff7b00); border-radius:50%; box-shadow:0 0 30px 10px rgba(255,184,108,.6); animation:flicker .25s infinite alternate}
+@keyframes flicker{0%{transform:translateX(-50%) scale(1);opacity:.95}100%{transform:translateX(-48%) scale(1.1);opacity:1}}
+.smoke{position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:10px; height:10px; border-radius:50%; background:radial-gradient(circle, rgba(180,180,180,.6), rgba(180,180,180,0)); opacity:0; pointer-events:none}
+.smoke.show{ animation:puff 1.2s ease-out forwards }
+@keyframes puff{0%{opacity:.8; transform:translate(-50%,0) scale(.8)}100%{opacity:0; transform:translate(-50%,-40px) scale(1.4)}}
+.candle.off .flame{display:none}
+#message{font-size:16px; font-weight:700; margin-top:6px; color:var(--ink-2)}
 
-    /* Reveal (micro-reveal 12px) */
-    .reveal{opacity:0; transform:translateY(12px); transition:opacity .45s ease, transform .45s ease}
-    .reveal.is-in{opacity:1; transform:translateY(0)}
-  </style>
+/* postcard wishes */
+.postcard{background:#fffdfc; border-radius:20px; padding:28px 22px; box-shadow:0 12px 30px rgba(255,170,200,.35), inset 0 0 0 2px rgba(255,160,200,.25); position:relative}
+.postcard:before{content:""; position:absolute; inset:10px; border-radius:16px; border:2px dashed rgba(255,120,170,.35)}
+.wish-title{ font-weight:800; margin:0 0 10px; font-size:clamp(18px,2.4vw,22px) }
+.wish-list{display:grid; gap:12px}
+.wish-item{background:var(--card); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); text-align:left; position:relative; padding-left:44px}
+.wish-item::before{content: attr(data-emo); position:absolute; left:12px; top:50%; transform:translateY(-50%) rotate(-8deg); font-weight:800; animation:wiggle 1.6s ease-in-out infinite; color:#ff76b4}
+@keyframes wiggle{0%,100%{transform:translateY(-50%) rotate(-8deg)}50%{transform:translateY(calc(-50% - 2px)) rotate(6deg)}}
+
+/* envelope (Birthday Letter) */
+.envelope{position:relative; margin:0 auto; max-width:var(--max); background:#fff7fb; border-radius:18px; box-shadow:var(--shadow); padding:0; overflow:hidden}
+.envelope .flap{position:absolute; left:0; right:0; top:0; height:0; padding-bottom:32%; background:linear-gradient(180deg,#ffd8ea,#ffeaf5); clip-path:polygon(0 0, 100% 0, 50% 100%); transition:transform .6s ease, opacity .6s ease; transform-origin:50% 0; z-index:2}
+.envelope.open .flap{ transform:rotateX(180deg); opacity:.35 }
+.flap .hint{position:absolute; left:50%; top:18%; transform:translate(-50%,-50%); font-weight:800; font-size:14px; color:#b14b7b; text-shadow:0 1px 0 rgba(255,255,255,.8)}
+.envelope .paper-wrap{margin-top:28%; background:#fffdfd; border-top-left-radius:18px; border-top-right-radius:18px; position:relative}
+.paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease, padding .6s ease; padding:0 22px 0; text-align:left}
+.paper-inner::after{content:""; display:block; height:18px;} /* spacer dưới */
+.envelope.open .paper-inner{max-height:1200px; padding:22px 22px 36px;}
+
+/* paw-pop effect */
+.paw{position:absolute; top:14%; left:50%; transform:translate(-50%,0); font-size:18px; color:#ff76b4; opacity:0; pointer-events:none}
+.paw.show{animation:pawPop 900ms ease-out forwards}
+@keyframes pawPop{
+  0%{transform:translate(-50%,0) scale(.6); opacity:0}
+  35%{transform:translate(-50%,-6px) scale(1); opacity:1}
+  100%{transform:translate(-50%,-26px) scale(1.05); opacity:0}
+}
+
+/* gift */
+.gift-section{padding:30px 0 10px}
+.gift-wrap{display:flex; flex-direction:column; align-items:center; gap:10px}
+.gift{width:160px; height:120px; background:#ff9dc6; border-radius:12px; position:relative; box-shadow:var(--shadow); cursor:pointer}
+.gift:before{content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:18px; height:100%; background:#ff4d94; border-radius:6px}
+.gift:after{content:""; position:absolute; left:0; top:52%; transform:translateY(-50%); width:100%; height:18px; background:#ff4d94; border-radius:6px}
+.lid{position:absolute; left:-6px; top:-28px; width:172px; height:36px; background:#ffa9d0; border-radius:12px; box-shadow:var(--shadow); transform-origin:left bottom; transition:transform .45s ease}
+.gift.open .lid{transform:rotate(-22deg) translate(-6px,-8px)}
+.balloons{position:relative; width:100%; height:0}
+.balloon{position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:26px; height:34px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; background:#ffd166; opacity:0; animation:rise 2.8s ease-in forwards; filter:drop-shadow(0 6px 10px rgba(0,0,0,.1))}
+.balloon:after{content:""; position:absolute; left:50%; bottom:-18px; transform:translateX(-50%); width:2px; height:22px; background:rgba(0,0,0,.15)}
+@keyframes rise{0%{transform:translate(-50%,20px) scale(.9);opacity:0}12%{opacity:1}100%{transform:translate(-50%,-220px) scale(1.05);opacity:0}}
+
+/* Auto motion (reveal) */
+.reveal{opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease}
+.reveal.show{opacity:1; transform:translateY(0)}
+
+/* marquee gallery */
+.marquee{overflow:hidden}
+.mtrack{display:flex; gap:12px; width:max-content; margin:22px auto 0; animation:scroll 25s linear infinite}
+.mtrack img{height:200px; width:auto; border-radius:15px; box-shadow:var(--shadow)}
+@keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){ .mtrack{animation:none} }
+
+/* Music button */
+.music-btn{border:0; border-radius:999px; padding:10px 18px; background:#ffe5f3; color:#b14b7b; font-weight:800; box-shadow:var(--shadow); cursor:pointer}
+.music-btn[aria-pressed="true"]{background:#ffccdf}
+
+/* sub-pages (hash) */
+.subpage{position:fixed; inset:0; background:linear-gradient(180deg,var(--bg1),var(--bg2)); z-index:100; overflow:auto; transform:translateY(4px); display:none}
+.subpage.show{display:block}
+.subpage .wrap{max-width:920px; margin:0 auto; padding:28px 16px}
+.subpage .card{padding:22px 20px}
+.subpage .brand{font-family:'Pacifico',cursive; font-size:34px; color:#ff66a3; text-decoration:none}
+.subpage .back{display:inline-block; margin-top:16px; text-decoration:none; font-weight:800; background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow); color:#ff4d94}
+.subpage img{max-width:100%; border-radius:18px; box-shadow:var(--shadow)}
+
+/* Prev/next dots under vcarousel */
+.dots{display:flex; justify-content:center; gap:8px; margin-top:10px}
+.dots button{width:8px; height:8px; border-radius:50%; border:0; background:#ffd0e3; cursor:pointer}
+.dots button.active{background:#ff4d94}
+
+/* ====== Music/Movie link buttons (glassy hover) ====== */
+.music-links{display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:14px}
+.music-links a{
+  display:inline-block; padding:12px 18px; border-radius:999px; font-weight:800; text-decoration:none;
+  background:rgba(255,255,255,.7); color:#ff4d94; box-shadow:var(--shadow); backdrop-filter:blur(4px);
+  transition:transform .2s, box-shadow .2s, background .2s;
+}
+.music-links a:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 36px rgba(255,105,180,.28), inset 0 0 0 1px rgba(255,105,180,.25);
+  background:rgba(255,255,255,.85);
+}
+
+/* ====== Sparkle trail (click effect) ====== */
+.sparkle{
+  position:fixed; left:0; top:0; transform:translate(-50%,-50%);
+  pointer-events:none; font-size:14px; color:#ff76b4; opacity:0; filter:drop-shadow(0 2px 6px rgba(255,120,170,.6));
+  animation:sparklePop .42s ease-out forwards;
+}
+@keyframes sparklePop{
+  0%{opacity:0; transform:translate(-50%,-50%) scale(.6)}
+  30%{opacity:1; transform:translate(-50%,-60%) scale(1.05)}
+  100%{opacity:0; transform:translate(-50%,-80%) scale(.8)}
+}
+</style>
 </head>
 <body>
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="nav">
-      <div class="nav-left">
-        <a class="pill" href="#sweet-letter">Sweet Letter</a>
-        <a class="pill" href="#birthday-letter">Birthday Letter</a>
-      </div>
-      <a class="brand" href="#">Home Sweet Home</a>
-      <div class="nav-right">
-        <a class="pill" href="lazy.html">Are you lazy?</a>
-        <a class="pill" href="busy.html">Are you busy?</a>
-      </div>
+<!-- floating cute icons -->
+<div class="bg-decor" aria-hidden="true" id="bgDecor">
+  <span style="left:6%; animation-delay:-2s">✦</span>
+  <span style="left:14%; animation-delay:-6s">❀</span>
+  <span style="left:26%; animation-delay:-4s">★</span>
+  <span style="left:40%; animation-delay:-9s">🐾</span>
+  <span style="left:58%; animation-delay:-11s">❁</span>
+  <span style="left:74%; animation-delay:-1s">❃</span>
+  <span style="left:88%; animation-delay:-7s">✦</span>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="navwrap">
+    <div class="group">
+      <a href="#sweet" class="btn">Sweet Letter</a>
+      <a href="#letter" class="btn">Birthday Letter</a>
+    </div>
+    <div class="brand"><a href="#" style="text-decoration:none;color:inherit">Home Sweet Home</a></div>
+    <div class="group">
+      <a href="#lazy" class="btn">Are you lazy?</a>
+      <a href="#busy" class="btn">Are you busy?</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== From Tinkerbell tag + VERTICAL CAROUSEL (HT1..Tinkerbell1) ===== -->
+<section class="container section reveal" id="memories">
+  <div class="corner-tag">From Tinkerbell with luv</div>
+
+  <div class="vcarousel" id="vcarousel" style="margin-top:12px">
+    <div class="vtrack" id="vtrack">
+      <div class="vslide"><img src="assets/HT1.jpg" alt="HT1"></div>
+      <div class="vslide"><img src="assets/HT2.jpg" alt="HT2"></div>
+      <div class="vslide"><img src="assets/HT3.jpg" alt="HT3"></div>
+      <div class="vslide"><img src="assets/HT4.jpg" alt="HT4"></div>
+      <div class="vslide"><img src="assets/Tinkerbell1.jpg" alt="Tinkerbell1"></div>
+    </div>
+    <div class="vnav">
+      <button id="vprev">‹</button>
+      <button id="vnext">›</button>
+    </div>
+  </div>
+  <div class="dots" id="vdots"></div>
+
+  <p class="card note" style="margin-top:12px; text-align:left">
+    Em đặt ảnh của cả hai em bé ở đây bởi vì có lẽ nó là khoảng thời gian hồn nhiên nhất trong cả cuộc đời này - mà bất kỳ lúc nào nhìn lại, chúng ta cũng sẽ mỉm cười (nhỉ)? Giữ được sự hồn nhiên trong tất cả mọi điều thật khó - nhưng cũng sẽ thật tuyệt, nên hi vọng là tụi mình có thể vui vẻ với nhau như trẻ em và nâng niu nhau như những em bé, nhoé ạ (<a href="https://youtu.be/OUZA0RAv85U?si=pDRpDc3j2zMajV19" target="_blank" rel="noopener">link</a>). Thời gian sẽ lấy đi của mỗi người nhiều thứ, nhưng, nếu mệt quá thì em hi vọng người có thể quay về nhà nhá... Tinkerbell nói là biết đâu sinh nhật năm sau… hope so, hope so i ^.^
+  </p>
+</section>
+
+<!-- ===== SWEET LETTER (hero) ===== -->
+<section class="container section hero reveal" id="sweet">
+  <div class="media">
+    <div class="img-wrap"><img src="assets/Tinkerbell.jpg" alt="Thiên Vi Tinkerbell" loading="eager"></div>
+  </div>
+  <div class="copy">
+    <span class="label">SWEET LETTER</span>
+    <h3>Chúng ta đã cùng trải qua một hành trình (không dài lắm mà cũng không ngắn lắm) và ọ oẹ nhau hơi nhiều, nhỉ?</h3>
+    <p>Cùng đếm ngược đến ngày sinh nhật Hà Thanh nhoé ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧</p>
+    <div class="countdown" id="countdown">09.11.2025 is comingggg 𓇼 ⋆.˚ 𓆉 𓆝</div>
+  </div>
+</section>
+
+<!-- ===== Calendar (title must be above) ===== -->
+<section class="container section reveal">
+  <h3 class="title">Hô biến ra quả lịch vạn niên</h3>
+  <div class="cal-wrap" id="calendar"></div>
+</section>
+
+<!-- ===== Test mic + Music + meo2/meo3/meo4 (THIS MUST BE BEFORE ANGEL) ===== -->
+<section class="container section reveal" id="musicbox">
+  <div class="card">
+    <h3 style="margin:0 0 12px; font-weight:800; color:#ff4d94">Test mic, test mic, chuẩn bị lên nhạc chưa ạ? Gòi, Hà Thanh bấm dzo nhạc i ạ =))</h3>
+    <button id="musicBtn" class="music-btn" aria-pressed="false">♫ Music</button>
+    <div class="gifs-row" style="margin-top:18px">
+      <img src="assets/meo2.gif" alt="meo2">
+      <img src="assets/meo3.gif" alt="meo3">
+      <img src="assets/meo4.gif" alt="meo4">
+    </div>
+  </div>
+</section>
+
+<!-- ===== ANGEL title + 3 original gifs (meocon/conmeo/dancing-cat-dance) ===== -->
+<main class="container section reveal" id="oldSite">
+  <h1>HAPPY BIRTHDAY MY ANGEL</h1>
+  <h2>Wishing you a day as lovely as you are ฅ^>⩊<^ ฅ</h2>
+
+  <div class="container" style="padding-top:8px">
+    <div class="gifs-row">
+      <img src="assets/dancing-cat-dance.gif" alt="dancing cat"/>
+      <img src="assets/conmeo.gif" alt="con mèo dễ thương"/>
+      <img src="assets/meocon.gif" alt="mèo con đáng yêu"/>
     </div>
   </div>
 
-  <!-- From Tinkerbell + Album -->
-  <div class="wrap" style="padding-top:8px">
-    <div class="card" style="display:inline-block; font-weight:700; margin-bottom:10px">From Tinkerbell with luv</div>
-
-    <section class="section reveal">
-      <div class="album" id="album">
-        <div class="album-track" id="albumTrack">
-          <div class="album-slide"><img src="assets/HT1.jpg" alt="HT1"></div>
-          <div class="album-slide"><img src="assets/HT2.jpg" alt="HT2"></div>
-          <div class="album-slide"><img src="assets/HT3.jpg" alt="HT3"></div>
-          <div class="album-slide"><img src="assets/HT4.jpg" alt="HT4"></div>
-          <div class="album-slide"><img src="assets/Tinkerbell1.jpg" alt="Tinkerbell1"></div>
-        </div>
-        <div class="album-dots" id="albumDots"></div>
+  <!-- wishes postcard -->
+  <section class="container section">
+    <div class="postcard">
+      <div class="wish-title"><strong>Chúc Hà Thanh không chỉ vui vào mỗi ngày sinh nhật, mà là cả tháng, cả năm và nhiều năm 🐎i 🐎i về sau ạ ( ˶˘ ³˘)♡</strong></div>
+      <div style="margin-bottom:10px">Và tuổi mới có thể:</div>
+      <div class="wish-list">
+        <div class="wish-item" data-emo="✿">Làm sương sương, lương cũng cũng •ᴗ•</div>
+        <div class="wish-item" data-emo="♡">Xăng đầy bình, xinh đầy mình •ᴗ•</div>
+        <div class="wish-item" data-emo="★">Chẳng cần cày nhiều hơn mỗi ngày vẫn có thể cười nhiều hơn mỗi ngày •ᴗ•</div>
+        <div class="wish-item" data-emo="✦">Làm công tác phong làm chủ •ᴗ•</div>
+        <div class="wish-item" data-emo="❀">Nói trước bước qua luôn •ᴗ•</div>
       </div>
+    </div>
+  </section>
 
-      <div class="card" style="text-align:left; margin-top:12px">
-        Em đặt ảnh của cả hai em bé ở đây bởi vì có lẽ nó là khoảng thời gian hồn nhiên nhất trong cả cuộc đời này - mà bất kỳ lúc nào nhìn lại, chúng ta cũng sẽ mỉm cười (nhỉ)?
-        Giữ được sự hồn nhiên trong tất cả mọi điều thật khó - nhưng cũng sẽ thật tuyệt, nên hi vọng là tụi mình có thể vui vẻ với nhau như trẻ em và nâng niu nhau như những em bé, nhoé ạ
-        (<a href="https://youtu.be/OUZA0RAv85U?si=pDRpDc3j2zMajV19" target="_blank" rel="noopener">link</a>).
-        Thời gian sẽ lấy đi của mỗi người nhiều thứ, nhưng, nếu mệt quá thì em hi vọng người có thể quay về nhà nhá...
+  <!-- marquee gallery (added benh/an/miss; removed toion) -->
+  <section class="container section">
+    <div class="marquee">
+      <div class="mtrack" aria-hidden="true">
+        <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="be kind to your mind" loading="lazy">
+        <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="if u got issues, I got tissues" loading="lazy">
+        <img src="assets/Happy%20Birthday.jpg" alt="Happy Birthday" loading="lazy">
+        <img src="assets/benh.jpg" alt="benh" loading="lazy">
+        <img src="assets/an.jpg" alt="an" loading="lazy">
+        <img src="assets/miss.jpg" alt="miss" loading="lazy">
+        <!-- loop again for seamless -->
+        <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="" loading="lazy">
+        <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="" loading="lazy">
+        <img src="assets/Happy%20Birthday.jpg" alt="" loading="lazy">
+        <img src="assets/benh.jpg" alt="" loading="lazy">
+        <img src="assets/an.jpg" alt="" loading="lazy">
+        <img src="assets/miss.jpg" alt="" loading="lazy">
       </div>
-    </section>
+    </div>
+  </section>
+</main>
+
+<!-- Candle -->
+<div class="candle-section reveal">
+  <div id="message">Ba là cây nến vàng, mẹ là cây nến xanh, Hà Thanh thổi nến nhẹ nhàng thôi nha (˵ •̀ ᴗ - ˵ ) ✧</div>
+  <div class="candle" id="candle" title="Chạm để thổi nến"><div class="flame"></div><div class="smoke" id="smoke"></div></div>
+</div>
+
+<!-- Wish granted -->
+<section class="container section reveal" style="padding-top:12px"><div class="card"><strong>Wish granted (∩˃o˂∩)♡</strong></div></section>
+
+<!-- Gift -->
+<section class="gift-section container reveal">
+  <div class="gift-wrap">
+    <div class="gift" id="gift"><div class="lid"></div></div>
+    <div class="balloons" id="balloons" aria-hidden="true"></div>
+    <div style="margin-top:8px; font-weight:600">Ông già Noel đang trên đường ship quà đến ạ</div>
   </div>
+</section>
 
-  <!-- Sweet Letter -->
-  <section id="sweet-letter" class="wrap section reveal hero">
-    <div class="media">
-      <div class="img-wrap"><img src="assets/Tinkerbell.jpg" alt="Thiên Vi Tinkerbell"></div>
-    </div>
-    <div class="copy">
-      <span class="label">SWEET LETTER</span>
-      <h3>Chúng ta đã cùng trải qua một hành trình (không dài lắm mà cũng không ngắn lắm) và ọ oẹ nhau hơi nhiều, nhỉ?</h3>
-      <div style="font-weight:800; margin-top:8px; font-size:clamp(18px,3vw,32px); color:#ff66a3">
-        09.11.2025 is comingggg 𓇼 ⋆.˚ 𓆉 𓆝
+<!-- LOOK BACK -->
+<section class="container section reveal">
+  <div class="card" style="text-align:left; position:relative">
+    <h3 style="margin:0 0 10px; font-weight:800">Mình cùng look back một chút không nhỉ?</h3>
+    <p>Thiên Vi có chiếc playlist này từ hồi tháng 1 — chắc là nó lookback được cả journey của tụi mình luôn rồi ạ.</p>
+    <div class="marquee" aria-hidden="true">
+      <div class="mtrack">
+        <img src="assets/cant-smile-1.jpg" alt="can't smile without you 1" loading="lazy">
+        <img src="assets/cant-smile-2.jpg" alt="can't smile without you 2" loading="lazy">
+        <img src="assets/cant-smile-3.jpg" alt="can't smile without you 3" loading="lazy">
+        <img src="assets/cant-smile-1.jpg" alt="" loading="lazy">
+        <img src="assets/cant-smile-2.jpg" alt="" loading="lazy">
+        <img src="assets/cant-smile-3.jpg" alt="" loading="lazy">
       </div>
     </div>
-  </section>
+    <p style="margin-top:12px; font-weight:600; text-align:center">
+      Mọi người bảo lúc này em cười nhiều nhất trong suốt thời gian ở đây. Đúng là như vậy rồi ạ, tại vì thực sự là “Can't smile without you ạ (˵ •̀ ᴗ - ˵ ) ✧
+    </p>
+  </div>
+</section>
 
-  <!-- Calendar block (trả lại) -->
-  <section class="wrap section reveal">
-    <div class="cal" id="cal">
-      <!-- JS sẽ render lịch vào đây -->
+<!-- PLAYLIST -->
+<section class="container section reveal">
+  <div class="card">
+    <h3 style="margin:0 0 10px; font-weight:800; text-align:left">Chiếc playlist này nè ạ ^.^</h3>
+    <iframe style="width:100%; min-height:420px; border:0; border-radius:14px; box-shadow:var(--shadow)"
+      src="https://www.youtube.com/embed/videoseries?list=PLz301c-yfQZ8YEHu6Jn-g9q8KxXaveREV"
+      title="YouTube playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- Envelope (Birthday Letter) -->
+<section class="container section reveal" id="letter">
+  <div id="env" class="envelope">
+    <div class="flap">
+      <div class="hint">Chạm vào để xem ^.^</div>
     </div>
-    <div style="margin-top:8px; font-size:12px; opacity:.7">Hồ biến ra quả lịch vạn niên ✧</div>
-  </section>
-
-  <!-- HAPPY BDAY + 3 GIF riêng -->
-  <main class="wrap section reveal">
-    <h1 style=" font-family:'Comic Sans MS',cursive; font-size: clamp(28px, 4vw, 48px); color:#ff66a3; font-weight:800; letter-spacing:1px; margin:8px 0 2px">HAPPY BIRTHDAY MY ANGEL</h1>
-    <h2 style="font-family:'Comic Sans MS',cursive; margin-top:0; font-weight:400; color:#ff8fb3; font-size: clamp(16px, 2.2vw, 22px)">Wishing you a day as lovely as you are ฅ^>⩊<^ ฅ</h2>
-    <div class="gifs-row" style="margin-top:10px">
-      <img src="assets/meocon.gif" alt="meocon">
-      <img src="assets/conmeo.gif" alt="conmeo">
-      <img src="assets/dancing-cat-dance.gif" alt="dance">
+    <div class="paper-wrap">
+      <span class="paw" id="paw">🐾</span>
+      <div class="paper-inner" id="paper">
+        <p>
+          <strong>Còn đây là những điều đơn giản, không cầu kỳ mà Thiên Vi muốn nhắn nhủ:</strong><br><br>
+          Cảm ơn người vì đã mang đến cho em rất nhiều những cảm xúc và cả suy nghĩ, trải nghiệm - mà em chưa từng có bao giờ. Có thể Hà Thanh thấy em cũng giỏi, cũng làm được nhiều thứ, nhưng, em cũng chỉ là người bình thường, vẫn có rất nhiều hạn chế và vẫn chông chênh mỗi ngày - ý là vẫn nằm suy nghĩ và cũng chẳng biết phải làm gì tiếp theo. Mấy tháng gần đây em rảnh hơn nhiều và còn thấy mình ngốc đi nữa. Giỏi giang âu cũng chỉ là cái mác đẹp đẽ mà mọi người hay gán cho ta thôi, chứ điều mà em có thực ra chỉ là sự chân thành và tử tế, tận tâm này. Tuổi mới đừng khóc nhiều nhoé. Từ lần đầu em thấy người khóc, em đã tự hứa với lòng là nếu em còn ở cạnh người, em sẽ không để người phải khóc vì những uất ức đó nữa. Bây giờ và sau này chắc sẽ có người khác thay em làm điều này rồi, nên chỉ mong người cười nhiều hơn thôi. Niềm vui vốn dĩ đơn giản như khi mình xem meme, lướt web, thấy chiếc tin nhắn quan tâm hay là ngắm hoàng hôn mỗi chiều - kiểu vậy, nhỉ? Thật vui khi thấy story của Hà Thanh là những buổi chiều hoàng hôn và những buổi sáng đi làm trên metro đấy ạ. Ngày đấy, khi thấy người lướt xem điện thoại, rồi nhìn sang xung quanh team mình cũng hay thế, em đã nghĩ: Ôi *lắc đầu*. Thiên Vi mà người thấy luôn hustle thực ra nó cũng chỉ thích ngắm mưa, nhìn trời, nựng mèo và rung cảm với tất cả mọi thứ nhỏ nhất diễn ra mọi ngày thôi người ạ. Sự có mặt trọn vẹn là điều tốt nhất mà em có thể dành cho người (lần đó có share bài này về tag mà chắc người quên rồi quá hoặc là hỏng xem luôn éc). Ai cũng có những điều đẹp đẽ để mình nhìn vào đó mà cảm thông cho họ hơn. Nên là: hãy luôn dịu dàng với chính mình và dịu dàng với cả vết thương của người khác nha angel ơi *biến mất cùng làn khói*....
+        </p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- postcard wishes -->
-    <section class="container section">
-      <div class="postcard">
-        <div class="wish-title"><strong>Chúc Hà Thanh không chỉ vui vào mỗi ngày sinh nhật, mà là cả tháng, cả năm và nhiều năm 🐎i 🐎i về sau ạ ( ˶˘ ³˘)♡</strong></div>
-        <div style="margin-bottom:10px">Và tuổi mới có thể:</div>
-        <div class="wish-list">
-          <div class="wish-item" data-emo="✿">Làm sương sương, lương cũng cũng •ᴗ•</div>
-          <div class="wish-item" data-emo="♡">Xăng đầy bình, xinh đầy mình •ᴗ•</div>
-          <div class="wish-item" data-emo="★">Chẳng cần cày nhiều hơn mỗi ngày vẫn có thể cười nhiều hơn mỗi ngày •ᴗ•</div>
-          <div class="wish-item" data-emo="✦">Làm công tác phong làm chủ •ᴗ•</div>
-          <div class="wish-item" data-emo="❀">Nói trước bước qua luôn •ᴗ•</div>
-        </div>
-      </div>
-    </section>
+<!-- Music/Movies links (restored + glassy hover) -->
+<section class="container section reveal">
+  <h3 style="margin:0 0 10px; font-weight:800">
+    Lúc nào chán quá thì mình nghe nhạc, còn chán hơn nữa thì mình xem phim, đọc sách, nấu ăn, làm bánh đồ ạ. Chắc người thông minh aka Nguyễn Hà Thanh sẽ thích “Inception” - poor vì chúng ta không có cơ hội xem cùng hẹ hẹ. Đời này thi vị lắm, chúc người enjoy nhiều nha ạ ^.^
+  </h3>
+  <div class="music-links">
+    <a href="https://www.youtube.com/watch?v=DydIIDQuhxU&list=RDDydIIDQuhxU&start_radio=1" target="_blank" rel="noopener">Thư cho anh</a>
+    <a href="https://www.youtube.com/watch?v=A8-ENEqhQjg" target="_blank" rel="noopener">Every day, Every Moment</a>
+    <a href="https://www.youtube.com/watch?v=YoHD9XEInc0" target="_blank" rel="noopener">Inception</a>
+    <a href="https://www.youtube.com/watch?v=zSWdZVtXT7E" target="_blank" rel="noopener">Interstellar</a>
+    <a href="https://www.youtube.com/watch?v=oglmFkKicYk&list=RDoglmFkKicYk&start_radio=1" target="_blank" rel="noopener">Wish</a>
+  </div>
+</section>
 
-    <!-- Marquee gallery (đã thêm ảnh) -->
-    <section class="container section">
-      <div class="gallery-wrap" aria-hidden="true">
-        <div class="gallery">
-          <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="issues tissues">
-          <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="be kind">
-          <img src="assets/Happy%20Birthday.jpg" alt="HB">
-          <img src="assets/toion.jpg" alt="toion">
-          <img src="assets/benh.jpg" alt="benh">
-          <img src="assets/an.jpg" alt="an">
-          <img src="assets/miss.jpg" alt="miss">
-          <!-- lặp lại để chạy vô hạn -->
-          <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="">
-          <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="">
-          <img src="assets/Happy%20Birthday.jpg" alt="">
-          <img src="assets/toion.jpg" alt="">
-          <img src="assets/benh.jpg" alt="">
-          <img src="assets/an.jpg" alt="">
-          <img src="assets/miss.jpg" alt="">
-        </div>
-      </div>
-    </section>
-  </main>
+<!-- Footer line -->
+<div class="container" style="padding-top:0; padding-bottom:48px">
+  Sẽ luôn có người dịu dàng với Hà Thanh, nên Hà Thanh hãy luôn dịu dàng với chính mình và mọi người nha ạ. I meow you ≽^-⩊-^≼
+</div>
 
-  <!-- Music + meo2/meo3 -->
-  <section class="wrap section reveal" style="padding-top:8px">
+<!-- audio element -->
+<audio id="bgm" preload="auto" loop src="assets/Bongo Cat - Happy Birthday to You (Cover Version) 🎧 - Bongo Cat (youtube).mp3"></audio>
+
+<!-- ===== SUBPAGES (hash) ===== -->
+<section id="lazyPage" class="subpage" aria-hidden="true">
+  <div class="wrap">
+    <a class="brand" href="#">Home Sweet Home</a>
     <div class="card">
-      <div style="font-weight:800; margin-bottom:10px">Test mic, test mic, chuẩn bị lên nhạc chưa ạ? Gòi, Hà Thanh bấm dzo nhạc i ạ =))</div>
-      <button id="musicBtn" class="pill" style="cursor:pointer">♫ Music</button>
-      <div class="gifs-row" style="margin-top:12px">
-        <img src="assets/meo2.gif" alt="meo2">
-        <img src="assets/meo3.gif" alt="meo3">
-      </div>
+      <h2 style="font-family:Montserrat; color:#ff4d94; margin:0 0 10px">Are you lazy?</h2>
+      <p>Nếu bạn đang có một ngày buồn chán, hì hãy nhớ là 👇</p>
+      <img src="assets/cty.jpg" alt="cty">
     </div>
-  </section>
+    <a href="#" class="back">← Quay về trang chủ</a>
+  </div>
+</section>
 
-  <!-- Look back -->
-  <section class="wrap section reveal">
-    <div class="card" style="text-align:left">
-      <h3 style="margin:0 0 10px; font-weight:800">Mình cùng look back một chút không nhỉ?</h3>
-      <p>Thiên Vi có chiếc playlist này từ hồi tháng 1 — chắc là nó lookback được cả journey của tụi mình luôn rồi ạ.</p>
-      <div class="gallery-wrap" aria-hidden="true">
-        <div class="gallery">
-          <img src="assets/cant-smile-1.jpg" alt="can't smile 1">
-          <img src="assets/cant-smile-2.jpg" alt="can't smile 2">
-          <img src="assets/cant-smile-3.jpg" alt="can't smile 3">
-          <img src="assets/cant-smile-1.jpg" alt="">
-          <img src="assets/cant-smile-2.jpg" alt="">
-          <img src="assets/cant-smile-3.jpg" alt="">
-        </div>
-      </div>
-      <p style="margin-top:12px; font-weight:600; text-align:center">
-        Mọi người bảo lúc này em cười nhiều nhất trong suốt thời gian ở đây. Đúng là như vậy rồi ạ, tại vì thực sự là “Can't smile without you ạ (˵ •̀ ᴗ - ˵ ) ✧”
-      </p>
-    </div>
-  </section>
-
-  <!-- Playlist -->
-  <section class="wrap section reveal">
+<section id="busyPage" class="subpage" aria-hidden="true">
+  <div class="wrap">
+    <a class="brand" href="#">Home Sweet Home</a>
     <div class="card">
-      <iframe style="width:100%; min-height:420px; border:0; border-radius:14px; box-shadow:var(--shadow)"
-        src="https://www.youtube.com/embed/videoseries?list=PLz301c-yfQZ8YEHu6Jn-g9q8KxXaveREV"
-        title="YouTube playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <h2 style="font-family:Montserrat; color:#ff4d94; margin:0 0 10px">Are you busy?</h2>
+      <p>Nếu bạn đang ngao ngán công việc, thì hãy nhớ đến tôi, tại vì tôi cũng vậy, nhưng mà, tôi là một bé bò kiểu 👇</p>
+      <img src="assets/bo.jpg" alt="bo">
     </div>
-  </section>
+    <a href="#" class="back">← Quay về trang chủ</a>
+  </div>
+</section>
 
-  <!-- Birthday Letter -->
-  <section id="birthday-letter" class="wrap section reveal">
-    <div id="env" class="envelope">
-      <div class="flap"><div class="hint">Chạm vào để xem ^.^</div></div>
-      <div class="paper-wrap">
-        <div class="paper-inner" id="paper">
-          <p>
-            Còn đây là những điều đơn giản, không cầu kỳ mà Thiên Vi muốn nhắn nhủ:<br><br>
-            Cảm ơn người vì đã mang đến cho em rất nhiều những cảm xúc và cả suy nghĩ, trải nghiệm - mà em chưa từng có bao giờ. Có thể Hà Thanh thấy em cũng giỏi, cũng làm được nhiều thứ, nhưng, em cũng chỉ là người bình thường, vẫn có rất nhiều hạn chế và vẫn chông chênh mỗi ngày - ý là vẫn nằm suy nghĩ và cũng chẳng biết phải làm gì tiếp theo. Mấy tháng gần đây em rảnh hơn nhiều và còn thấy mình ngốc đi nữa. Giỏi giang âu cũng chỉ là cái mác đẹp đẽ mà mọi người hay gán cho ta thôi, chứ điều mà em có thực ra chỉ là sự chân thành và tử tế, tận tâm này. Tuổi mới đừng khóc nhiều nhoé. Từ lần đầu em thấy người khóc, em đã tự hứa với lòng là nếu em còn ở cạnh người, em sẽ không để người phải khóc vì những uất ức đó nữa. Bây giờ và sau này chắc sẽ có người khác thay em làm điều này rồi, nên chỉ mong người cười nhiều hơn thôi. Niềm vui vốn dĩ đơn giản như khi mình xem meme, lướt web, thấy chiếc tin nhắn quan tâm hay là ngắm hoàng hôn mỗi chiều - kiểu vậy, nhỉ? Thật vui khi thấy story của Hà Thanh là những buổi chiều hoàng hôn và những buổi sáng đi làm trên metro đấy ạ. Ngày đấy, khi thấy người lướt xem điện thoại, rồi nhìn sang xung quanh team mình cũng hay thế, em đã nghĩ: Ôi *lắc đầu*. Thiên Vi mà người thấy luôn hustle thực ra nó cũng chỉ thích ngắm mưa, nhìn trời, nựng mèo và rung cảm với tất cả mọi thứ nhỏ nhất diễn ra mỗi ngày thôi người ạ. Sự có mặt trọn vẹn là điều tốt nhất mà em có thể dành cho người (lần đó có share bài này về tag mà chắc người quên rồi quá hoặc là hỏng xem luôn éc). Ai cũng có những điều đẹp đẽ để mình nhìn vào đó mà cảm thông cho họ hơn. Nên là: hãy luôn dịu dàng với chính mình và dịu dàng với cả vết thương của người khác nha angel ơi *biến mất cùng làn khói*....
-          </p>
-        </div>
-      </div>
+<script>
+/* ========== Micro reveal on scroll ========== */
+const revealer = new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); revealer.unobserve(e.target) } })
+},{threshold:0.2});
+document.querySelectorAll('.reveal').forEach(el=>revealer.observe(el));
+
+/* ========== Vertical carousel (auto + controls) ========== */
+const vtrack=document.getElementById('vtrack');
+const slides=[...document.querySelectorAll('.vslide')];
+const dotsWrap=document.getElementById('vdots');
+let idx=0, timer=null;
+function renderDots(){
+  slides.forEach((_,i)=>{
+    const b=document.createElement('button');
+    if(i===0) b.classList.add('active');
+    b.addEventListener('click',()=>go(i));
+    dotsWrap.appendChild(b);
+  });
+}
+function mark(){ [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active',i===idx)); }
+function go(i){ idx=(i+slides.length)%slides.length; vtrack.style.transform=`translateX(${-idx*100}%)`; mark(); restart(); }
+function next(){ go(idx+1) }
+function prev(){ go(idx-1) }
+function restart(){ clearInterval(timer); timer=setInterval(next, 3500); }
+document.getElementById('vnext').onclick=next;
+document.getElementById('vprev').onclick=prev;
+renderDots(); restart();
+
+/* ========== Calendar (client-side) ========== */
+const calEl=document.getElementById('calendar');
+function buildCalendar(d=new Date()){
+  const view=new Date(d.getFullYear(), d.getMonth(), 1);
+  const year=view.getFullYear(), month=view.getMonth();
+  const start=(new Date(year,month,1).getDay()+7)%7;
+  const days=new Date(year,month+1,0).getDate();
+  const today=new Date();
+  const title=`tháng ${month+1} năm ${year}`;
+
+  calEl.innerHTML=`
+    <div class="cal-head">
+      <button id="prevM">‹ Tháng trước</button>
+      <h4>${title}</h4>
+      <button id="nextM">Tháng sau ›</button>
     </div>
-  </section>
+    <div class="grid">
+      ${["CN","T2","T3","T4","T5","T6","T7"].map(s=>`<div class="dow">${s}</div>`).join('')}
+      ${Array.from({length:start},()=>`<div></div>`).join('')}
+      ${Array.from({length:days},(_,i)=>{
+        const day=i+1, isToday= day===today.getDate() && month===today.getMonth() && year===today.getFullYear();
+        const mark = (month===10 && day===9) ? `<span class="mark">🎂</span>` : "";
+        return `<div class="cell ${isToday?'today':''}">${day}${mark}</div>`;
+      }).join('')}
+    </div>`;
+  calEl.querySelector('#prevM').onclick=()=>buildCalendar(new Date(year,month-1,1));
+  calEl.querySelector('#nextM').onclick=()=>buildCalendar(new Date(year,month+1,1));
+}
+buildCalendar();
 
-  <!-- Music source -->
-  <audio id="bgm" preload="auto" loop></audio>
+/* ========== Music autoplay & toggle ========== */
+const bgm=document.getElementById('bgm');
+const musicBtn=document.getElementById('musicBtn');
+bgm.volume=.6;
+async function tryPlay(){ try{ await bgm.play(); musicBtn?.setAttribute('aria-pressed','true'); }catch(e){} }
+['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.addEventListener(ev, tryPlay, {passive:true, once:true}));
+musicBtn?.addEventListener('click', async ()=>{
+  if (bgm.paused){ try{ await bgm.play(); musicBtn.setAttribute('aria-pressed','true'); }catch(e){} }
+  else { bgm.pause(); musicBtn.setAttribute('aria-pressed','false'); }
+});
+document.addEventListener('visibilitychange', async ()=>{
+  if (!document.hidden && musicBtn?.getAttribute('aria-pressed')==='true' && bgm.paused){ try{ await bgm.play(); }catch(e){} }
+});
 
-  <script>
-    /* ===== Album dots + auto swipe ===== */
-    (function(){
-      const track = document.getElementById('albumTrack');
-      const dotsWrap = document.getElementById('albumDots');
-      if(!track || !dotsWrap) return;
-      const slides = [...track.children];
-      slides.forEach((_,i)=>{
-        const b = document.createElement('button');
-        if(i===0) b.setAttribute('aria-current','true');
-        b.addEventListener('click', ()=> track.scrollTo({left: track.clientWidth*i, behavior:'smooth'}));
-        dotsWrap.appendChild(b);
-      });
-      const sync = ()=>{
-        const i = Math.round(track.scrollLeft / track.clientWidth);
-        [...dotsWrap.children].forEach((d,idx)=> d.toggleAttribute('aria-current', idx===i));
-      };
-      track.addEventListener('scroll', sync, {passive:true});
-      window.addEventListener('resize', sync);
+/* ========== Candle & Gift ========== */
+const candle=document.getElementById('candle'), smoke=document.getElementById('smoke');
+let blown=false;
+candle?.addEventListener('click', ()=>{
+  if (navigator.vibrate) navigator.vibrate(10);
+  if (blown) return; blown=true;
+  candle.classList.add('off'); smoke.classList.add('show');
+  setTimeout(()=> smoke.classList.remove('show'), 1300);
+});
+const gift=document.getElementById('gift'), balloons=document.getElementById('balloons'); let opened=false;
+function spawnBalloon(i){
+  const b=document.createElement('span'); b.className='balloon';
+  const hues=['#ffd166','#a0c4ff','#bdb2ff','#caffbf','#ffc6ff','#fdffb6','#ffadad'];
+  b.style.background=hues[i%hues.length]; b.style.left=(30+Math.random()*40)+'%';
+  b.style.animationDelay=(Math.random()*0.4)+'s'; b.style.width=(22+Math.random()*10)+'px'; b.style.height=(30+Math.random()*12)+'px';
+  balloons.appendChild(b); setTimeout(()=>b.remove(),3200);
+}
+gift?.addEventListener('click', ()=>{
+  if (navigator.vibrate) navigator.vibrate(10);
+  if(!opened){ gift.classList.add('open'); opened=true; for(let i=0;i<14;i++) setTimeout(()=>spawnBalloon(i), i*120); }
+  else { for(let i=0;i<6;i++) setTimeout(()=>spawnBalloon(i), i*140); }
+});
 
-      // auto-swipe
-      let idx = 0, timer;
-      function goNext(){
-        idx = (idx + 1) % slides.length;
-        track.scrollTo({left: track.clientWidth*idx, behavior:'smooth'});
-      }
-      function start(){ stop(); timer = setInterval(goNext, 3500); }
-      function stop(){ if(timer) clearInterval(timer); }
-      start();
-      track.addEventListener('pointerdown', stop, {passive:true});
-      track.addEventListener('pointerup', start, {passive:true});
-      track.addEventListener('mouseenter', stop);
-      track.addEventListener('mouseleave', start);
-    })();
+/* ========== Envelope: paw pop + smooth scroll push-down ========== */
+const env=document.getElementById('env'), paper=document.getElementById('paper'), paw=document.getElementById('paw');
+env?.addEventListener('click', ()=>{
+  env.classList.toggle('open');
+  const opening = env.classList.contains('open');
+  if (opening){
+    paw.classList.remove('show'); // restart
+    void paw.offsetWidth; paw.classList.add('show');
+    // smooth scroll to the start of paper section
+    setTimeout(()=>{ env.scrollIntoView({behavior:'smooth', block:'start'}); }, 150);
+  }
+});
 
-    /* ===== Calendar renderer ===== */
-    (function(){
-      const el = document.getElementById('cal'); if(!el) return;
-      const marks = { '11-09': {emoji:'🎂'} };
-      let d = new Date();
+/* ========== Subpages with hash (#lazy/#busy) ========== */
+const lazyPage=document.getElementById('lazyPage'), busyPage=document.getElementById('busyPage');
+function onHash(){
+  const h=location.hash.replace('#','');
+  lazyPage.classList.toggle('show', h==='lazy');
+  busyPage.classList.toggle('show', h==='busy');
+}
+window.addEventListener('hashchange', onHash); onHash();
 
-      function render(){
-        el.innerHTML = '';
-        const head = document.createElement('div'); head.className='cal-head';
-        const monthName = d.toLocaleString('vi-VN',{month:'long', year:'numeric'});
-        head.innerHTML = `<div class="navs"><button id="prevCal">‹ Tháng trước</button></div>
-                          <div style="font-weight:800">${monthName}</div>
-                          <div class="navs"><button id="nextCal">Tháng sau ›</button></div>`;
-        el.appendChild(head);
+/* ========== Equal nav spacing safeguard ========== */
+function fixNavSpacing(){
+  const left = document.querySelectorAll('.nav .group')[0];
+  const right = document.querySelectorAll('.nav .group')[1];
+  const wL = left.getBoundingClientRect().width;
+  const wR = right.getBoundingClientRect().width;
+  left.style.transform = right.style.transform = '';
+  const diff = Math.abs(wL - wR);
+  if (diff > 40){
+    if (wL > wR) left.style.transform = 'scale(.95)';
+    else right.style.transform = 'scale(.95)';
+  }
+}
+window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing, 300);
 
-        const grid = document.createElement('div'); grid.className='cal-grid';
-        ['CN','T2','T3','T4','T5','T6','T7'].forEach(t=>{ const c=document.createElement('div'); c.className='cal-cell cal-day'; c.textContent=t; grid.appendChild(c); });
-
-        const y=d.getFullYear(), m=d.getMonth();
-        const first = new Date(y,m,1), startW=(first.getDay()+7)%7, last = new Date(y,m+1,0).getDate();
-        for(let i=0;i<startW;i++){ grid.appendChild(Object.assign(document.createElement('div'),{className:'cal-cell'})); }
-        const today = new Date();
-        for(let day=1; day<=last; day++){
-          const c = document.createElement('div'); c.className='cal-cell cal-date'; c.textContent=day;
-          if(day===today.getDate() && m===today.getMonth() && y===today.getFullYear()) c.classList.add('today');
-          const key = `${String(m+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-          if(marks[key]){ const em=document.createElement('span'); em.className='emoji'; em.textContent=marks[key].emoji; c.appendChild(em); }
-          grid.appendChild(c);
-        }
-        el.appendChild(grid);
-        document.getElementById('prevCal').onclick = ()=>{ d = new Date(y, m-1, 1); render(); };
-        document.getElementById('nextCal').onclick = ()=>{ d = new Date(y, m+1, 1); render(); };
-      }
-      render();
-    })();
-
-    /* ===== Music ===== */
-    (function(){
-      const MUSIC_SRC = 'assets/Bongo Cat - Happy Birthday to You (Cover Version) 🎧 - Bongo Cat (youtube).mp3';
-      const bgm = document.getElementById('bgm'); const btn = document.getElementById('musicBtn');
-      if(!bgm || !btn) return;
-      bgm.src = encodeURI(MUSIC_SRC); bgm.volume = .6;
-      const unlock = async () => { try{ await bgm.play(); }catch(e){} ['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.removeEventListener(ev, unlock,{passive:true}));};
-      ['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.addEventListener(ev, unlock,{passive:true}));
-      btn.addEventListener('click', async ()=>{ if(bgm.paused){ try{ await bgm.play(); }catch(e){} } else bgm.pause(); });
-      document.addEventListener('visibilitychange', async ()=>{ if(!document.hidden && bgm.paused) { try{ await bgm.play(); }catch(e){} } });
-    })();
-
-    /* ===== Envelope open + pink paws (pop + fade-out) ===== */
-    (function(){
-      const env = document.getElementById('env'); const paper = document.getElementById('paper'); if(!env) return;
-      function spawnPaw(x){
-        const p = document.createElement('span'); p.className='paw';
-        p.style.left = x + '%'; p.style.top = (10 + Math.random()*70) + '%';
-        p.innerHTML = '<i class="toe1"></i><i class="toe2"></i><i class="toe3"></i><i class="pad"></i>';
-        env.appendChild(p);
-        requestAnimationFrame(()=> p.classList.add('show'));
-        setTimeout(()=> p.remove(), 950);
-      }
-      env.addEventListener('click', ()=>{
-        env.classList.toggle('open');
-        const opening = env.classList.contains('open');
-        if (opening){
-          for(let i=0;i<14;i++) setTimeout(()=>spawnPaw(10+Math.random()*80), i*40);
-          paper.style.maxHeight = paper.scrollHeight + 'px'; paper.style.padding = '22px 22px 36px';
-        } else {
-          paper.style.maxHeight = '0px'; paper.style.padding = '0 22px 0';
-        }
-      });
-    })();
-
-    /* ===== Reveal on scroll (threshold 0.15) ===== */
-    (function(){
-      const targets = document.querySelectorAll('.section, .card, .hero');
-      targets.forEach(el=> el.classList.add('reveal'));
-      const io = new IntersectionObserver((ents)=>{
-        ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target);} });
-      },{threshold:0.15, rootMargin:'0px 0px -10% 0px'});
-      targets.forEach(el=> io.observe(el));
-    })();
-  </script>
+/* ========== Sparkle trail on click (pink) ========== */
+const SPARKS = ['✦','❀','★','❁','❃','•'];
+function makeSparkle(x,y,scale=1,delay=0){
+  const s=document.createElement('span');
+  s.className='sparkle';
+  s.textContent=SPARKS[Math.floor(Math.random()*SPARKS.length)];
+  s.style.left=x+'px'; s.style.top=y+'px';
+  s.style.fontSize=(12+Math.random()*10)*scale+'px';
+  s.style.animationDelay=delay+'ms';
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(), 480);
+}
+window.addEventListener('click', (e)=>{
+  // create a tiny burst around the click
+  const n=4+Math.floor(Math.random()*3);
+  for(let i=0;i<n;i++){
+    const dx=(Math.random()-.5)*24;
+    const dy=(Math.random()-.5)*24;
+    makeSparkle(e.clientX+dx, e.clientY+dy, 0.9+Math.random()*0.4, i*25);
+  }
+}, {passive:true});
+</script>
 </body>
 </html>
