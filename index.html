@@ -10,13 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== Tokens (chỉ light theme) ===== */
+    /* ===== Tokens (light only) ===== */
     :root{
       --bg1:#ffe6f0; --bg2:#ffd6eb; --ink:#ff4d94;
       --card:#fff7fb; --shadow:0 6px 16px rgba(255,105,180,.25);
       --radius:18px; --maxw:1100px;
     }
-
     *{box-sizing:border-box}
     body{
       margin:0; background:linear-gradient(180deg,var(--bg1),var(--bg2));
@@ -24,16 +23,15 @@
       line-height:1.65; text-align:center; overflow-x:hidden;
     }
     a{color:inherit; text-decoration:none}
-
     .wrap{max-width:var(--maxw); margin:0 auto; padding:24px 16px}
     .section{padding:32px 0}
     .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
 
-    /* ===== Topbar / Nav (khoảng cách đều) ===== */
+    /* ===== Topbar / Nav (cân khoảng cách đều) ===== */
     .topbar{position:sticky; top:0; z-index:50; backdrop-filter:blur(10px);
       background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.25)); padding:8px 12px}
     .nav{max-width:var(--maxw); margin:0 auto;
-      display:grid; grid-template-columns:1fr auto 1fr; align-items:center}
+      display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px}
     .nav-left,.nav-right{display:flex; gap:10px; align-items:center}
     .nav-left{justify-content:flex-start}
     .nav-right{justify-content:flex-end}
@@ -98,7 +96,7 @@
     .paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease; padding:0 22px 0; text-align:left}
     .paper-inner::after{content:""; display:block; height:12px} /* giảm đệm cuối */
 
-    /* Paw (vẽ bằng CSS để có màu hồng) */
+    /* Paw (màu hồng) */
     .paw{position:absolute; width:28px; height:28px; pointer-events:none; opacity:0; transform:translate(-50%,0) scale(.9)}
     .paw i{position:absolute; background:#ff9ac1; border-radius:50%; box-shadow:0 2px 6px rgba(255,120,170,.35)}
     .paw .pad{width:16px; height:14px; left:6px; bottom:2px}
@@ -107,20 +105,20 @@
     .paw .toe3{width:7px; height:7px; left:18px; top:2px}
     .paw.show{animation:paw-pop 900ms ease forwards}
     @keyframes paw-pop{
-      0%{opacity:0; transform:translate(-50%,6px) scale(.8)}
-      30%{opacity:1; transform:translate(-50%,-6px) scale(1.05)}
-      60%{opacity:1; transform:translate(-50%,-10px) scale(1)}
-      100%{opacity:0; transform:translate(-50%,-26px) scale(.98)}
+      0%{opacity:0; transform:translateY(6px) scale(.82)}
+      30%{opacity:1; transform:translateY(-6px) scale(1.05)}
+      60%{opacity:1; transform:translateY(-10px) scale(1)}
+      100%{opacity:0; transform:translateY(-26px) scale(.98)}
     }
 
-    /* Reveal nhẹ khi cuộn */
+    /* Reveal (micro-reveal 12px) */
     .reveal{opacity:0; transform:translateY(12px); transition:opacity .45s ease, transform .45s ease}
     .reveal.is-in{opacity:1; transform:translateY(0)}
   </style>
 </head>
 <body>
 
-  <!-- Topbar (không có toggle) -->
+  <!-- Topbar -->
   <div class="topbar">
     <div class="nav">
       <div class="nav-left">
@@ -135,9 +133,10 @@
     </div>
   </div>
 
-  <!-- Album -->
+  <!-- From Tinkerbell + Album -->
   <div class="wrap" style="padding-top:8px">
     <div class="card" style="display:inline-block; font-weight:700; margin-bottom:10px">From Tinkerbell with luv</div>
+
     <section class="section reveal">
       <div class="album" id="album">
         <div class="album-track" id="albumTrack">
@@ -167,11 +166,21 @@
     <div class="copy">
       <span class="label">SWEET LETTER</span>
       <h3>Chúng ta đã cùng trải qua một hành trình (không dài lắm mà cũng không ngắn lắm) và ọ oẹ nhau hơi nhiều, nhỉ?</h3>
-      <div style="font-weight:800; font-size:clamp(18px,3vw,32px); color:#ff66a3">09.11.2025 is comingggg 𓇼 ⋆.˚ 𓆉 𓆝</div>
+      <div style="font-weight:800; margin-top:8px; font-size:clamp(18px,3vw,32px); color:#ff66a3">
+        09.11.2025 is comingggg 𓇼 ⋆.˚ 𓆉 𓆝
+      </div>
     </div>
   </section>
 
-  <!-- HAPPY BDAY heading + 3 GIF riêng -->
+  <!-- Calendar block (trả lại) -->
+  <section class="wrap section reveal">
+    <div class="cal" id="cal">
+      <!-- JS sẽ render lịch vào đây -->
+    </div>
+    <div style="margin-top:8px; font-size:12px; opacity:.7">Hồ biến ra quả lịch vạn niên ✧</div>
+  </section>
+
+  <!-- HAPPY BDAY + 3 GIF riêng -->
   <main class="wrap section reveal">
     <h1 style=" font-family:'Comic Sans MS',cursive; font-size: clamp(28px, 4vw, 48px); color:#ff66a3; font-weight:800; letter-spacing:1px; margin:8px 0 2px">HAPPY BIRTHDAY MY ANGEL</h1>
     <h2 style="font-family:'Comic Sans MS',cursive; margin-top:0; font-weight:400; color:#ff8fb3; font-size: clamp(16px, 2.2vw, 22px)">Wishing you a day as lovely as you are ฅ^>⩊<^ ฅ</h2>
@@ -181,7 +190,7 @@
       <img src="assets/dancing-cat-dance.gif" alt="dance">
     </div>
 
-    <!-- postcard wishes (giữ nguyên nội dung) -->
+    <!-- postcard wishes -->
     <section class="container section">
       <div class="postcard">
         <div class="wish-title"><strong>Chúc Hà Thanh không chỉ vui vào mỗi ngày sinh nhật, mà là cả tháng, cả năm và nhiều năm 🐎i 🐎i về sau ạ ( ˶˘ ³˘)♡</strong></div>
@@ -196,20 +205,20 @@
       </div>
     </section>
 
-    <!-- Marquee gallery + thêm ảnh -->
+    <!-- Marquee gallery (đã thêm ảnh) -->
     <section class="container section">
       <div class="gallery-wrap" aria-hidden="true">
         <div class="gallery">
-          <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="be kind">
           <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="issues tissues">
+          <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="be kind">
           <img src="assets/Happy%20Birthday.jpg" alt="HB">
           <img src="assets/toion.jpg" alt="toion">
           <img src="assets/benh.jpg" alt="benh">
           <img src="assets/an.jpg" alt="an">
           <img src="assets/miss.jpg" alt="miss">
-          <!-- lặp lại để chạy vô hạn mượt -->
-          <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="">
+          <!-- lặp lại để chạy vô hạn -->
           <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="">
+          <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="">
           <img src="assets/Happy%20Birthday.jpg" alt="">
           <img src="assets/toion.jpg" alt="">
           <img src="assets/benh.jpg" alt="">
@@ -232,7 +241,7 @@
     </div>
   </section>
 
-  <!-- Look back (giữ) -->
+  <!-- Look back -->
   <section class="wrap section reveal">
     <div class="card" style="text-align:left">
       <h3 style="margin:0 0 10px; font-weight:800">Mình cùng look back một chút không nhỉ?</h3>
@@ -315,7 +324,7 @@
       track.addEventListener('mouseleave', start);
     })();
 
-    /* ===== Calendar (nhẹ) ===== */
+    /* ===== Calendar renderer ===== */
     (function(){
       const el = document.getElementById('cal'); if(!el) return;
       const marks = { '11-09': {emoji:'🎂'} };
@@ -357,8 +366,8 @@
       const bgm = document.getElementById('bgm'); const btn = document.getElementById('musicBtn');
       if(!bgm || !btn) return;
       bgm.src = encodeURI(MUSIC_SRC); bgm.volume = .6;
-      const firstUnlock = async () => { try{ await bgm.play(); }catch(e){} ['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.removeEventListener(ev, firstUnlock,{passive:true}));};
-      ['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.addEventListener(ev, firstUnlock,{passive:true}));
+      const unlock = async () => { try{ await bgm.play(); }catch(e){} ['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.removeEventListener(ev, unlock,{passive:true}));};
+      ['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.addEventListener(ev, unlock,{passive:true}));
       btn.addEventListener('click', async ()=>{ if(bgm.paused){ try{ await bgm.play(); }catch(e){} } else bgm.pause(); });
       document.addEventListener('visibilitychange', async ()=>{ if(!document.hidden && bgm.paused) { try{ await bgm.play(); }catch(e){} } });
     })();
@@ -386,7 +395,7 @@
       });
     })();
 
-    /* ===== Reveal on scroll ===== */
+    /* ===== Reveal on scroll (threshold 0.15) ===== */
     (function(){
       const targets = document.querySelectorAll('.section, .card, .hero');
       targets.forEach(el=> el.classList.add('reveal'));
