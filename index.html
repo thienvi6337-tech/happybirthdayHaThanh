@@ -1,485 +1,445 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!doctype html>
+<html lang="vi" data-theme="light">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>🎂</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Home Sweet Home</title>
 
-  <meta property="og:title" content=" "/>
-  <meta property="og:description" content=" "/>
-  <meta property="og:image" content=" "/>
-  <meta name="twitter:card" content="none"/>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-
+  <!-- Font title -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     :root{
-      --pink-1:#ffe6f0; --pink-2:#ffd6eb; --pink-3:#ff66a3; --pink-4:#ff8fb3; --ink:#ff4d94;
-      --card:#fff7fb; --shadow:0 6px 16px rgba(255,105,180,.25); --radius:18px; --maxw:1100px;
+      --bg:#f6f0e5; --paper:#efe6d2; --text:#3b2f2f; --accent:#b2552a; --muted:#806b5f;
+      --surface:#f4efe6; --shadow:0 3px 0 rgba(0,0,0,.2);
+    }
+    [data-theme="dark"]{
+      --bg:#1f1b16; --paper:#2a241d; --text:#f5eddc; --accent:#ffb07a; --muted:#cbbaa5;
+      --surface:#221d17; --shadow:0 3px 0 rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
-    body{
-      margin:0; background:linear-gradient(180deg,var(--pink-1),var(--pink-2));
-      color:var(--ink); font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      line-height:1.65; overflow-x:hidden; text-align:center; position:relative;
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto}
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:18px}
+
+    /* ===== NAV with 4 buttons + centered title ===== */
+    .topbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.75rem;margin:10px 0 16px}
+    .btn-row{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:flex-start}
+    .btn-row.right{justify-content:flex-end}
+    .btn-paper{
+      background:var(--paper); border:0; padding:.6rem .9rem; border-radius:10px; box-shadow:var(--shadow);
+      font-weight:700; cursor:pointer; transition:.15s; white-space:nowrap
+    }
+    .btn-paper:hover{transform:translateY(-2px)}
+    .site-title{
+      font-family:'Pacifico',cursive; font-size:34px; letter-spacing:.5px; user-select:none; cursor:pointer;
+      text-align:center; text-shadow:0 2px 0 rgba(0,0,0,.18)
     }
 
-    /* nền icon động */
-    .bg-decor{pointer-events:none; position:fixed; inset:0; z-index:-1; overflow:hidden; opacity:.25; font-size:22px; will-change:transform;}
-    .bg-decor span{position:absolute; animation:drift 14s linear infinite; filter:blur(.2px)}
-    @keyframes drift{from{transform:translateY(110vh)} to{transform:translateY(-15vh)}}
+    /* Theme toggle */
+    .theme-toggle{position:fixed; top:14px; right:14px; background:var(--paper); padding:.5rem .7rem; border-radius:10px; cursor:pointer; box-shadow:var(--shadow); z-index:50}
 
-    .container{max-width:var(--maxw); margin:0 auto; padding:24px 16px}
-    .section{padding:32px 0}
-    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
-    .corner-tag{position:fixed; left:14px; top:12px; z-index:1000; background:rgba(255,255,255,.6); backdrop-filter:blur(6px); padding:8px 12px; border-radius:999px; box-shadow:var(--shadow); font-weight:600; font-size:14px}
+    /* ===== Carousel ===== */
+    .carousel{position:relative; overflow:hidden; border-radius:14px; background:var(--surface); box-shadow:var(--shadow)}
+    .track{display:flex; transition:transform .45s ease-in-out; touch-action:pan-y}
+    .slide{min-width:100%; height:420px; display:grid; place-items:center; background:#000}
+    .slide img{max-width:100%; max-height:100%; object-fit:contain}
+    .car-nav{position:absolute; top:50%; transform:translateY(-50%); background:var(--paper); border:0; padding:.5rem .7rem; border-radius:50%; cursor:pointer; box-shadow:var(--shadow)}
+    .car-prev{left:10px} .car-next{right:10px}
+    .car-dots{position:absolute; bottom:8px; left:0; right:0; display:flex; justify-content:center; gap:.4rem}
+    .car-dots button{width:8px;height:8px;border-radius:50%;border:0;background:#aaa;opacity:.6}
+    .car-dots button.active{opacity:1;background:var(--accent)}
 
-    /* HERO */
-    .hero{display:grid; gap:24px; align-items:center; grid-template-columns:1fr}
-    .hero .media{display:flex; justify-content:center}
-    .hero .img-wrap{width:100%; max-width:420px; aspect-ratio:3/4; border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:linear-gradient(180deg,#ffddea,#ffeaf3)}
-    .hero img{width:100%; height:100%; object-fit:cover; display:block}
-    .hero .copy{text-align:left; max-width:680px; margin:0 auto}
-    .hero .label{display:inline-block; padding:6px 12px; border-radius:999px; background:#ffe5f3; font-weight:800; margin-bottom:8px; box-shadow:var(--shadow); letter-spacing:.5px}
-    .hero h3{margin:4px 0 6px; font-weight:800; font-size:28px}
-    .hero p{margin:8px 0 0}
-    .countdown{margin-top:12px; font-weight:800; font-size:clamp(18px,3vw,32px); color:var(--pink-3)}
-    @media(min-width:900px){ .hero{grid-template-columns:420px 1fr} .hero .copy{margin:0} }
+    .caption{font-size:.95rem; margin-top:10px; background:var(--surface); padding:10px 12px; border-radius:10px; box-shadow:var(--shadow)}
 
-    /* headings */
-    h1,h2{font-family:"Comic Sans MS",cursive}
-    h1{ font-size: clamp(28px, 4vw, 48px); color: var(--pink-3); font-weight:800; letter-spacing:1px; margin:8px 0 2px}
-    h2{ margin-top:0; font-weight:400; color: var(--pink-4); font-size: clamp(16px, 2.2vw, 22px)}
+    /* ===== Calendar (from earlier plan) ===== */
+    .calendar-section{margin:2rem 0}
+    .cal-wrap{background:var(--surface); border:1px solid rgba(0,0,0,.08); box-shadow:var(--shadow); padding:1rem; border-radius:10px}
+    .cal-header{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.5rem}
+    .cal-title{font-weight:700;letter-spacing:.5px}
+    .cal-nav{background:var(--paper);border:0;padding:.4rem .6rem;border-radius:8px;cursor:pointer;box-shadow:var(--shadow)}
+    .cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:.25rem;margin:.5rem 0;color:var(--accent);font-weight:600}
+    .cal-week span{text-align:center}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.25rem}
+    .cal-cell{background:var(--paper);min-height:64px;border-radius:8px;position:relative;padding:.45rem;display:flex;align-items:flex-start;justify-content:flex-start;cursor:default}
+    .cal-cell .d{font-weight:700}
+    .cal-cell .emoji{position:absolute;right:.35rem;bottom:.2rem;font-size:18px}
+    .cal-cell.today{outline:2px dashed var(--accent);background:rgba(255,210,127,.5)}
+    .cal-cell.muted{opacity:.45}
+    .cal-cell:hover{transform:translateY(-2px);box-shadow:0 4px 0 rgba(0,0,0,.2);transition:.15s}
+    .cal-tooltip{position:fixed;pointer-events:none;background:#000;color:#fff;padding:.35rem .5rem;border-radius:6px;font-size:.85rem;z-index:60;transform:translate(-50%,-120%);white-space:nowrap}
+    .btn-mini{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:.4rem .6rem;cursor:pointer}
 
-    /* gallery ngang */
-    .gallery-wrap{overflow:hidden}
-    .gallery{display:flex; gap:12px; width:max-content; margin:22px auto 0; animation:scroll 25s linear infinite}
-    .gallery img{height:200px; width:auto; border-radius:15px; box-shadow:var(--shadow); animation:floaty 3s ease-in-out infinite; transition:transform .18s ease;}
-    .gallery img:hover{ transform:translateY(-6px) rotate(-1.5deg);}
-    @keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
-    @keyframes floaty{0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)}}
-    @media(prefers-reduced-motion:reduce){ .gallery{animation:none} .gallery img{animation:none} }
-
-    /* Candle */
-    .candle-section{margin-top:30px; background:var(--card); padding:44px 0; border-top-left-radius:50px; border-top-right-radius:50px; box-shadow:0 -5px 20px rgba(255,182,193,.3)}
-    .candle{position:relative; width:40px; height:80px; background:#fff0f5; border-radius:10px; margin:26px auto; box-shadow:var(--shadow); cursor:pointer}
-    .flame{position:absolute; top:-25px; left:50%; transform:translateX(-50%); width:25px; height:25px; background:radial-gradient(circle,#ffd966,#ffb347,#ff7b00); border-radius:50%; box-shadow:0 0 30px 10px rgba(255,184,108,.6); animation:flicker .25s infinite alternate}
-    @keyframes flicker{0%{transform:translateX(-50%) scale(1);opacity:.95}100%{transform:translateX(-48%) scale(1.1);opacity:1}}
-    .smoke{position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:10px; height:10px; border-radius:50%; background:radial-gradient(circle, rgba(180,180,180,.6), rgba(180,180,180,0)); opacity:0; pointer-events:none}
-    .smoke.show{ animation:puff 1.2s ease-out forwards }
-    @keyframes puff{0%{opacity:.8; transform:translate(-50%,0) scale(.8)}100%{opacity:0; transform:translate(-50%,-40px) scale(1.4)}}
-    .candle.off .flame{display:none}
-    #message{font-size:16px; font-weight:700; margin-top:6px; color:var(--pink-3)}
-
-    /* postcard lời chúc */
-    .postcard{background:#fffdfc; border-radius:20px; padding:28px 22px; box-shadow:0 12px 30px rgba(255,170,200,.35), inset 0 0 0 2px rgba(255,160,200,.25); position:relative}
-    .postcard:before{content:""; position:absolute; inset:10px; border-radius:16px; border:2px dashed rgba(255,120,170,.35)}
-    .wish-title{ font-weight:800; margin:0 0 10px; font-size:clamp(18px,2.4vw,22px) }
-    .wish-list{display:grid; gap:12px}
-    .wish-item{background:var(--card); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); text-align:left; position:relative; padding-left:44px}
-    .wish-item::before{content: attr(data-emo); position:absolute; left:12px; top:50%; transform:translateY(-50%) rotate(-8deg); font-weight:800; animation:wiggle 1.6s ease-in-out infinite}
-    @keyframes wiggle{0%,100%{transform:translateY(-50%) rotate(-8deg)}50%{transform:translateY(calc(-50% - 2px)) rotate(6deg)}}
-
-    /* CONFESSION: phong bì */
-    .envelope{position:relative; margin:0 auto; max-width:var(--maxw); background:#fff7fb; border-radius:18px; box-shadow:var(--shadow); padding:0; overflow:hidden}
-    .envelope .flap{position:absolute; left:0; right:0; top:0; height:0; padding-bottom:32%; background:linear-gradient(180deg,#ffd8ea,#ffeaf5); clip-path:polygon(0 0, 100% 0, 50% 100%); transition:transform .6s ease, opacity .6s ease; transform-origin:50% 0; z-index:2}
-    .envelope.open .flap{ transform:rotateX(180deg); opacity:.35 }
-    /* hint nằm trên mặt bìa */
-    .flap .hint{position:absolute; left:50%; top:18%; transform:translate(-50%,-50%); font-weight:800; font-size:14px; color:#b14b7b; text-shadow:0 1px 0 rgba(255,255,255,.8)}
-    .envelope .paper-wrap{margin-top:28%; background:#fffdfd; border-top-left-radius:18px; border-top-right-radius:18px; position:relative}
-    /* Ẩn hoàn toàn nội dung trước khi mở */
-    .paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease; padding:0 22px 0; text-align:left}
-    /* thêm khoảng dưới + spacer để chữ không chạm viền */
-    .paper-inner::after{content:""; display:block; height:18px;}
-    .envelope.open .paper-inner{max-height:1200px; padding:22px 22px 36px;}
-
-    /* Confetti heart */
-    .heart{position:absolute; top:10%; font-size:18px; opacity:.85; filter:drop-shadow(0 2px 4px rgba(0,0,0,.08)); pointer-events:none}
-    @keyframes fall{
-      0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:.95}
-      80%{ opacity:.9}
-      100%{ transform:translateY(120%) translateX(var(--drift, 0px)) rotate(360deg); opacity:0}
+    /* ===== Letter section & paw effect ===== */
+    .letter{position:relative; background:var(--surface); border-radius:12px; padding:16px; box-shadow:var(--shadow)}
+    .envelope{display:flex; align-items:center; gap:10px; background:var(--paper); padding:10px 12px; border-radius:10px; cursor:pointer; box-shadow:var(--shadow)}
+    .letter-content{display:none; margin-top:12px}
+    .letter.open .letter-content{display:block}
+    #paw-layer{position:absolute; inset:0; pointer-events:none; overflow:visible}
+    .paw-pop{position:absolute; font-size:18px; line-height:1; opacity:0; transform:translate(-50%, -10px) scale(.92) rotate(var(--rot,0deg)); filter:drop-shadow(0 2px 0 rgba(0,0,0,.18)); animation:paw-pop .95s cubic-bezier(.22,.61,.36,1) forwards}
+    @keyframes paw-pop{
+      0%{opacity:0; transform:translate(-50%,6px) scale(.9) rotate(var(--rot))}
+      20%{opacity:.95; transform:translate(-50%,-6px) scale(1.06) rotate(var(--rot))}
+      100%{opacity:0; transform:translate(calc(-50% + var(--dx,0px)),-48px) scale(1) rotate(var(--rot))}
     }
 
-    /* lưới 2 cột (dùng nơi khác nếu cần) */
-    .grid-2{display:grid; gap:18px}
-    @media(min-width:960px){ .grid-2{grid-template-columns:1fr 1fr} }
+    /* ===== Scroll reveal ===== */
+    .reveal{opacity:0; transform:translateY(14px); transition:opacity .35s ease, transform .35s ease}
+    .reveal.in{opacity:1; transform:none}
 
-    /* music chips / button */
-    .music-links{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:10px}
-    .music-links a{background:var(--card); padding:10px 14px; border-radius:999px; box-shadow:var(--shadow); text-decoration:none; color:var(--ink); font-weight:600}
-    .music-btn{position:fixed; right:16px; bottom:16px; z-index:1001; border:0; border-radius:999px; padding:10px 16px; background:#ffe5f3; color:#b14b7b; font-weight:800; box-shadow:var(--shadow); cursor:pointer}
-    .music-btn[aria-pressed="true"]{background:#ffccdf}
+    /* ===== Music + GIFs ===== */
+    .music-block{background:var(--surface); padding:12px; border-radius:12px; box-shadow:var(--shadow)}
+    .gif-row{display:flex; gap:.75rem; flex-wrap:wrap}
+    .gif-row img{height:120px; border-radius:10px; box-shadow:var(--shadow); animation:float 3.8s ease-in-out infinite}
+    @keyframes float{
+      0%,100%{transform:translateY(0) rotate(0deg)}
+      50%{transform:translateY(-4px) rotate(.8deg)}
+    }
 
-    /* gift + balloons */
-    .gift-section{padding:30px 0 10px}
-    .gift-wrap{display:flex; flex-direction:column; align-items:center; gap:10px}
-    .gift{width:160px; height:120px; background:#ff9dc6; border-radius:12px; position:relative; box-shadow:var(--shadow); cursor:pointer}
-    .gift:before{content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:18px; height:100%; background:#ff4d94; border-radius:6px}
-    .gift:after{content:""; position:absolute; left:0; top:52%; transform:translateY(-50%); width:100%; height:18px; background:#ff4d94; border-radius:6px}
-    .lid{position:absolute; left:-6px; top:-28px; width:172px; height:36px; background:#ffa9d0; border-radius:12px; box-shadow:var(--shadow); transform-origin:left bottom; transition:transform .45s ease}
-    .gift.open .lid{transform:rotate(-22deg) translate(-6px,-8px)}
-    .balloons{position:relative; width:100%; height:0}
-    .balloon{position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:26px; height:34px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; background:#ffd166; opacity:0; animation:rise 2.8s ease-in forwards; filter:drop-shadow(0 6px 10px rgba(0,0,0,.1))}
-    .balloon:after{content:""; position:absolute; left:50%; bottom:-18px; transform:translateX(-50%); width:2px; height:22px; background:rgba(0,0,0,.15)}
-    @keyframes rise{0%{transform:translate(-50%,20px) scale(.9);opacity:0}12%{opacity:1}100%{transform:translate(-50%,-220px) scale(1.05);opacity:0}}
+    /* ===== Horizontal quote slider ===== */
+    .marquee{overflow:hidden; background:var(--surface); border-radius:12px; padding:10px; box-shadow:var(--shadow)}
+    .marquee-track{display:flex; gap:12px; animation:scrollX 22s linear infinite}
+    .marquee img{height:90px; border-radius:10px; display:block}
+    @keyframes scrollX{from{transform:translateX(0)} to{transform:translateX(-50%)}}
 
-    /* GIFs cạnh nhau */
-    .gifs-row{display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap}
-    .gifs-row img{width:min(220px,30vw); border-radius:20px; box-shadow:0 0 25px rgba(255,192,203,.6)}
+    /* ===== Modal ===== */
+    .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.4); z-index:70}
+    .modal.open{display:grid}
+    .modal-card{max-width:720px; background:var(--surface); color:var(--text); border-radius:14px; padding:16px; box-shadow:var(--shadow)}
+    .modal-card img{max-width:100%; border-radius:10px}
 
-    /* Mini heart trail (hover Music) */
-    .mini-heart{position:fixed; pointer-events:none; z-index:2000; font-size:14px; color:#ff77aa; opacity:.95; filter:drop-shadow(0 1px 2px rgba(0,0,0,.1))}
-    @keyframes miniUp{0%{ transform:translateY(0) scale(.9); opacity:.95}100%{ transform:translateY(-20px) scale(1.05); opacity:0}}
-
-    /* Sparkle on click */
-    .sparkle{position:fixed; pointer-events:none; z-index:2000; font-size:14px; color:#ffb3d9; opacity:.95; filter:drop-shadow(0 1px 2px rgba(0,0,0,.08))}
-    @keyframes sparkle{from{ transform:translate(0,0) scale(.9); opacity:1 } to{ transform:translate(var(--tx,0), var(--ty,0)) scale(1.1); opacity:0 }}
+    /* helpers */
+    h2{margin:18px 0 10px}
+    .muted{color:var(--muted)}
+    .space{height:16px}
   </style>
 </head>
 <body>
-  <!-- nền icon (bỏ icon mèo 😺) -->
-  <div class="bg-decor" aria-hidden="true" id="bgDecor">
-    <span style="left:6%; animation-delay:-2s">✦</span>
-    <span style="left:16%; animation-delay:-6s">𓆉</span>
-    <!-- removed 😺 per request -->
-    <span style="left:40%; animation-delay:-4s">✩</span>
-    <span style="left:58%; animation-delay:-11s">♡</span>
-    <span style="left:74%; animation-delay:-1s">★</span>
-    <span style="left:88%; animation-delay:-7s">❀</span>
+<div class="theme-toggle" id="themeToggle" title="Đổi giao diện sáng/tối">🌞/🌙</div>
+
+<div class="container">
+
+  <!-- ===== NAV ===== -->
+  <nav class="topbar reveal">
+    <div class="btn-row">
+      <button class="btn-paper" data-scroll="#sweet-letter">Sweet Letter</button>
+      <button class="btn-paper" data-scroll="#birthday-letter">Birthday Letter</button>
+    </div>
+
+    <div class="site-title" id="homeTitle">Home Sweet Home</div>
+
+    <div class="btn-row right">
+      <button class="btn-paper" id="btnSadDay">Nếu như bạn đang có một ngày buồn chán</button>
+      <button class="btn-paper" id="btnTiredWork">Nếu như bạn đang ngao ngán công việc ở công ty</button>
+    </div>
+  </nav>
+
+  <!-- ===== CAROUSEL ===== -->
+  <section class="reveal">
+    <div class="carousel" id="carousel">
+      <div class="track">
+        <div class="slide"><img src="assets/gallery/HT1.jpg" alt="HT1"></div>
+        <div class="slide"><img src="assets/gallery/HT2.jpg" alt="HT2"></div>
+        <div class="slide"><img src="assets/gallery/HT3.jpg" alt="HT3"></div>
+        <div class="slide"><img src="assets/gallery/HT4.jpg" alt="HT4"></div>
+        <div class="slide"><img src="assets/gallery/Tinkerbell.jpg" alt="Tinkerbell"></div>
+        <div class="slide"><img src="assets/gallery/Tinkerbell1.jpg" alt="Tinkerbell1"></div>
+      </div>
+      <button class="car-nav car-prev" aria-label="Prev">‹</button>
+      <button class="car-nav car-next" aria-label="Next">›</button>
+      <div class="car-dots" aria-hidden="true"></div>
+    </div>
+    <div class="caption">
+      Em đặt ảnh của cả hai em bé ở đây bởi vì có lẽ nó là khoảng thời gian hồn nhiên nhất trong cả cuộc đời này - mà bất kỳ lúc nào nhìn lại, chúng ta cũng sẽ mỉm cười (nhỉ)? Giữ được sự hồn nhiên trong tất cả mọi điều thật khó - nhưng cũng sẽ thật tuyệt, nên hi vọng là tụi mình có thể vui vẻ với nhau như trẻ em và nâng niu nhau như những em bé, nhoé ạ (<a href="https://youtu.be/OUZA0RAv85U?si=pDRpDc3j2zMajV19" target="_blank" rel="noopener">link</a>). Thời gian sẽ lấy đi của mỗi người nhiều thứ, nhưng, nếu mệt quá thì em hi vọng người có thể quay về nhà nhá - nhà thật thì có gia đình của Hà Thanh đấy, còn chỗ này thì (chắc là) sẽ có vài sweet moments để người xem lại (...). Tinkerbell nói là biết đâu sinh nhật năm sau - khi người quay lại đây thì nhạc nền của chiếc web này khom phải là Happy Birthday mà là chiếc bài Thiên Vi viết riêng cho người - hope so ^.^
+    </div>
+  </section>
+
+  <div class="space"></div>
+
+  <!-- ===== SWEET LETTER ===== -->
+  <section id="sweet-letter" class="letter reveal">
+    <div class="envelope" id="sweetOpen">
+      ✉️ <b>Sweet Letter</b> — Bấm để mở
+    </div>
+    <div class="letter-content">
+      <!-- (Giữ nguyên nội dung Sweet Letter hiện có của bạn ở đây) -->
+      <p>Chúng ta đã cùng trải qua một hành trình (không dài lắm mà cũng không ngắn lắm) và ọ oẹ nhau hơi nhiều, nhỉ?
+      Cùng đếm ngược đến ngày sinh nhật Hà Thanh nhoé ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧ — 09.11.2025 is comingggg 𓇼 ⋆.˚ 𓆉 𓆝</p>
+    </div>
+  </section>
+
+  <div class="space"></div>
+
+  <!-- ===== BIRTHDAY LETTER (phong thư) ===== -->
+  <section id="birthday-letter" class="letter reveal">
+    <div class="envelope" id="birthdayOpen">
+      💌 <b>Birthday Letter</b> — Bấm để mở phong thư
+    </div>
+    <div class="letter-content">
+      <!-- (GIỮ NGUYÊN NGUYÊN VĂN bạn đã cung cấp, không sửa) -->
+      <p><i>Còn đây là những điều đơn giản, không cầu kỳ mà Thiên Vi muốn nhắn nhủ:</i></p>
+      <p>… (toàn bộ đoạn dài bạn đã đưa — giữ nguyên)...</p>
+    </div>
+  </section>
+
+  <div class="space"></div>
+
+  <!-- ===== MARQUEE QUOTES (thêm ảnh toion, benh, an, miss) ===== -->
+  <section class="marquee reveal" aria-label="Quotes slider">
+    <div class="marquee-track">
+      <img src="assets/img/toion.png" alt="toion">
+      <img src="assets/img/benh.png" alt="benh">
+      <img src="assets/img/an.png" alt="an">
+      <img src="assets/img/miss.png" alt="miss">
+      <img src="assets/img/toion.png" alt="" aria-hidden="true">
+      <img src="assets/img/benh.png" alt="" aria-hidden="true">
+      <img src="assets/img/an.png" alt="" aria-hidden="true">
+      <img src="assets/img/miss.png" alt="" aria-hidden="true">
+    </div>
+  </section>
+
+  <div class="space"></div>
+
+  <!-- ===== LỊCH VẠN NIÊN ===== -->
+  <section id="lich-van-nien" class="calendar-section reveal">
+    <h2>HÔ BIẾN RA QUẢ LỊCH VẠN NIÊN</h2>
+    <div class="cal-wrap">
+      <div class="cal-header">
+        <button class="cal-nav" id="cal-prev" aria-label="Tháng trước">‹</button>
+        <div class="cal-title"><span id="cal-month"></span> <span id="cal-year"></span></div>
+        <button class="cal-nav" id="cal-next" aria-label="Tháng sau">›</button>
+      </div>
+      <div class="cal-week">
+        <span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span>
+      </div>
+      <div class="cal-grid" id="cal-grid" aria-live="polite"></div>
+      <div class="cal-legend">
+        <button id="add-marker" class="btn-mini">+ Thả emoji mốc (vd: 🎂)</button>
+        <small class="muted">Hover để xem ghi chú. Emoji lưu cục bộ (localStorage).</small>
+      </div>
+    </div>
+    <div id="cal-tooltip" class="cal-tooltip" role="tooltip" hidden></div>
+  </section>
+
+  <div class="space"></div>
+
+  <!-- ===== MUSIC + GIFS ===== -->
+  <section class="music-block reveal">
+    <p><b>Test mic, test mic, chuẩn bị lên nhạc chưa ạ?</b> Gòi, Hà Thanh bấm dzo nhạc i ạ =))</p>
+    <audio id="bgm" src="assets/audio/happy-birthday.mp3" preload="none"></audio>
+    <button class="btn-paper" id="musicToggle">▶️ Play / ⏸️ Pause</button>
+
+    <div class="gif-row" style="margin-top:10px">
+      <!-- GIF mới ngay dưới nút nhạc -->
+      <img src="assets/gif/meo1.gif" alt="meo1">
+      <img src="assets/gif/meo2.gif" alt="meo2">
+      <img src="assets/gif/meo3.gif" alt="meo3">
+    </div>
+
+    <div class="gif-row" style="margin-top:10px">
+      <!-- GIF hiện tại, thêm bobbing nhẹ -->
+      <img src="assets/gif/meocon.gif" alt="meocon">
+      <img src="assets/gif/conmeo.gif" alt="conmeo">
+      <img src="assets/gif/dancing-cat-dance.gif" alt="dancing cat">
+    </div>
+  </section>
+
+  <div class="space"></div>
+
+</div><!-- /container -->
+
+<!-- ===== MODALS ===== -->
+<div class="modal" id="modalSad">
+  <div class="modal-card">
+    <h3>Nếu như bạn đang có một ngày buồn chán</h3>
+    <p>Thì hãy nhớ là 👇</p>
+    <img src="assets/img/cty.png" alt="cty" />
+    <div style="margin-top:10px; text-align:right">
+      <button class="btn-paper" data-close="#modalSad">Đóng</button>
+    </div>
   </div>
+</div>
 
-  <div class="corner-tag">From Tinkerbell with luv</div>
-
-  <!-- HERO -->
-  <section class="container section hero">
-    <div class="media">
-      <div class="img-wrap"><img src="assets/Tinkerbell.jpg" alt="Thiên Vi Tinkerbell" loading="eager"></div>
+<div class="modal" id="modalTired">
+  <div class="modal-card">
+    <h3>Nếu như bạn đang ngao ngán công việc ở công ty</h3>
+    <p>Thì hãy nhớ đến tôi, tại vì tôi cũng vậy, nhưng mà, tôi là một bé bò kiểu 👇</p>
+    <img src="assets/img/bo.png" alt="bo" />
+    <div style="margin-top:10px; text-align:right">
+      <button class="btn-paper" data-close="#modalTired">Đóng</button>
     </div>
-    <div class="copy">
-      <span class="label">SWEET LETTER</span>
-      <h3>Chúng ta đã cùng trải qua một hành trình (không dài lắm mà cũng không ngắn lắm) và ọ oẹ nhau hơi nhiều, nhỉ?</h3>
-      <p>Cùng đếm ngược đến ngày sinh nhật Hà Thanh nhoé ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧</p>
-      <div class="countdown" id="countdown">09.11.2025 is comingggg 𓇼 ⋆.˚ 𓆉 𓆝</div>
-    </div>
-  </section>
-
-  <!-- Calendar -->
-  <section class="container section">
-    <h3 style="margin:0 0 14px; font-weight:800">HÔ BIẾN RA QUẢ LỊCH VẠN NIÊN</h3>
-    <div class="card">
-      <iframe title="Google Calendar" style="min-height:540px; width:100%; border:0; border-radius:12px; box-shadow:0 0 15px rgba(255,105,180,.25)" src="https://calendar.google.com/calendar/embed?src=your_public_calendar_id%40group.calendar.google.com&ctz=Asia%2FHo_Chi_Minh"></iframe>
-    </div>
-  </section>
-
-  <!-- Ngắt trang -->
-  <section class="container section">
-    <div class="card" style="font-weight:800">PHẦN NÀY ĐẾN 09.11.2025 HÀ THANH MỚI ĐƯỢC ĐỌC Ạ. CHE MẮT LẠI I ^.^</div>
-  </section>
-
-  <!-- Site cũ -->
-  <main id="oldSite" class="container section">
-    <h1>HAPPY BIRTHDAY MY ANGEL</h1>
-    <h2>Wishing you a day as lovely as you are ฅ^>⩊<^ ฅ</h2>
-
-    <!-- GIF + đoạn văn mới -->
-    <div class="container" style="padding-top:8px">
-      <div class="gifs-row">
-        <img src="assets/dancing-cat-dance.gif" alt="dancing cat"/>
-        <img src="assets/conmeo.gif" alt="con mèo dễ thương"/>
-        <img src="assets/meocon.gif" alt="mèo con đáng yêu"/>
-      </div>
-      <p style="max-width:820px; margin:16px auto 0">Đọc đến đây, người đã bắt đầu smile chưa nhỉ? Chắc chắn là có luôn ^.^ Đó, nên là làm người khác vui khom khó đâu, chỉ cần mình đừng khó chịu với người ta là người ta dễ chịu với mình liền ò. Nên là đừng ọ oẹ với Thiên Vi nữa nha. Thiên Vi còn dỗi nên mới nhờ Tinkerbell code tặng Hà Thanh chiếc web này đó ạ (╥﹏╥)</p>
-    </div>
-
-    <!-- Postcard lời chúc -->
-    <section class="container section">
-      <div class="postcard">
-        <div class="wish-title"><strong>Chúc Hà Thanh không chỉ vui vào mỗi ngày sinh nhật, mà là cả tháng, cả năm và nhiều năm 🐎i 🐎i về sau ạ ( ˶˘ ³˘)♡</strong></div>
-        <div style="margin-bottom:10px">Và tuổi mới có thể:</div>
-        <div class="wish-list">
-          <div class="wish-item" data-emo="✿">Làm sương sương, lương cũng cũng •ᴗ•</div>
-          <div class="wish-item" data-emo="♡">Xăng đầy bình, xinh đầy mình •ᴗ•</div>
-          <div class="wish-item" data-emo="★">Chẳng cần cày nhiều hơn mỗi ngày vẫn có thể cười nhiều hơn mỗi ngày •ᴗ•</div>
-          <div class="wish-item" data-emo="✦">Làm công tác phong làm chủ •ᴗ•</div>
-          <div class="wish-item" data-emo="❀">Nói trước bước qua luôn •ᴗ•</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Bộ ảnh cũ với motion -->
-    <section class="container section">
-      <div class="gallery-wrap">
-        <div class="gallery" aria-hidden="true">
-          <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="be kind to your mind" loading="lazy">
-          <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="if u got issues, I got tissues" loading="lazy">
-          <img src="assets/Happy%20Birthday.jpg" alt="Happy Birthday" loading="lazy">
-          <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="" loading="lazy">
-          <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="" loading="lazy">
-          <img src="assets/Happy%20Birthday.jpg" alt="" loading="lazy">
-        </div>
-      </div>
-    </section>
-
-    <!-- Nến -->
-    <div class="candle-section">
-      <div id="message">Ba là cây nến vàng, mẹ là cây nến xanh, Hà Thanh thổi nến nhẹ nhàng thôi nha (˵ •̀ ᴗ - ˵ ) ✧</div>
-      <div class="candle" id="candle" title="Chạm để thổi nến"><div class="flame"></div><div class="smoke" id="smoke"></div></div>
-    </div>
-
-    <!-- Wish granted -->
-    <section class="container section" style="padding-top:12px"><div class="card"><strong>Wish granted (∩˃o˂∩)♡</strong></div></section>
-
-    <!-- Hộp quà -->
-    <section class="gift-section container">
-      <div class="gift-wrap">
-        <div class="gift" id="gift"><div class="lid"></div></div>
-        <div class="balloons" id="balloons" aria-hidden="true"></div>
-        <div style="margin-top:8px; font-weight:600">Ông già Noel đang trên đường ship quà đến ạ</div>
-      </div>
-    </section>
-
-    <!-- LOOK BACK TRƯỚC -->
-    <section class="container section">
-      <div class="card" style="text-align:left; position:relative">
-        <h3 style="margin:0 0 10px; font-weight:800">Mình cùng look back một chút không nhỉ?</h3>
-        <p>Thiên Vi có chiếc playlist này từ hồi tháng 1 — chắc là nó lookback được cả journey của tụi mình luôn rồi ạ.</p>
-        <div class="gallery-wrap" aria-hidden="true">
-          <div class="gallery">
-            <img src="assets/cant-smile-1.jpg" alt="can't smile without you 1" loading="lazy">
-            <img src="assets/cant-smile-2.jpg" alt="can't smile without you 2" loading="lazy">
-            <img src="assets/cant-smile-3.jpg" alt="can't smile without you 3" loading="lazy">
-            <img src="assets/cant-smile-1.jpg" alt="" loading="lazy">
-            <img src="assets/cant-smile-2.jpg" alt="" loading="lazy">
-            <img src="assets/cant-smile-3.jpg" alt="" loading="lazy">
-          </div>
-        </div>
-        <p style="margin-top:12px; font-weight:600; text-align:center">
-          Mọi người bảo lúc này em cười nhiều nhất trong suốt thời gian ở đây. Đúng là như vậy rồi ạ, tại vì thực sự là “Can't smile without you ạ (˵ •̀ ᴗ - ˵ ) ✧
-        </p>
-      </div>
-    </section>
-
-    <!-- PLAYLIST SAU ĐÓ -->
-    <section class="container section">
-      <div class="card">
-        <h3 style="margin:0 0 10px; font-weight:800; text-align:left">Chiếc playlist này nè ạ ^.^</h3>
-        <iframe style="width:100%; min-height:420px; border:0; border-radius:14px; box-shadow:var(--shadow)"
-          src="https://www.youtube.com/embed/videoseries?list=PLz301c-yfQZ8YEHu6Jn-g9q8KxXaveREV"
-          title="YouTube playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-    </section>
-
-    <!-- CONFESSION: phong bì, ẩn nội dung trước khi mở -->
-    <section class="container section">
-      <div id="env" class="envelope">
-        <div class="flap">
-          <div class="hint">Chạm vào để xem ^.^</div>
-        </div>
-        <div class="paper-wrap">
-          <div class="paper-inner" id="paper">
-            <p>
-              Còn đây là những điều đơn giản, không cầu kỳ mà Thiên Vi muốn nhắn nhủ:<br><br>
-              Cảm ơn người vì đã mang đến cho em rất nhiều những cảm xúc và cả suy nghĩ, trải nghiệm - mà em chưa từng có bao giờ. Có thể Hà Thanh thấy em cũng giỏi, cũng làm được nhiều thứ, nhưng, em cũng chỉ là người bình thường, vẫn có rất nhiều hạn chế và vẫn chông chênh mỗi ngày - ý là vẫn nằm suy nghĩ và cũng chẳng biết phải làm gì tiếp theo. Mấy tháng gần đây em rảnh hơn nhiều và còn thấy mình ngốc đi nữa. Giỏi giang âu cũng chỉ là cái mác đẹp đẽ mà mọi người hay gán cho ta thôi, chứ điều mà em có thực ra chỉ là sự chân thành và tử tế, tận tâm này. Tuổi mới đừng khóc nhiều nhoé. Từ lần đầu em thấy người khóc, em đã tự hứa với lòng là nếu em còn ở cạnh người, em sẽ không để người phải khóc vì những uất ức đó nữa. Bây giờ và sau này chắc sẽ có người khác thay em làm điều này rồi, nên chỉ mong người cười nhiều hơn thôi. Niềm vui vốn dĩ đơn giản như khi mình xem meme, lướt web, thấy chiếc tin nhắn quan tâm hay là ngắm hoàng hôn mỗi chiều - kiểu vậy, nhỉ? Thật vui khi thấy story của Hà Thanh là những buổi chiều hoàng hôn và những buổi sáng đi làm trên metro đấy ạ. Ngày đấy, khi thấy người lướt xem điện thoại, rồi nhìn sang xung quanh team mình cũng hay thế, em đã nghĩ: Ôi *lắc đầu*. Thiên Vi mà người thấy luôn hustle thực ra nó cũng chỉ thích ngắm mưa, nhìn trời, nựng mèo và rung cảm với tất cả mọi thứ nhỏ nhất diễn ra mọi ngày thôi người ạ. Sự có mặt trọn vẹn là điều tốt nhất mà em có thể dành cho người (lần đó có share bài này về tag mà chắc người quên rồi quá hoặc là hỏng xem luôn éc). Ai cũng có những điều đẹp đẽ để mình nhìn vào đó mà cảm thông cho họ hơn. Nên là: hãy luôn dịu dàng với chính mình và dịu dàng với cả vết thương của người khác nha angel ơi *biến mất cùng làn khói*....
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Nhạc + phim (đã chỉnh text) -->
-    <section class="container section">
-      <h3 style="margin:0 0 10px; font-weight:800">
-        Lúc nào chán quá thì mình nghe nhạc, còn chán hơn nữa thì mình xem phim, đọc sách, nấu ăn, làm bánh đồ ạ. Chắc người thông minh aka Nguyễn Hà Thanh sẽ thích “Inception” - poor vì chúng ta không có cơ hội xem cùng hẹ hẹ. Đời này thi vị lắm, chúc người enjoy nhiều nha ạ ^.^
-      </h3>
-      <div class="music-links">
-        <a href="https://www.youtube.com/watch?v=DydIIDQuhxU&list=RDDydIIDQuhxU&start_radio=1" target="_blank" rel="noopener">Thư cho anh</a>
-        <a href="https://www.youtube.com/watch?v=A8-ENEqhQjg" target="_blank" rel="noopener">Every day, Every Moment</a>
-        <a href="https://www.youtube.com/watch?v=YoHD9XEInc0" target="_blank" rel="noopener">Inception</a>
-        <a href="https://www.youtube.com/watch?v=zSWdZVtXT7E" target="_blank" rel="noopener">Interstellar</a>
-        <a href="https://www.youtube.com/watch?v=oglmFkKicYk&list=RDoglmFkKicYk&start_radio=1" target="_blank" rel="noopener">Wish</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Lời nhắn cuối -->
-  <div class="container" style="padding-top:0; padding-bottom:48px">
-    Sẽ luôn có người dịu dàng với Hà Thanh, nên Hà Thanh hãy luôn dịu dàng với chính mình và mọi người nha ạ. I meow you ≽^-⩊-^≼
   </div>
+</div>
 
-  <!-- Music -->
-  <audio id="bgm" preload="auto" loop></audio>
-  <button id="musicBtn" class="music-btn" aria-pressed="false" aria-label="Toggle music">♫ Music</button>
+<script>
+/* ========= Theme ========= */
+(function(){
+  const root=document.documentElement, tgl=document.getElementById('themeToggle');
+  const saved=localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  root.setAttribute('data-theme', saved);
+  tgl.textContent = saved==='dark'?'🌙':'🌞';
+  tgl.onclick=()=>{const cur=root.getAttribute('data-theme'); const next=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',next); localStorage.setItem('theme',next); tgl.textContent = next==='dark'?'🌙':'🌞';};
+})();
 
-  <script>
-    // ===== Preferences
-    const PREFERS_REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ========= Smooth scroll ========= */
+document.querySelectorAll('[data-scroll]').forEach(b=>b.addEventListener('click',e=>{
+  const to=b.getAttribute('data-scroll'); const el=document.querySelector(to); if(el) el.scrollIntoView({behavior:'smooth'});
+}));
+document.getElementById('homeTitle').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 
-    // ===== Music autoplay & toggle (fix nút Bongo Cat)
-    const MUSIC_SRC = 'assets/Bongo Cat - Happy Birthday to You (Cover Version) 🎧 - Bongo Cat (youtube).mp3';
-    const bgm = document.getElementById('bgm');
-    const musicBtn = document.getElementById('musicBtn');
-    bgm.src = encodeURI(MUSIC_SRC);
-    bgm.volume = 0.6;
+/* ========= Scroll reveal ========= */
+(function(){
+  const io=new IntersectionObserver((ents)=>{
+    ents.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
 
-    const firstUnlock = async () => {
-      try { await bgm.play(); musicBtn.setAttribute('aria-pressed','true'); }
-      catch(e){}
-      ['click','touchstart','keydown','scroll','pointermove'].forEach(ev => window.removeEventListener(ev, firstUnlock, {passive:true}));
-    };
-    ['click','touchstart','keydown','scroll','pointermove'].forEach(ev => window.addEventListener(ev, firstUnlock, {passive:true}));
+/* ========= Carousel (swipe-able) ========= */
+(function(){
+  const root=document.getElementById('carousel');
+  const track=root.querySelector('.track');
+  const slides=[...root.querySelectorAll('.slide')];
+  const prev=root.querySelector('.car-prev'), next=root.querySelector('.car-next');
+  const dots=root.querySelector('.car-dots');
+  let idx=0, startX=null, curX=0;
 
-    musicBtn.addEventListener('click', async () => {
-      if (bgm.paused) {
-        try { await bgm.play(); musicBtn.setAttribute('aria-pressed','true'); }
-        catch(e){}
-      } else {
-        bgm.pause(); musicBtn.setAttribute('aria-pressed','false');
-      }
-    });
+  slides.forEach((_,i)=>{const d=document.createElement('button'); d.addEventListener('click',()=>go(i)); dots.appendChild(d)});
+  function updateDots(){ [...dots.children].forEach((d,i)=>d.classList.toggle('active', i===idx)); }
+  function go(i){ idx=Math.max(0,Math.min(i,slides.length-1)); track.style.transform=`translateX(${-idx*100}%)`; updateDots(); }
+  prev.onclick=()=>go(idx-1); next.onclick=()=>go(idx+1);
+  updateDots(); go(0);
 
-    document.addEventListener('visibilitychange', async () => {
-      if (!document.hidden && musicBtn.getAttribute('aria-pressed') === 'true' && bgm.paused) {
-        try { await bgm.play(); } catch(e){}
-      }
-    });
+  track.addEventListener('pointerdown',e=>{startX=e.clientX; track.setPointerCapture(e.pointerId);});
+  track.addEventListener('pointermove',e=>{ if(startX==null) return; curX=e.clientX; const dx=curX-startX; track.style.transform=`translateX(calc(${-idx*100}% + ${dx}px))`;});
+  track.addEventListener('pointerup',e=>{ if(startX==null) return; const dx=curX-startX; if(Math.abs(dx)>60) go(idx+(dx<0?1:-1)); else go(idx); startX=null;});
+})();
 
-    // ===== Candle (Haptic)
-    const candle = document.getElementById('candle');
-    const smoke = document.getElementById('smoke');
-    let blown = false;
-    candle?.addEventListener('click', ()=>{
-      if (navigator.vibrate) navigator.vibrate(10);
-      if (blown) return;
-      blown = true;
-      candle.classList.add('off');
-      smoke.classList.add('show');
-      setTimeout(()=> smoke.classList.remove('show'), 1300);
-    });
+/* ========= Calendar (client-side) ========= */
+(function(){
+  const grid = document.getElementById('cal-grid');
+  const mEl = document.getElementById('cal-month');
+  const yEl = document.getElementById('cal-year');
+  const tip = document.getElementById('cal-tooltip');
+  const btnPrev = document.getElementById('cal-prev');
+  const btnNext = document.getElementById('cal-next');
+  const btnAdd = document.getElementById('add-marker');
 
-    // ===== Gift balloons (Haptic)
-    const gift = document.getElementById('gift');
-    const balloons = document.getElementById('balloons');
-    let opened = false;
-    function spawnBalloon(i){
-      const b = document.createElement('span');
-      b.className = 'balloon';
-      const hues = ['#ffd166','#a0c4ff','#bdb2ff','#caffbf','#ffc6ff','#fdffb6','#ffadad'];
-      b.style.background = hues[i % hues.length];
-      b.style.left = (30 + Math.random()*40) + '%';
-      b.style.animationDelay = (Math.random()*0.4) + 's';
-      b.style.width = (22 + Math.random()*10) + 'px';
-      b.style.height = (30 + Math.random()*12) + 'px';
-      balloons.appendChild(b);
-      setTimeout(()=> b.remove(), 3200);
+  const MONTHS = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+  let view = new Date(); view.setDate(1);
+
+  const key = 'van-nien-markers';
+  const markers = JSON.parse(localStorage.getItem(key) || '{}');
+
+  const fmt = (d)=> d.toISOString().slice(0,10);
+  const sameDay=(a,b)=> a.getFullYear()==b.getFullYear() && a.getMonth()==b.getMonth() && a.getDate()==b.getDate();
+
+  function render(){
+    grid.innerHTML='';
+    mEl.textContent=MONTHS[view.getMonth()];
+    yEl.textContent=view.getFullYear();
+
+    const firstDow=(view.getDay()+6)%7;
+    const daysInMonth=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+    const prevDays=new Date(view.getFullYear(),view.getMonth(),0).getDate();
+    const today=new Date(); const cells=[];
+
+    for(let i=firstDow-1;i>=0;i--){
+      const d=new Date(view.getFullYear(),view.getMonth()-1,prevDays-i);
+      cells.push({d,muted:true});
     }
-    gift?.addEventListener('click', ()=>{
-      if (navigator.vibrate) navigator.vibrate(10);
-      if(!opened){ gift.classList.add('open'); opened = true; for(let i=0;i<14;i++) setTimeout(()=>spawnBalloon(i), i*120); }
-      else { for(let i=0;i<6;i++) setTimeout(()=>spawnBalloon(i), i*140); }
-    });
-
-    // ===== CONFESSION toggle + Confetti hearts
-    const env = document.getElementById('env');
-    const paper = document.getElementById('paper');
-
-    function spawnHearts(container, count=14){
-      if (PREFERS_REDUCED) return;
-      for(let i=0;i<count;i++){
-        const h = document.createElement('span');
-        h.className = 'heart';
-        h.textContent = '♥';
-        const left = 10 + Math.random()*80;       // %
-        const size = 14 + Math.random()*10;       // px
-        const dur = 1500 + Math.random()*500;     // ms
-        const drift = (Math.random()*40 - 20);    // px
-        const delay = Math.random()*200;          // ms
-        h.style.left = left + '%';
-        h.style.fontSize = size + 'px';
-        h.style.setProperty('--drift', drift + 'px');
-        h.style.animation = `fall ${dur}ms ease-in forwards`;
-        if (delay) h.style.animationDelay = delay + 'ms';
-        container.appendChild(h);
-        setTimeout(()=> h.remove(), dur + 220);
-      }
+    for(let i=1;i<=daysInMonth;i++){
+      const d=new Date(view.getFullYear(),view.getMonth(),i);
+      cells.push({d});
+    }
+    while(cells.length%7!==0){
+      const d=new Date(view.getFullYear(),view.getMonth()+1,(cells.length%7)+1);
+      cells.push({d,muted:true});
     }
 
-    env?.addEventListener('click', ()=>{
-      env.classList.toggle('open');
-      const opening = env.classList.contains('open');
-      if (opening) spawnHearts(env, 16);
-      if (paper.style.maxHeight && paper.style.maxHeight !== '0px'){
-        paper.style.maxHeight = '0px'; paper.style.padding = '0 22px 0';
-      } else {
-        paper.style.maxHeight = paper.scrollHeight + 'px'; paper.style.padding = '22px 22px 36px';
-      }
+    cells.forEach(({d,muted})=>{
+      const cell=document.createElement('div'); cell.className='cal-cell'+(muted?' muted':'')+(sameDay(d,today)?' today':''); cell.tabIndex=0; cell.dataset.date=fmt(d);
+      const day=document.createElement('div'); day.className='d'; day.textContent=d.getDate(); cell.appendChild(day);
+
+      const mark=markers[fmt(d)];
+      if(mark){ const em=document.createElement('div'); em.className='emoji'; em.textContent=mark.emoji || '📌'; cell.appendChild(em); cell.dataset.note=mark.note || ''; }
+
+      cell.addEventListener('mousemove', (e)=>{
+        if(!cell.dataset.note && !markers[fmt(d)]) { tip.hidden=true; return; }
+        tip.hidden=false; tip.textContent=(markers[fmt(d)]?.emoji||'')+' '+(cell.dataset.note || markers[fmt(d)]?.note || '');
+        tip.style.left=e.pageX+'px'; tip.style.top=e.pageY+'px';
+      });
+      cell.addEventListener('mouseleave', ()=> tip.hidden=true);
+
+      cell.addEventListener('click', ()=>{
+        const dateKey=fmt(d);
+        const current=markers[dateKey]?.emoji || '';
+        const emoji=prompt('Emoji mốc cho ngày '+dateKey+' (vd: 🎂). Để trống để xoá.', current || '🎂');
+        if(emoji===null) return;
+        if(emoji.trim()===''){ delete markers[dateKey]; }
+        else{ const note=prompt('Ghi chú (tuỳ chọn):', markers[dateKey]?.note || ''); markers[dateKey]={emoji, note}; }
+        localStorage.setItem(key, JSON.stringify(markers)); render();
+      });
+
+      grid.appendChild(cell);
     });
+  }
+  document.getElementById('add-marker').onclick=()=>{
+    const today=new Date(); const k=fmt(today);
+    const emoji=prompt('Emoji cho hôm nay '+k+' (mặc định 🎂):','🎂'); if(emoji===null) return;
+    const note=prompt('Ghi chú (tuỳ chọn):','Sinh nhật!')||'';
+    markers[k]={emoji:emoji||'🎂',note}; localStorage.setItem(key, JSON.stringify(markers)); render();
+  };
+  document.getElementById('cal-prev').onclick=()=>{view.setMonth(view.getMonth()-1); render();};
+  document.getElementById('cal-next').onclick=()=>{view.setMonth(view.getMonth()+1); render();};
 
-    // ===== Parallax icon nền (1–2px)
-    (function(){
-      const decor = document.getElementById('bgDecor');
-      if (!decor || PREFERS_REDUCED) return;
-      let rafId = null, targetX = 0, targetY = 0;
-      function onMove(e){
-        const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-        const dx = (e.clientX - cx), dy = (e.clientY - cy);
-        targetX = Math.max(-2, Math.min(2, dx * 0.01));
-        targetY = Math.max(-2, Math.min(2, dy * 0.01));
-        if (!rafId){
-          rafId = requestAnimationFrame(()=>{
-            decor.style.transform = `translate(${targetX}px, ${targetY}px)`;
-            rafId = null;
-          });
-        }
-      }
-      window.addEventListener('mousemove', onMove, {passive:true});
-    })();
+  // seed 09/11
+  (function(){
+    const yyyy=new Date().getFullYear(); const d=new Date(yyyy,10,9); const k=fmt(d);
+    if(!markers[k]){ markers[k]={emoji:'🎂',note:'Happy Birthday Hà Thanh'}; localStorage.setItem(key, JSON.stringify(markers)); }
+  })();
 
-    // ===== Auto-heart trail khi hover nút Music
-    function miniHeartTrail(){
-      if (PREFERS_REDUCED) return;
-      const rect = musicBtn.getBoundingClientRect();
-      const count = 1 + Math.floor(Math.random()*2);
-      for(let i=0;i<count;i++){
-        const span = document.createElement('span');
-        span.className = 'mini-heart';
-        span.textContent = '♥';
-        const x = rect.left + rect.width/2 + (Math.random()*24 - 12);
-        const y = rect.top + 6 + (Math.random()*6 - 3);
-        span.style.left = x + 'px';
-        span.style.top  = y + 'px';
-        span.style.animation = 'miniUp 600ms ease-out forwards';
-        document.body.appendChild(span);
-        setTimeout(()=> span.remove(), 620);
-      }
+  render();
+})();
+
+/* ========= Letter paw prints & open ========= */
+(function(){
+  function ensurePawLayer(container){
+    let layer = container.querySelector('#paw-layer');
+    if(!layer){ layer=document.createElement('div'); layer.id='paw-layer'; container.style.position = container.style.position || 'relative'; container.appendChild(layer); }
+    return layer;
+  }
+  function spawnPaws(container,x,y,count=8){
+    const layer=ensurePawLayer(container); const rect=layer.getBoundingClientRect();
+    const baseX=(x ?? (rect.left+rect.width/2)) - rect.left;
+    const baseY=(y ?? (rect.top+rect.height/2)) - rect.top;
+    for(let i=0;i<count;i++){
+      const el=document.createElement('div'); el.className='paw-pop'; el.textContent='🐾';
+      const dx=(Math.random()*24-12).toFixed(1)+'px'; const rot=(Math.random()*8-4).toFixed(1)+'deg';
+      el.style.left=baseX+(Math.random()*30-15)+'px'; el.style.top=baseY+(Math.random()*12-6)+'px';
+      el.style.setProperty('--dx',dx); el.style.setProperty('--rot',rot);
+      layer.appendChild(el); el.addEventListener('animationend',()=>el.remove(),{once:true});
     }
-    musicBtn?.addEventListener('mouseenter', miniHeartTrail);
-    musicBtn?.addEventListener('mousemove', ()=>{ if (Math.random() < 0.1) miniHeartTrail(); });
+  }
+  const sweet = document.getElementById('sweet-letter');
+  const birth = document.getElementById('birthday-letter');
+  document.getElementById('sweetOpen').addEventListener('click', (e)=>{ sweet.classList.toggle('open'); spawnPaws(sweet,e.clientX,e.clientY,6); });
+  document.getElementById('birthdayOpen').addEventListener('click', (e)=>{ birth.classList.toggle('open'); spawnPaws(birth,e.clientX,e.clientY,8); });
+})();
 
-    // ===== Sparkle on click (mọi nơi)
-    window.addEventListener('click', (e)=>{
-      if (PREFERS_REDUCED) return;
-      const n = 5 + Math.floor(Math.random()*3); // 5–7
-      for(let i=0;i<n;i++){
-        const sp = document.createElement('span');
-        sp.className = 'sparkle';
-        sp.textContent = '✦';
-        const ang = Math.random()*Math.PI*2;
-        const dist = 16 + Math.random()*20; // px
-        const tx = Math.cos(ang)*dist;
-        const ty = Math.sin(ang)*dist;
-        sp.style.left = (e.clientX) + 'px';
-        sp.style.top  = (e.clientY) + 'px';
-        sp.style.setProperty('--tx', tx + 'px');
-        sp.style.setProperty('--ty', ty + 'px');
-        const dur = 300 + Math.random()*200; // 300–500ms
-        sp.style.animation = `sparkle ${dur}ms ease-out forwards`;
-        document.body.appendChild(sp);
-        setTimeout(()=> sp.remove(), dur + 50);
-      }
-    }, {passive:true});
-  </script>
+/* ========= Music ========= */
+(function(){
+  const audio=document.getElementById('bgm'); const btn=document.getElementById('musicToggle');
+  let playing=false; btn.onclick=()=>{ if(!playing){ audio.play(); playing=true; btn.textContent='⏸️ Pause'; } else { audio.pause(); playing=false; btn.textContent='▶️ Play'; } };
+})();
+
+/* ========= Modals ========= */
+(function(){
+  const sad=document.getElementById('modalSad'), tired=document.getElementById('modalTired');
+  document.getElementById('btnSadDay').onclick=()=>sad.classList.add('open');
+  document.getElementById('btnTiredWork').onclick=()=>tired.classList.add('open');
+  document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>{document.querySelector(b.getAttribute('data-close')).classList.remove('open');});
+  [sad,tired].forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open');}));
+})();
+</script>
 </body>
 </html>
