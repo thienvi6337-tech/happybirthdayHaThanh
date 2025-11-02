@@ -23,12 +23,13 @@
 html,body{margin:0; padding:0}
 body{
   background:linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:#b14b7b; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink); /* to all text -> pink */
+  font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   line-height:1.65; overflow-x:hidden; text-align:center; cursor:auto;
 }
 
-/* floating cute icons background (giữ cấu hình hiện tại) */
-.bg-decor{pointer-events:none; position:fixed; inset:0; z-index:-1; opacity:.25}
+/* floating cute icons background (flower only) */
+.bg-decor{pointer-events:none; position:fixed; inset:0; z-index:-1; opacity:.22}
 .bg-decor span{position:absolute; color:#ff76b4; animation:drift 14s linear infinite; font-size:22px; filter:blur(.2px)}
 @keyframes drift{from{transform:translateY(110vh)} to{transform:translateY(-15vh)}}
 
@@ -36,10 +37,12 @@ body{
 .container{max-width:var(--max); margin:0 auto; padding:24px 16px}
 .section{padding:32px 0}
 .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
-h1,h2{font-family:"Comic Sans MS",cursive; margin:0}
-h1{font-size:clamp(28px,4vw,48px); color:var(--ink-2); font-weight:800}
+
+/* headings */
+h1,h2{margin:0}
+h1{font-size:clamp(28px,4vw,48px); color:var(--ink-2); font-weight:800; font-family: "Comic Sans MS", cursive;} /* GIỮ nguyên font Happy Birthday */
 h2{font-size:clamp(16px,2.2vw,22px); color:var(--ink-3); font-weight:400}
-a{color:#ff4d94}
+a{color:var(--ink)}
 
 /* ===== NAV (4 buttons + centered brand) ===== */
 .nav{
@@ -50,7 +53,7 @@ a{color:#ff4d94}
 .navwrap{max-width:1200px; margin:auto; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; padding:10px 12px}
 .nav .group{display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
 .nav a.btn{
-  display:inline-flex; gap:8px; align-items:center; font-weight:800; text-decoration:none; color:#b14b7b;
+  display:inline-flex; gap:8px; align-items:center; font-weight:800; text-decoration:none; color:var(--ink);
   background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow)
 }
 /* Brand text (Pacifico) + pulse hover */
@@ -58,6 +61,7 @@ a{color:#ff4d94}
   font-family:'Pacifico', cursive; font-size:clamp(22px,3.2vw,34px); color:#ff66a3; text-shadow:0 1px 0 #fff;
   display:inline-block; transition:transform .25s ease;
 }
+.brand a{color:inherit; text-decoration:none}
 .brand:hover{ animation:pulse 1.2s ease-in-out infinite alternate }
 @keyframes pulse{ from{transform:scale(1)} to{transform:scale(1.02)} }
 
@@ -67,39 +71,35 @@ a{color:#ff4d94}
 .img-wrap{width:100%; max-width:420px; aspect-ratio:3/4; border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:linear-gradient(180deg,#ffddea,#ffeaf3)}
 .hero img{width:100%; height:100%; object-fit:cover; display:block}
 .hero .copy{text-align:left; max-width:680px; margin:0 auto}
-.label{display:inline-block; padding:6px 12px; border-radius:999px; background:#ffe5f3; font-weight:800; margin-bottom:8px; box-shadow:var(--shadow); letter-spacing:.5px}
-.hero h3{margin:4px 0 6px; font-weight:800; font-size:28px; color:#ff4d94}
+.label{display:inline-block; padding:6px 12px; border-radius:999px; background:#ffe5f3; font-weight:800; margin-bottom:8px; box-shadow:var(--shadow); letter-spacing:.5px; color:var(--ink)}
+.hero h3{margin:4px 0 6px; font-weight:800; font-size:28px; color:var(--ink)}
 .hero p{margin:8px 0 0}
 .countdown{margin-top:12px; font-weight:800; font-size:clamp(18px,3vw,32px); color:var(--ink-2)}
 @media(min-width:900px){ .hero{grid-template-columns:420px 1fr} .hero .copy{margin:0} }
 
-/* ===== From Tinkerbell corner tag ===== */
+/* corner tag */
 .corner-tag{
-  position:relative; display:inline-block; padding:8px 14px; font-weight:800; color:#ff4d94;
-  background:#fff; border-radius:999px; box-shadow:var(--shadow); border:2px dashed rgba(255,120,170,.35);
+  display:inline-block; padding:8px 14px; border-radius:999px;
+  background:#ffe5f3; color:var(--ink); font-weight:800; box-shadow:var(--shadow);
 }
 
 /* vertical carousel (HT1..Tinkerbell1) */
 .vcarousel{position:relative; overflow:hidden; border-radius:22px; box-shadow:var(--shadow)}
 .vtrack{display:flex; transition:transform .6s ease}
-.vslide{
-  min-width:100%; display:flex; justify-content:center; align-items:center;
-  /* đổi nền slide: hồng nhạt để match theme */
-  background:#ffeaf3;
-}
+.vslide{min-width:100%; display:flex; justify-content:center; align-items:center; background:#fffdfc}
 .vslide img{max-height:70vh; width:auto; height:auto; object-fit:contain; display:block}
 .vnav{position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none}
-.vnav button{pointer-events:auto; border:0; width:42px; height:42px; border-radius:999px; background:#fff; box-shadow:var(--shadow); color:#ff4d94; font-weight:800}
+.vnav button{pointer-events:auto; border:0; width:42px; height:42px; border-radius:999px; background:#fff; box-shadow:var(--shadow); color:var(--ink); font-weight:800}
 
 /* micro copy under carousel */
-.note{font-size:14px; color:#b14b7b}
+.note{font-size:16px; color:var(--ink)}
 
 /* === Calendar === */
-h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); color:#ff4d94}
+h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); color:var(--ink)}
 .cal-wrap{background:var(--card); padding:20px; border-radius:22px; box-shadow:var(--shadow)}
 .cal-head{display:flex; align-items:center; justify-content:space-between}
-.cal-head h4{margin:6px 0 14px; font-size:clamp(18px,3.2vw,28px); color:#ff4d94}
-.cal-head button{border:0; background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow); font-weight:800; color:#b14b7b}
+.cal-head h4{margin:6px 0 14px; font-size:clamp(18px,3.2vw,28px); color:var(--ink)}
+.cal-head button{border:0; background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow); font-weight:800; color:var(--ink)}
 .grid{display:grid; grid-template-columns:repeat(7,1fr); gap:14px}
 .cell,.dow{background:#fff; border-radius:16px; padding:18px 0; box-shadow:var(--shadow)}
 .dow{background:linear-gradient(180deg,#fff,#fff0); font-weight:800; color:#ff66a3}
@@ -112,23 +112,24 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .gifs-row img{width:min(260px,32vw); border-radius:20px; box-shadow:0 0 25px rgba(255,192,203,.6); transform:translateY(0); transition:transform .35s}
 .gifs-row img:hover{transform:translateY(-6px) rotate(-1.5deg)}
 
-/* candle */
-.candle-section{margin-top:30px; background:var(--card); padding:44px 0; border-top-left-radius:50px; border-top-right-radius:50px; box-shadow:0 -5px 20px rgba(255,182,193,.3)}
-.candle{position:relative; width:40px; height:80px; background:#fff0f5; border-radius:10px; margin:26px auto; box-shadow:var(--shadow); cursor:pointer}
-.flame{position:absolute; top:-25px; left:50%; transform:translateX(-50%); width:25px; height:25px; background:radial-gradient(circle,#ffd966,#ffb347,#ff7b00); border-radius:50%; box-shadow:0 0 30px 10px rgba(255,184,108,.6); animation:flicker .25s infinite alternate}
+/* candle (now same width as card) */
+.candle-section{margin-top:30px}
+.candle-card{background:var(--card); padding:28px 22px; border-radius:22px; box-shadow:var(--shadow); max-width:var(--max); margin:0 auto}
+.candle{position:relative; width:54px; height:110px; background:#fff0f5; border-radius:12px; margin:18px auto; box-shadow:var(--shadow); cursor:pointer}
+.flame{position:absolute; top:-28px; left:50%; transform:translateX(-50%); width:30px; height:30px; background:radial-gradient(circle,#ffd966,#ffb347,#ff7b00); border-radius:50%; box-shadow:0 0 30px 10px rgba(255,184,108,.6); animation:flicker .25s infinite alternate}
 @keyframes flicker{0%{transform:translateX(-50%) scale(1);opacity:.95}100%{transform:translateX(-48%) scale(1.1);opacity:1}}
-.smoke{position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:10px; height:10px; border-radius:50%; background:radial-gradient(circle, rgba(180,180,180,.6), rgba(180,180,180,0)); opacity:0; pointer-events:none}
+.smoke{position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:12px; height:12px; border-radius:50%; background:radial-gradient(circle, rgba(180,180,180,.6), rgba(180,180,180,0)); opacity:0; pointer-events:none}
 .smoke.show{ animation:puff 1.2s ease-out forwards }
 @keyframes puff{0%{opacity:.8; transform:translate(-50%,0) scale(.8)}100%{opacity:0; transform:translate(-50%,-40px) scale(1.4)}}
 .candle.off .flame{display:none}
 #message{font-size:16px; font-weight:700; margin-top:6px; color:var(--ink-2)}
 
 /* postcard wishes */
-.postcard{background:#fffdfc; border-radius:20px; padding:28px 22px; box-shadow:0 12px 30px rgba(255,170,200,.35), inset 0 0 0 2px rgba(255,160,200,.25); position:relative}
+.postcard{background:#fffdfc; border-radius:20px; padding:28px 22px; box-shadow:0 12px 30px rgba(255,170,200,.35), inset 0 0 0 2px rgba(255,160,200,.25); position:relative; color:var(--ink)}
 .postcard:before{content:""; position:absolute; inset:10px; border-radius:16px; border:2px dashed rgba(255,120,170,.35)}
 .wish-title{ font-weight:800; margin:0 0 10px; font-size:clamp(18px,2.4vw,22px) }
 .wish-list{display:grid; gap:12px}
-.wish-item{background:var(--card); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); text-align:left; position:relative; padding-left:44px}
+.wish-item{background:var(--card); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); text-align:left; position:relative; padding-left:44px; color:var(--ink)}
 .wish-item::before{content: attr(data-emo); position:absolute; left:12px; top:50%; transform:translateY(-50%) rotate(-8deg); font-weight:800; animation:wiggle 1.6s ease-in-out infinite; color:#ff76b4}
 @keyframes wiggle{0%,100%{transform:translateY(-50%) rotate(-8deg)}50%{transform:translateY(calc(-50% - 2px)) rotate(6deg)}}
 
@@ -136,13 +137,13 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .envelope{position:relative; margin:0 auto; max-width:var(--max); background:#fff7fb; border-radius:18px; box-shadow:var(--shadow); padding:0; overflow:hidden}
 .envelope .flap{position:absolute; left:0; right:0; top:0; height:0; padding-bottom:32%; background:linear-gradient(180deg,#ffd8ea,#ffeaf5); clip-path:polygon(0 0, 100% 0, 50% 100%); transition:transform .6s ease, opacity .6s ease; transform-origin:50% 0; z-index:2}
 .envelope.open .flap{ transform:rotateX(180deg); opacity:.35 }
-.flap .hint{position:absolute; left:50%; top:18%; transform:translate(-50%,-50%); font-weight:800; font-size:14px; color:#b14b7b; text-shadow:0 1px 0 rgba(255,255,255,.8)}
+.flap .hint{position:absolute; left:50%; top:18%; transform:translate(-50%,-50%); font-weight:800; font-size:14px; color:#ff66a3; text-shadow:0 1px 0 rgba(255,255,255,.8)}
 .envelope .paper-wrap{margin-top:28%; background:#fffdfd; border-top-left-radius:18px; border-top-right-radius:18px; position:relative}
-.paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease, padding .6s ease; padding:0 22px 0; text-align:left}
-.paper-inner::after{content:""; display:block; height:18px;} /* spacer dưới */
-.envelope.open .paper-inner{max-height:1200px; padding:22px 22px 36px;}
+.paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease, padding .6s ease; padding:0 22px 0; text-align:left; color:var(--ink)}
+.paper-inner::after{content:""; display:block; height:0;} /* xoá spacer thừa */
+.envelope.open .paper-inner{max-height:1200px; padding:22px 22px 22px;}
 
-/* paw-pop effect */
+/* paw-pop effect (pink) */
 .paw{position:absolute; top:14%; left:50%; transform:translate(-50%,0); font-size:18px; color:#ff76b4; opacity:0; pointer-events:none}
 .paw.show{animation:pawPop 900ms ease-out forwards}
 @keyframes pawPop{
@@ -153,7 +154,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 
 /* gift */
 .gift-section{padding:30px 0 10px}
-.gift-wrap{display:flex; flex-direction:column; align-items:center; gap:10px}
+.gift-wrap{display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--ink)}
 .gift{width:160px; height:120px; background:#ff9dc6; border-radius:12px; position:relative; box-shadow:var(--shadow); cursor:pointer}
 .gift:before{content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:18px; height:100%; background:#ff4d94; border-radius:6px}
 .gift:after{content:""; position:absolute; left:0; top:52%; transform:translateY(-50%); width:100%; height:18px; background:#ff4d94; border-radius:6px}
@@ -176,7 +177,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 @media(prefers-reduced-motion:reduce){ .mtrack{animation:none} }
 
 /* Music button */
-.music-btn{border:0; border-radius:999px; padding:10px 18px; background:#ffe5f3; color:#b14b7b; font-weight:800; box-shadow:var(--shadow); cursor:pointer}
+.music-btn{border:0; border-radius:999px; padding:10px 18px; background:#ffe5f3; color:var(--ink); font-weight:800; box-shadow:var(--shadow); cursor:pointer}
 .music-btn[aria-pressed="true"]{background:#ffccdf}
 
 /* sub-pages (hash) */
@@ -186,42 +187,61 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .subpage .card{padding:22px 20px}
 .subpage .brand{font-family:'Pacifico',cursive; font-size:34px; color:#ff66a3; text-decoration:none}
 .subpage .back{display:inline-block; margin-top:16px; text-decoration:none; font-weight:800; background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow); color:#ff4d94}
-.subpage img{max-width:100%; border-radius:18px; box-shadow:var(--shadow)}
+.subpage h2{font-family:Montserrat, sans-serif; color:#ff4d94}
+.subpage p, .subpage a{color:#ff4d94}
 
 /* Prev/next dots under vcarousel */
 .dots{display:flex; justify-content:center; gap:8px; margin-top:10px}
 .dots button{width:8px; height:8px; border-radius:50%; border:0; background:#ffd0e3; cursor:pointer}
 .dots button.active{background:#ff4d94}
 
-/* ====== Pills in subpage Vi Trô hello! ====== */
-.pills{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:8px 0 14px}
-.pills .pill{
-  display:inline-block; padding:10px 16px; border-radius:999px; font-weight:800; text-decoration:none;
-  background:#ffe5f3; color:#ff4d94; box-shadow:var(--shadow);
+/* music/movie links (glassy hover) */
+.music-links{display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:14px}
+.music-links a{
+  display:inline-block; padding:12px 18px; border-radius:999px; font-weight:800; text-decoration:none;
+  background:rgba(255,255,255,.7); color:#ff4d94; box-shadow:var(--shadow); backdrop-filter:blur(4px);
+  transition:transform .2s, box-shadow .2s, background .2s;
+}
+.music-links a:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 36px rgba(255,105,180,.28), inset 0 0 0 1px rgba(255,105,180,.25);
+  background:rgba(255,255,255,.85);
+}
+
+/* click sparkle – flower only */
+.sparkle{
+  position:fixed; left:0; top:0; transform:translate(-50%,-50%);
+  pointer-events:none; font-size:14px; color:#ff76b4; opacity:0; filter:drop-shadow(0 2px 6px rgba(255,120,170,.6));
+  animation:sparklePop .42s ease-out forwards;
+}
+@keyframes sparklePop{
+  0%{opacity:0; transform:translate(-50%,-50%) scale(.6)}
+  30%{opacity:1; transform:translate(-50%,-60%) scale(1.05)}
+  100%{opacity:0; transform:translate(-50%,-80%) scale(.8)}
 }
 </style>
 </head>
 <body>
 
-<!-- floating cute icons -->
+<!-- floating cute icons: only flowers -->
 <div class="bg-decor" aria-hidden="true" id="bgDecor">
-  <span style="left:6%; animation-delay:-2s">✦</span>
-  <span style="left:14%; animation-delay:-6s">❀</span>
-  <span style="left:26%; animation-delay:-4s">★</span>
-  <span style="left:40%; animation-delay:-9s">🐾</span>
-  <span style="left:58%; animation-delay:-11s">❁</span>
-  <span style="left:74%; animation-delay:-1s">❃</span>
-  <span style="left:88%; animation-delay:-7s">✦</span>
+  <span style="left:6%; animation-delay:-2s">❀</span>
+  <span style="left:18%; animation-delay:-6s">❀</span>
+  <span style="left:34%; animation-delay:-4s">❀</span>
+  <span style="left:50%; animation-delay:-9s">❀</span>
+  <span style="left:68%; animation-delay:-11s">❀</span>
+  <span style="left:82%; animation-delay:-1s">❀</span>
+  <span style="left:92%; animation-delay:-7s">❀</span>
 </div>
 
 <!-- ===== NAV ===== -->
 <nav class="nav">
   <div class="navwrap">
     <div class="group">
-      <a href="#vitro" class="btn">Vi Trô hello!</a>
+      <a href="#vtro" class="btn">Vi Trô hello!</a>
       <a href="#letter" class="btn">Birthday Letter</a>
     </div>
-    <div class="brand"><a href="#" style="text-decoration:none;color:inherit">Home Sweet Home</a></div>
+    <div class="brand"><a href="#">Home Sweet Home</a></div>
     <div class="group">
       <a href="#lazy" class="btn">Are you lazy?</a>
       <a href="#busy" class="btn">Are you busy?</a>
@@ -229,7 +249,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </nav>
 
-<!-- ===== From Tinkerbell tag + VERTICAL CAROUSEL ===== -->
+<!-- ===== From Tinkerbell tag + VERTICAL CAROUSEL (HT1..Tinkerbell1) ===== -->
 <section class="container section reveal" id="memories">
   <div class="corner-tag">From Tinkerbell with luv</div>
 
@@ -248,9 +268,8 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
   <div class="dots" id="vdots"></div>
 
-  <!-- CẬP NHẬT ĐOẠN VĂN THEO YÊU CẦU -->
   <p class="card note" style="margin-top:12px; text-align:left">
-    Em đặt ảnh của cả hai em bé ở đây bởi vì có lẽ nó là khoảng thời gian hồn nhiên nhất trong cả cuộc đời này - mà bất kỳ lúc nào nhìn lại, chúng ta cũng sẽ mỉm cười (nhỉ)? Giữ được sự hồn nhiên trong tất cả mọi điều thật khó - nhưng cũng sẽ thật tuyệt, nên hi vọng là tụi mình có thể vui vẻ với nhau như trẻ em và nâng niu nhau như những em bé, nhoé ạ (<a href="https://youtu.be/OUZA0RAv85U?si=pDRpDc3j2zMajV19" target="_blank" rel="noopener">link</a>). Thời gian sẽ lấy đi của mỗi người nhiều thứ, nhưng, nếu mệt quá thì em hi vọng người có thể quay về nhà nhá. Tinkerbell nói là biết đâu sinh nhật năm sau có thể viết tặng Hà Thanh một chiếc bài nhạc mới or anything kiểu kiểu vậy ạ, hope so, hope so i ^.^
+    Em đặt ảnh của cả hai em bé ở đây bởi vì có lẽ nó là khoảng thời gian hồn nhiên nhất trong cả cuộc đời này - mà bất kỳ lúc nào nhìn lại, chúng ta cũng sẽ mỉm cười (nhỉ)? Giữ được sự hồn nhiên trong tất cả mọi điều thật khó - nhưng cũng sẽ thật tuyệt, nên hi vọng là tụi mình có thể vui vẻ với nhau như trẻ em và nâng niu nhau như những em bé, nhoé ạ (<a href="https://youtu.be/OUZA0RAv85U?si=pDRpDc3j2zMajV19" target="_blank" rel="noopener">link</a>). Thời gian sẽ lấy đi của mỗi người nhiều thứ, nhưng, nếu mệt quá thì em hi vọng người có thể quay về nhà nhá... Tinkerbell nói là biết đâu sinh nhật năm sau… hope so, hope so i ^.^
   </p>
 </section>
 
@@ -273,10 +292,10 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   <div class="cal-wrap" id="calendar"></div>
 </section>
 
-<!-- ===== Test mic + Music + meo2/meo3/meo4 ===== -->
+<!-- ===== Test mic + Music + meo2/meo3/meo4 (trước ANGEL) ===== -->
 <section class="container section reveal" id="musicbox">
   <div class="card">
-    <h3 style="margin:0 0 12px; font-weight:800; color:#ff4d94">Test mic, test mic, chuẩn bị lên nhạc chưa ạ? Gòi, Hà Thanh bấm dzo nhạc i ạ =))</h3>
+    <h3 style="margin:0 0 12px; font-weight:800; color:var(--ink)">Test mic, test mic, chuẩn bị lên nhạc chưa ạ? Gòi, Hà Thanh bấm dzo nhạc i ạ =))</h3>
     <button id="musicBtn" class="music-btn" aria-pressed="false">♫ Music</button>
     <div class="gifs-row" style="margin-top:18px">
       <img src="assets/meo2.gif" alt="meo2">
@@ -314,10 +333,10 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
     </div>
   </section>
 
-  <!-- marquee gallery (benh/an/miss; đã bỏ toion) -->
+  <!-- marquee gallery -->
   <section class="container section">
-    <div class="marquee">
-      <div class="mtrack" aria-hidden="true">
+    <div class="marquee" aria-hidden="true">
+      <div class="mtrack">
         <img src="assets/be%20kind%20to%20your%20mind.jpg" alt="be kind to your mind" loading="lazy">
         <img src="assets/If%20u%20got%20issues,%20I%20got%20tissues.jpg" alt="if u got issues, I got tissues" loading="lazy">
         <img src="assets/Happy%20Birthday.jpg" alt="Happy Birthday" loading="lazy">
@@ -336,11 +355,13 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </section>
 </main>
 
-<!-- Candle -->
-<div class="candle-section reveal">
-  <div id="message">Ba là cây nến vàng, mẹ là cây nến xanh, Hà Thanh thổi nến nhẹ nhàng thôi nha (˵ •̀ ᴗ - ˵ ) ✧</div>
-  <div class="candle" id="candle" title="Chạm để thổi nến"><div class="flame"></div><div class="smoke" id="smoke"></div></div>
-</div>
+<!-- Candle (same width as card) -->
+<section class="candle-section reveal">
+  <div class="candle-card">
+    <div id="message">Ba là cây nến vàng, mẹ là cây nến xanh, Hà Thanh thổi nến nhẹ nhàng thôi nha (˵ •̀ ᴗ - ˵ ) ✧</div>
+    <div class="candle" id="candle" title="Chạm để thổi nến"><div class="flame"></div><div class="smoke" id="smoke"></div></div>
+  </div>
+</section>
 
 <!-- Wish granted -->
 <section class="container section reveal" style="padding-top:12px"><div class="card"><strong>Wish granted (∩˃o˂∩)♡</strong></div></section>
@@ -356,7 +377,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 
 <!-- LOOK BACK -->
 <section class="container section reveal">
-  <div class="card" style="text-align:left; position:relative">
+  <div class="card" style="text-align:left; position:relative; color:var(--ink)">
     <h3 style="margin:0 0 10px; font-weight:800">Mình cùng look back một chút không nhỉ?</h3>
     <p>Thiên Vi có chiếc playlist này từ hồi tháng 1 — chắc là nó lookback được cả journey của tụi mình luôn rồi ạ.</p>
     <div class="marquee" aria-hidden="true">
@@ -375,6 +396,16 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
+<!-- PLAYLIST -->
+<section class="container section reveal">
+  <div class="card" style="color:var(--ink)">
+    <h3 style="margin:0 0 10px; font-weight:800; text-align:left">Chiếc playlist này nè ạ ^.^</h3>
+    <iframe style="width:100%; min-height:420px; border:0; border-radius:14px; box-shadow:var(--shadow)"
+      src="https://www.youtube.com/embed/videoseries?list=PLz301c-yfQZ8YEHu6Jn-g9q8KxXaveREV"
+      title="YouTube playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+</section>
+
 <!-- Envelope (Birthday Letter) -->
 <section class="container section reveal" id="letter">
   <div id="env" class="envelope">
@@ -382,7 +413,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
       <div class="hint">Chạm vào để xem ^.^</div>
     </div>
     <div class="paper-wrap">
-      <span class="paw" id="paw">🐾</span>
+      <span class="paw" id="paw">❀</span>
       <div class="paper-inner" id="paper">
         <p>
           <strong>Còn đây là những điều đơn giản, không cầu kỳ mà Thiên Vi muốn nhắn nhủ:</strong><br><br>
@@ -393,22 +424,36 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
+<!-- Music/Movies links (giữ nguyên ở trang chính) -->
+<section class="container section reveal">
+  <h3 style="margin:0 0 10px; font-weight:800; color:var(--ink)">
+    Lúc nào chán quá thì mình nghe nhạc, còn chán hơn nữa thì mình xem phim, đọc sách, nấu ăn, làm bánh đồ ạ. Chắc người thông minh aka Nguyễn Hà Thanh sẽ thích “Inception” - poor vì chúng ta không có cơ hội xem cùng hẹ hẹ. Đời này thi vị lắm, chúc người enjoy nhiều nha ạ ^.^
+  </h3>
+  <div class="music-links">
+    <a href="https://www.youtube.com/watch?v=DydIIDQuhxU&list=RDDydIIDQuhxU&start_radio=1" target="_blank" rel="noopener">Thư cho anh</a>
+    <a href="https://www.youtube.com/watch?v=A8-ENEqhQjg" target="_blank" rel="noopener">Every day, Every Moment</a>
+    <a href="https://www.youtube.com/watch?v=YoHD9XEInc0" target="_blank" rel="noopener">Inception</a>
+    <a href="https://www.youtube.com/watch?v=zSWdZVtXT7E" target="_blank" rel="noopener">Interstellar</a>
+    <a href="https://www.youtube.com/watch?v=oglmFkKicYk&list=RDoglmFkKicYk&start_radio=1" target="_blank" rel="noopener">Wish</a>
+  </div>
+</section>
+
 <!-- Footer line -->
-<div class="container" style="padding-top:0; padding-bottom:48px">
+<div class="container" style="padding-top:0; padding-bottom:48px; color:var(--ink)">
   Sẽ luôn có người dịu dàng với Hà Thanh, nên Hà Thanh hãy luôn dịu dàng với chính mình và mọi người nha ạ. I meow you ≽^-⩊-^≼
 </div>
 
 <!-- audio element -->
 <audio id="bgm" preload="auto" loop src="assets/Bongo Cat - Happy Birthday to You (Cover Version) 🎧 - Bongo Cat (youtube).mp3"></audio>
 
-<!-- ===== SUBPAGES (hash) ===== -->
+<!-- ===== SUBPAGES ===== -->
 <section id="lazyPage" class="subpage" aria-hidden="true">
   <div class="wrap">
     <a class="brand" href="#">Home Sweet Home</a>
     <div class="card">
-      <h2 style="font-family:Montserrat; color:#ff4d94; margin:0 0 10px">Are you lazy?</h2>
+      <h2>Are you lazy?</h2>
       <p>Nếu bạn đang có một ngày buồn chán, thì hãy nhớ là 👇</p>
-      <img src="assets/cty.jpg" alt="cty">
+      <img src="assets/cty.jpg" alt="cty" style="max-width:100%; border-radius:18px; box-shadow:var(--shadow)">
     </div>
     <a href="#" class="back">← Quay về trang chủ</a>
   </div>
@@ -418,39 +463,27 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   <div class="wrap">
     <a class="brand" href="#">Home Sweet Home</a>
     <div class="card">
-      <h2 style="font-family:Montserrat; color:#ff4d94; margin:0 0 10px">Are you busy?</h2>
+      <h2>Are you busy?</h2>
       <p>Nếu bạn đang ngao ngán công việc, thì hãy nhớ đến tôi, tại vì tôi cũng vậy, nhưng mà, tôi là một bé bò kiểu 👇</p>
-      <img src="assets/bo.jpg" alt="bo">
+      <img src="assets/bo.jpg" alt="bo" style="max-width:100%; border-radius:18px; box-shadow:var(--shadow)">
     </div>
     <a href="#" class="back">← Quay về trang chủ</a>
   </div>
 </section>
 
 <!-- NEW: Vi Trô hello! subpage -->
-<section id="vitroPage" class="subpage" aria-hidden="true">
+<section id="vtroPage" class="subpage" aria-hidden="true">
   <div class="wrap">
     <a class="brand" href="#">Home Sweet Home</a>
     <div class="card">
-      <h2 style="font-family:Montserrat; color:#ff4d94; margin:0 0 8px">Vi Trô hello!</h2>
-
-      <!-- 4 nút như yêu cầu -->
-      <div class="pills" role="tablist" aria-label="Vi Trô menu">
-        <a href="#vitro" class="pill" role="tab" aria-selected="true">Nhạc</a>
-        <a href="#vitro" class="pill" role="tab">Phim</a>
-        <a href="#vitro" class="pill" role="tab">Sách</a>
-        <a href="#vitro" class="pill" role="tab">I chơi</a>
-      </div>
-
-      <!-- Giữ nguyên nội dung đã chuyển vào subpage này -->
-      <h3 style="margin:8px 0 12px; font-weight:800; color:#ff4d94; text-align:left">
-        Lúc nào chán quá thì mình nghe nhạc, còn chán hơn nữa thì mình xem phim, đọc sách, nấu ăn, làm bánh đồ ạ. Chắc người thông minh aka Nguyễn Hà Thanh sẽ thích “Inception” - poor vì chúng ta không có cơ hội xem cùng hẹ hẹ. Đời này thi vị lắm, chúc người enjoy nhiều nha ạ ^.^
-      </h3>
-      <div class="pills" style="margin-top:0">
-        <a class="pill" href="https://www.youtube.com/watch?v=DydIIDQuhxU&list=RDDydIIDQuhxU&start_radio=1" target="_blank" rel="noopener">Thư cho anh</a>
-        <a class="pill" href="https://www.youtube.com/watch?v=A8-ENEqhQjg" target="_blank" rel="noopener">Every day, Every Moment</a>
-        <a class="pill" href="https://www.youtube.com/watch?v=YoHD9XEInc0" target="_blank" rel="noopener">Inception</a>
-        <a class="pill" href="https://www.youtube.com/watch?v=zSWdZVtXT7E" target="_blank" rel="noopener">Interstellar</a>
-        <a class="pill" href="https://www.youtube.com/watch?v=oglmFkKicYk&list=RDoglmFkKicYk&start_radio=1" target="_blank" rel="noopener">Wish</a>
+      <h2>Vi Trô hello!</h2>
+      <p><strong>Lúc nào chán quá thì mình nghe nhạc, còn chán hơn nữa thì mình xem phim, đọc sách, nấu ăn, làm bánh đồ ạ. Chắc người thông minh aka Nguyễn Hà Thanh sẽ thích “Inception” - poor vì chúng ta không có cơ hội xem cùng hẹ hẹ. Đời này thi vị lắm, chúc người enjoy nhiều nha ạ ^.^</strong></p>
+      <div class="music-links" style="margin-top:6px">
+        <a href="https://www.youtube.com/watch?v=DydIIDQuhxU&list=RDDydIIDQuhxU&start_radio=1" target="_blank" rel="noopener">Thư cho anh</a>
+        <a href="https://www.youtube.com/watch?v=A8-ENEqhQjg" target="_blank" rel="noopener">Every day, Every Moment</a>
+        <a href="https://www.youtube.com/watch?v=YoHD9XEInc0" target="_blank" rel="noopener">Inception</a>
+        <a href="https://www.youtube.com/watch?v=zSWdZVtXT7E" target="_blank" rel="noopener">Interstellar</a>
+        <a href="https://www.youtube.com/watch?v=oglmFkKicYk&list=RDoglmFkKicYk&start_radio=1" target="_blank" rel="noopener">Wish</a>
       </div>
     </div>
     <a href="#" class="back">← Quay về trang chủ</a>
@@ -470,7 +503,6 @@ const slides=[...document.querySelectorAll('.vslide')];
 const dotsWrap=document.getElementById('vdots');
 let idx=0, timer=null;
 function renderDots(){
-  dotsWrap.innerHTML='';
   slides.forEach((_,i)=>{
     const b=document.createElement('button');
     if(i===0) b.classList.add('active');
@@ -520,7 +552,7 @@ buildCalendar();
 /* ========== Music autoplay & toggle ========== */
 const bgm=document.getElementById('bgm');
 const musicBtn=document.getElementById('musicBtn');
-bgm.volume=.6;
+if(bgm){ bgm.volume=.6; }
 async function tryPlay(){ try{ await bgm.play(); musicBtn?.setAttribute('aria-pressed','true'); }catch(e){} }
 ['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.addEventListener(ev, tryPlay, {passive:true, once:true}));
 musicBtn?.addEventListener('click', async ()=>{
@@ -531,13 +563,24 @@ document.addEventListener('visibilitychange', async ()=>{
   if (!document.hidden && musicBtn?.getAttribute('aria-pressed')==='true' && bgm.paused){ try{ await bgm.play(); }catch(e){} }
 });
 
-/* ========== Candle & Gift ========== */
+/* ========== Candle & Gift (with whoosh) ========== */
 const candle=document.getElementById('candle'), smoke=document.getElementById('smoke');
 let blown=false;
+function whoosh(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='sawtooth'; o.frequency.setValueAtTime(220, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(30, ctx.currentTime+0.35);
+    g.gain.setValueAtTime(0.2, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.4);
+    o.connect(g).connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.42);
+  }catch(e){}
+}
 candle?.addEventListener('click', ()=>{
   if (navigator.vibrate) navigator.vibrate(10);
   if (blown) return; blown=true;
-  candle.classList.add('off'); smoke.classList.add('show');
+  candle.classList.add('off'); smoke.classList.add('show'); whoosh();
   setTimeout(()=> smoke.classList.remove('show'), 1300);
 });
 const gift=document.getElementById('gift'), balloons=document.getElementById('balloons'); let opened=false;
@@ -560,21 +603,20 @@ env?.addEventListener('click', ()=>{
   env.classList.toggle('open');
   const opening = env.classList.contains('open');
   if (opening){
-    paw.classList.remove('show'); // restart
-    void paw.offsetWidth; paw.classList.add('show');
+    paw.classList.remove('show'); void paw.offsetWidth; paw.classList.add('show');
     setTimeout(()=>{ env.scrollIntoView({behavior:'smooth', block:'start'}); }, 150);
   }
 });
 
-/* ========== Subpages with hash (#lazy/#busy/#vitro) ========== */
+/* ========== Subpages with hash (#lazy/#busy/#vtro) ========== */
 const lazyPage=document.getElementById('lazyPage'),
       busyPage=document.getElementById('busyPage'),
-      vitroPage=document.getElementById('vitroPage');
+      vtroPage=document.getElementById('vtroPage');
 function onHash(){
   const h=location.hash.replace('#','');
   lazyPage.classList.toggle('show', h==='lazy');
   busyPage.classList.toggle('show', h==='busy');
-  vitroPage.classList.toggle('show', h==='vitro');
+  vtroPage.classList.toggle('show', h==='vtro');
 }
 window.addEventListener('hashchange', onHash); onHash();
 
@@ -592,6 +634,23 @@ function fixNavSpacing(){
   }
 }
 window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing, 300);
+
+/* ========== Sparkle trail on click (flower only) ========== */
+function makeSparkle(x,y,delay=0){
+  const s=document.createElement('span');
+  s.className='sparkle';
+  s.textContent='❀';
+  s.style.left=x+'px'; s.style.top=y+'px';
+  s.style.animationDelay=delay+'ms';
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(), 480);
+}
+window.addEventListener('click', (e)=>{
+  const n=4; for(let i=0;i<n;i++){
+    const dx=(Math.random()-.5)*24, dy=(Math.random()-.5)*24;
+    makeSparkle(e.clientX+dx, e.clientY+dy, i*25);
+  }
+},{passive:true});
 </script>
 </body>
 </html>
