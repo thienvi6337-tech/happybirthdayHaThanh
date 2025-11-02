@@ -36,7 +36,7 @@ body{
 .container{max-width:var(--max); margin:0 auto; padding:24px 16px}
 .section{padding:32px 0}
 .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
-h1,h2{font-family:"Comic Sans MS",cursive; margin:0}
+h1,h2{font-family:"Comic Sans MS",cursive; margin:0} /* giữ nguyên font của block ANGEL */
 h1{font-size:clamp(28px,4vw,48px); color:var(--ink-2); font-weight:800}
 h2{font-size:clamp(16px,2.2vw,22px); color:var(--ink-3); font-weight:400}
 a{color:#ff4d94}
@@ -84,6 +84,12 @@ a{color:#ff4d94}
 /* micro copy under carousel */
 .note{font-size:14px; color:#b14b7b}
 
+/* corner tag (From Tinkerbell with luv) */
+.corner-tag{
+  display:inline-block; padding:8px 14px; border-radius:999px;
+  background:#ffe5f3; color:#ff4d94; font-weight:800; box-shadow:var(--shadow);
+}
+
 /* === Calendar === */
 h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); color:#ff4d94}
 .cal-wrap{background:var(--card); padding:20px; border-radius:22px; box-shadow:var(--shadow)}
@@ -102,12 +108,11 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .gifs-row img{width:min(260px,32vw); border-radius:20px; box-shadow:0 0 25px rgba(255,192,203,.6); transform:translateY(0); transition:transform .35s}
 .gifs-row img:hover{transform:translateY(-6px) rotate(-1.5deg)}
 
-/* candle */
-.candle-section{margin-top:30px; background:var(--card); padding:44px 0; border-top-left-radius:50px; border-top-right-radius:50px; box-shadow:0 -5px 20px rgba(255,182,193,.3)}
-.candle{position:relative; width:40px; height:80px; background:#fff0f5; border-radius:10px; margin:26px auto; box-shadow:var(--shadow); cursor:pointer}
-.flame{position:absolute; top:-25px; left:50%; transform:translateX(-50%); width:25px; height:25px; background:radial-gradient(circle,#ffd966,#ffb347,#ff7b00); border-radius:50%; box-shadow:0 0 30px 10px rgba(255,184,108,.6); animation:flicker .25s infinite alternate}
+/* candle (moved into a card, bigger) */
+.candle{position:relative; width:54px; height:110px; background:#fff0f5; border-radius:12px; margin:16px auto; box-shadow:var(--shadow); cursor:pointer}
+.flame{position:absolute; top:-32px; left:50%; transform:translateX(-50%); width:30px; height:30px; background:radial-gradient(circle,#ffd966,#ffb347,#ff7b00); border-radius:50%; box-shadow:0 0 34px 12px rgba(255,184,108,.6); animation:flicker .25s infinite alternate}
 @keyframes flicker{0%{transform:translateX(-50%) scale(1);opacity:.95}100%{transform:translateX(-48%) scale(1.1);opacity:1}}
-.smoke{position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:10px; height:10px; border-radius:50%; background:radial-gradient(circle, rgba(180,180,180,.6), rgba(180,180,180,0)); opacity:0; pointer-events:none}
+.smoke{position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:12px; height:12px; border-radius:50%; background:radial-gradient(circle, rgba(180,180,180,.6), rgba(180,180,180,0)); opacity:0; pointer-events:none}
 .smoke.show{ animation:puff 1.2s ease-out forwards }
 @keyframes puff{0%{opacity:.8; transform:translate(-50%,0) scale(.8)}100%{opacity:0; transform:translate(-50%,-40px) scale(1.4)}}
 .candle.off .flame{display:none}
@@ -129,8 +134,8 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .flap .hint{position:absolute; left:50%; top:18%; transform:translate(-50%,-50%); font-weight:800; font-size:14px; color:#b14b7b; text-shadow:0 1px 0 rgba(255,255,255,.8)}
 .envelope .paper-wrap{margin-top:28%; background:#fffdfd; border-top-left-radius:18px; border-top-right-radius:18px; position:relative}
 .paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease, padding .6s ease; padding:0 22px 0; text-align:left}
-.paper-inner::after{content:""; display:block; height:18px;} /* spacer dưới */
-.envelope.open .paper-inner{max-height:1200px; padding:22px 22px 36px;}
+.paper-inner::after{content:""; display:block; height:0;} /* xoá spacer dư ở cuối */
+.envelope.open .paper-inner{max-height:1200px; padding:22px 22px 24px;} /* bớt padding đáy */
 
 /* paw-pop effect */
 .paw{position:absolute; top:14%; left:50%; transform:translate(-50%,0); font-size:18px; color:#ff76b4; opacity:0; pointer-events:none}
@@ -196,10 +201,10 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   background:rgba(255,255,255,.85);
 }
 
-/* ====== Sparkle trail (click effect) ====== */
+/* ====== Sparkle trail (click effect) — chỉ 1 bông hoa ❀ ====== */
 .sparkle{
   position:fixed; left:0; top:0; transform:translate(-50%,-50%);
-  pointer-events:none; font-size:14px; color:#ff76b4; opacity:0; filter:drop-shadow(0 2px 6px rgba(255,120,170,.6));
+  pointer-events:none; font-size:18px; color:#ff76b4; opacity:0; filter:drop-shadow(0 2px 6px rgba(255,120,170,.6));
   animation:sparklePop .42s ease-out forwards;
 }
 @keyframes sparklePop{
@@ -237,7 +242,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </nav>
 
-<!-- ===== From Tinkerbell tag + VERTICAL CAROUSEL (HT1..Tinkerbell1) ===== -->
+<!-- ===== From Tinkerbell tag + VERTICAL CAROUSEL ===== -->
 <section class="container section reveal" id="memories">
   <div class="corner-tag">From Tinkerbell with luv</div>
 
@@ -274,13 +279,13 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- ===== Calendar (title must be above) ===== -->
+<!-- ===== Calendar ===== -->
 <section class="container section reveal">
   <h3 class="title">Hô biến ra quả lịch vạn niên</h3>
   <div class="cal-wrap" id="calendar"></div>
 </section>
 
-<!-- ===== Test mic + Music + meo2/meo3/meo4 (THIS MUST BE BEFORE ANGEL) ===== -->
+<!-- ===== Test mic + Music + meo2/meo3/meo4 (phần này nằm TRƯỚC ANGEL) ===== -->
 <section class="container section reveal" id="musicbox">
   <div class="card">
     <h3 style="margin:0 0 12px; font-weight:800; color:#ff4d94">Test mic, test mic, chuẩn bị lên nhạc chưa ạ? Gòi, Hà Thanh bấm dzo nhạc i ạ =))</h3>
@@ -293,7 +298,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- ===== ANGEL title + 3 original gifs (meocon/conmeo/dancing-cat-dance) ===== -->
+<!-- ===== ANGEL title + 3 original gifs ===== -->
 <main class="container section reveal" id="oldSite">
   <h1>HAPPY BIRTHDAY MY ANGEL</h1>
   <h2>Wishing you a day as lovely as you are ฅ^>⩊<^ ฅ</h2>
@@ -321,7 +326,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
     </div>
   </section>
 
-  <!-- marquee gallery (added benh/an/miss; removed toion) -->
+  <!-- marquee gallery -->
   <section class="container section">
     <div class="marquee">
       <div class="mtrack" aria-hidden="true">
@@ -343,11 +348,13 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </section>
 </main>
 
-<!-- Candle -->
-<div class="candle-section reveal">
-  <div id="message">Ba là cây nến vàng, mẹ là cây nến xanh, Hà Thanh thổi nến nhẹ nhàng thôi nha (˵ •̀ ᴗ - ˵ ) ✧</div>
-  <div class="candle" id="candle" title="Chạm để thổi nến"><div class="flame"></div><div class="smoke" id="smoke"></div></div>
-</div>
+<!-- Candle inside a card (rộng bằng Wish granted) -->
+<section class="container section reveal" style="padding-top:8px">
+  <div class="card">
+    <div id="message">Ba là cây nến vàng, mẹ là cây nến xanh, Hà Thanh thổi nến nhẹ nhàng thôi nha (˵ •̀ ᴗ - ˵ ) ✧</div>
+    <div class="candle" id="candle" title="Chạm để thổi nến"><div class="flame"></div><div class="smoke" id="smoke"></div></div>
+  </div>
+</section>
 
 <!-- Wish granted -->
 <section class="container section reveal" style="padding-top:12px"><div class="card"><strong>Wish granted (∩˃o˂∩)♡</strong></div></section>
@@ -410,7 +417,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- Music/Movies links (restored + glassy hover) -->
+<!-- Music/Movies links -->
 <section class="container section reveal">
   <h3 style="margin:0 0 10px; font-weight:800">
     Lúc nào chán quá thì mình nghe nhạc, còn chán hơn nữa thì mình xem phim, đọc sách, nấu ăn, làm bánh đồ ạ. Chắc người thông minh aka Nguyễn Hà Thanh sẽ thích “Inception” - poor vì chúng ta không có cơ hội xem cùng hẹ hẹ. Đời này thi vị lắm, chúc người enjoy nhiều nha ạ ^.^
@@ -530,13 +537,26 @@ document.addEventListener('visibilitychange', async ()=>{
   if (!document.hidden && musicBtn?.getAttribute('aria-pressed')==='true' && bgm.paused){ try{ await bgm.play(); }catch(e){} }
 });
 
-/* ========== Candle & Gift ========== */
+/* ========== Candle (whoosh sound) & Gift ========== */
 const candle=document.getElementById('candle'), smoke=document.getElementById('smoke');
 let blown=false;
+function playWhoosh(){
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const bufferSize=2*ctx.sampleRate*0.6; // ~0.6s
+  const noise=ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data=noise.getChannelData(0);
+  for(let i=0;i<bufferSize;i++){ data[i]=(Math.random()*2-1)*Math.pow(1-i/bufferSize,1.6); }
+  const src=ctx.createBufferSource(); src.buffer=noise;
+  const filter=ctx.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=1200;
+  const gain=ctx.createGain(); gain.gain.setValueAtTime(0.001, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.4, ctx.currentTime+0.05); gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.6);
+  src.connect(filter).connect(gain).connect(ctx.destination);
+  src.start();
+  setTimeout(()=>ctx.close(), 800);
+}
 candle?.addEventListener('click', ()=>{
   if (navigator.vibrate) navigator.vibrate(10);
   if (blown) return; blown=true;
-  candle.classList.add('off'); smoke.classList.add('show');
+  candle.classList.add('off'); smoke.classList.add('show'); playWhoosh();
   setTimeout(()=> smoke.classList.remove('show'), 1300);
 });
 const gift=document.getElementById('gift'), balloons=document.getElementById('balloons'); let opened=false;
@@ -559,9 +579,7 @@ env?.addEventListener('click', ()=>{
   env.classList.toggle('open');
   const opening = env.classList.contains('open');
   if (opening){
-    paw.classList.remove('show'); // restart
-    void paw.offsetWidth; paw.classList.add('show');
-    // smooth scroll to the start of paper section
+    paw.classList.remove('show'); void paw.offsetWidth; paw.classList.add('show');
     setTimeout(()=>{ env.scrollIntoView({behavior:'smooth', block:'start'}); }, 150);
   }
 });
@@ -590,27 +608,16 @@ function fixNavSpacing(){
 }
 window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing, 300);
 
-/* ========== Sparkle trail on click (pink) ========== */
-const SPARKS = ['✦','❀','★','❁','❃','•'];
-function makeSparkle(x,y,scale=1,delay=0){
+/* ========== Sparkle trail on click (ONLY 1 pink flower) ========== */
+function makeSparkle(x,y){
   const s=document.createElement('span');
   s.className='sparkle';
-  s.textContent=SPARKS[Math.floor(Math.random()*SPARKS.length)];
+  s.textContent='❀';
   s.style.left=x+'px'; s.style.top=y+'px';
-  s.style.fontSize=(12+Math.random()*10)*scale+'px';
-  s.style.animationDelay=delay+'ms';
   document.body.appendChild(s);
   setTimeout(()=>s.remove(), 480);
 }
-window.addEventListener('click', (e)=>{
-  // create a tiny burst around the click
-  const n=4+Math.floor(Math.random()*3);
-  for(let i=0;i<n;i++){
-    const dx=(Math.random()-.5)*24;
-    const dy=(Math.random()-.5)*24;
-    makeSparkle(e.clientX+dx, e.clientY+dy, 0.9+Math.random()*0.4, i*25);
-  }
-}, {passive:true});
+window.addEventListener('click', (e)=>{ makeSparkle(e.clientX, e.clientY); }, {passive:true});
 </script>
 </body>
 </html>
