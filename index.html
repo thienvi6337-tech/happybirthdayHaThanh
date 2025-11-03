@@ -8,7 +8,8 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<!-- Pacifico (brand), Montserrat (body), Caveat (handwriting anim), Great Vibes (button/title handwriting) -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Pacifico&family=Caveat:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 /* ===== THEME (pink only) ===== */
@@ -28,9 +29,9 @@ body{
   line-height:1.65; overflow-x:hidden; text-align:center; cursor:auto;
 }
 
-/* floating cute icons background (flower only) */
+/* floating cute icons background (add ✦ ★ ❀ ❁ ❃ + pink paw svg) */
 .bg-decor{pointer-events:none; position:fixed; inset:0; z-index:-1; opacity:.22}
-.bg-decor span{position:absolute; color:#ff76b4; animation:drift 14s linear infinite; font-size:22px; filter:blur(.2px)}
+.bg-decor span,.bg-decor svg{position:absolute; color:#ff76b4; animation:drift 14s linear infinite; font-size:22px; filter:blur(.2px); fill:#ff76b4}
 @keyframes drift{from{transform:translateY(110vh)} to{transform:translateY(-15vh)}}
 
 /* layout helpers */
@@ -40,11 +41,11 @@ body{
 
 /* headings */
 h1,h2{margin:0}
-h1{font-size:clamp(28px,4vw,48px); color:var(--ink-2); font-weight:800; font-family: "Comic Sans MS", cursive;}
+h1{font-size:clamp(28px,4vw,48px); color:var(--ink-2); font-weight:800; font-family:"Comic Sans MS", cursive;} /* GIỮ nguyên font Happy Birthday */
 h2{font-size:clamp(16px,2.2vw,22px); color:var(--ink-3); font-weight:400}
 a{color:var(--ink)}
 
-/* ===== NAV (4 buttons + centered brand) ===== */
+/* ===== NAV ===== */
 .nav{
   position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
   background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.35));
@@ -77,10 +78,7 @@ a{color:var(--ink)}
 @media(min-width:900px){ .hero{grid-template-columns:420px 1fr} .hero .copy{margin:0} }
 
 /* corner tag */
-.corner-tag{
-  display:inline-block; padding:8px 14px; border-radius:999px;
-  background:#ffe5f3; color:var(--ink); font-weight:800; box-shadow:var(--shadow);
-}
+.corner-tag{display:inline-block; padding:8px 14px; border-radius:999px; background:#ffe5f3; color:var(--ink); font-weight:800; box-shadow:var(--shadow)}
 
 /* vertical carousel */
 .vcarousel{position:relative; overflow:hidden; border-radius:22px; box-shadow:var(--shadow)}
@@ -132,24 +130,24 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .wish-item::before{content: attr(data-emo); position:absolute; left:12px; top:50%; transform:translateY(-50%) rotate(-8deg); font-weight:800; animation:wiggle 1.6s ease-in-out infinite; color:#ff76b4}
 @keyframes wiggle{0%,100%{transform:translateY(-50%) rotate(-8deg)}50%{transform:translateY(calc(-50% - 2px)) rotate(6deg)}}
 
-/* envelope (Birthday Letter) */
+/* ===== ENVELOPE (Birthday Letter) ===== */
 .envelope{position:relative; margin:0 auto; max-width:var(--max); background:#fff7fb; border-radius:18px; box-shadow:var(--shadow); padding:0; overflow:hidden}
-.envelope .flap{position:absolute; left:0; right:0; top:0; height:0; padding-bottom:32%; background:linear-gradient(180deg,#ffd8ea,#ffeaf5); clip-path:polygon(0 0, 100% 0, 50% 100%); transition:transform .6s ease, opacity .6s ease; transform-origin:50% 0; z-index:2}
+.envelope .flap{
+  position:absolute; left:0; right:0; top:0; height:0; padding-bottom:32%;
+  background:linear-gradient(180deg,#ffd8ea,#ffeaf5);
+  clip-path:polygon(0 0, 100% 0, 50% 100%);
+  transition:transform .6s ease, opacity .6s ease; transform-origin:50% 0; z-index:2
+}
 .envelope.open .flap{ transform:rotateX(180deg); opacity:.35 }
 .flap .hint{position:absolute; left:50%; top:18%; transform:translate(-50%,-50%); font-weight:800; font-size:14px; color:#ff66a3; text-shadow:0 1px 0 rgba(255,255,255,.8)}
 .envelope .paper-wrap{margin-top:28%; background:#fffdfd; border-top-left-radius:18px; border-top-right-radius:18px; position:relative}
 .paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease, padding .6s ease; padding:0 22px 0; text-align:left; color:var(--ink)}
-.paper-inner::after{content:""; display:block; height:0;}
 .envelope.open .paper-inner{max-height:1200px; padding:22px 22px 22px;}
-
-/* paw-pop effect (pink) */
-.paw{position:absolute; top:14%; left:50%; transform:translate(-50%,0); font-size:18px; color:#ff76b4; opacity:0; pointer-events:none}
-.paw.show{animation:pawPop 900ms ease-out forwards}
-@keyframes pawPop{
-  0%{transform:translate(-50%,0) scale(.6); opacity:0}
-  35%{transform:translate(-50%,-6px) scale(1); opacity:1}
-  100%{transform:translate(-50%,-26px) scale(1.05); opacity:0}
-}
+/* paw pop (pink svg) */
+.paw-pop{position:absolute; top:14%; left:50%; transform:translate(-50%,0); width:20px; height:20px; opacity:0; pointer-events:none}
+.paw-pop svg{width:100%; height:100%; fill:#ff76b4}
+.paw-pop.show{animation:pawPop 900ms ease-out forwards}
+@keyframes pawPop{0%{transform:translate(-50%,0) scale(.6); opacity:0}35%{transform:translate(-50%,-6px) scale(1); opacity:1}100%{transform:translate(-50%,-26px) scale(1.05); opacity:0}}
 
 /* gift */
 .gift-section{padding:30px 0 10px}
@@ -164,11 +162,11 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .balloon:after{content:""; position:absolute; left:50%; bottom:-18px; transform:translateX(-50%); width:2px; height:22px; background:rgba(0,0,0,.15)}
 @keyframes rise{0%{transform:translate(-50%,20px) scale(.9);opacity:0}12%{opacity:1}100%{transform:translate(-50%,-220px) scale(1.05);opacity:0}}
 
-/* Auto motion (reveal) */
+/* Auto reveal */
 .reveal{opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease}
 .reveal.show{opacity:1; transform:translateY(0)}
 
-/* marquee gallery */
+/* marquee */
 .marquee{overflow:hidden}
 .mtrack{display:flex; gap:12px; width:max-content; margin:22px auto 0; animation:scroll 25s linear infinite}
 .mtrack img{height:200px; width:auto; border-radius:15px; box-shadow:var(--shadow)}
@@ -189,71 +187,113 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .subpage h2{font-family:Montserrat, sans-serif; color:#ff4d94}
 .subpage p, .subpage a{color:#ff4d94}
 
-/* pill buttons (Vi Trô hello!) */
+/* pill buttons */
 .pill-row{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:10px 0 14px}
 .pill{display:inline-block; padding:10px 16px; border-radius:999px; background:#ffe5f3; color:#ff4d94; font-weight:800; box-shadow:var(--shadow); text-decoration:none; cursor:pointer; user-select:none}
-.pill[aria-current="true"]{background:#ffccdf}
+.pill.active{outline:2px solid #ffb3cf}
+/* handwriting look for Love button text only */
+.pill[data-tab="love"]{font-family:"Great Vibes","Pacifico",cursive; font-size:22px; letter-spacing:.5px; position:relative; overflow:hidden}
+.pill[data-tab="love"].active::after{
+  content:""; position:absolute; left:0; bottom:6px; height:2px; width:100%;
+  background:linear-gradient(90deg, transparent, #ff85b8 30%, #ff85b8 70%, transparent);
+  animation:underline 1.6s ease forwards;
+}
+@keyframes underline{from{transform:translateX(-110%)} to{transform:translateX(0)}}
 
-/* Tab content */
+/* tab content */
 .tab{display:none}
 .tab.show{display:block}
-.iframe-wrap{position:relative; width:100%; padding-top:56.25%; border-radius:16px; overflow:hidden; box-shadow:var(--shadow); background:#fff}
-.iframe-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
 
-/* Sách images float */
-.books-row{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:12px}
-.books-row img{width:min(180px,28vw); border-radius:16px; box-shadow:var(--shadow)}
-.floatL{animation:floatL 4.5s ease-in-out infinite}
-.floatR{animation:floatR 4.8s ease-in-out infinite}
-@keyframes floatL{0%,100%{transform:translateX(0)}50%{transform:translateX(-6px)}}
-@keyframes floatR{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
-
-/* Signature as background in I chơi */
-.signature{position:relative; min-height:120px}
-.signature img{position:absolute; right:6%; bottom:-4px; width:min(260px,40vw); opacity:.35; pointer-events:none; filter:drop-shadow(0 4px 10px rgba(255,105,180,.2))}
-
-/* Prev/next dots under vcarousel */
-.dots{display:flex; justify-content:center; gap:8px; margin-top:10px}
-.dots button{width:8px; height:8px; border-radius:50%; border:0; background:#ffd0e3; cursor:pointer}
-.dots button.active{background:#ff4d94}
-
-/* music/movie links */
-.music-links{display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:14px}
-.music-links a{
-  display:inline-block; padding:12px 18px; border-radius:999px; font-weight:800; text-decoration:none;
-  background:rgba(255,255,255,.7); color:#ff4d94; box-shadow:var(--shadow); backdrop-filter:blur(4px);
-  transition:transform .2s, box-shadow .2s, background .2s;
+/* Love Letter heading handwriting effect */
+.love-title{
+  font-family:"Great Vibes","Pacifico",cursive;
+  font-size:clamp(30px,6vw,56px);
+  color:var(--ink);
+  text-align:center;
+  margin:4px 0 10px;
+  --reveal:0%;
+  -webkit-mask:linear-gradient(90deg,#000 var(--reveal), transparent calc(var(--reveal) + 1px));
+          mask:linear-gradient(90deg,#000 var(--reveal), transparent calc(var(--reveal) + 1px));
+  animation:handwrite 2.6s ease forwards;
 }
-.music-links a:hover{
-  transform:translateY(-2px);
-  box-shadow:0 18px 36px rgba(255,105,180,.28), inset 0 0 0 1px rgba(255,105,180,.25);
-  background:rgba(255,255,255,.85);
-}
+@keyframes handwrite{ from{ --reveal:0% } to{ --reveal:100% } }
 
-/* click sparkle – flower only */
+/* Love letter box */
+.love-box{background:#fffdfc; border-radius:18px; padding:18px; box-shadow:var(--shadow); text-align:left; color:var(--ink)}
+.love-box iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:14px; box-shadow:var(--shadow); margin-top:10px}
+
+/* Music tab: readable sheet (no lines), use notes emojis */
+.sheet{background:var(--card); border-radius:18px; padding:18px; box-shadow:var(--shadow); text-align:left; color:var(--ink)}
+.sheet h4{margin:0 0 8px; font-weight:800; color:var(--ink-2)}
+.sheet .notes{font-size:20px; margin-bottom:8px}
+
+/* click sparkle – pink paw SVG */
 .sparkle{
   position:fixed; left:0; top:0; transform:translate(-50%,-50%);
-  pointer-events:none; font-size:14px; color:#ff76b4; opacity:0; filter:drop-shadow(0 2px 6px rgba(255,120,170,.6));
+  pointer-events:none; width:20px; height:20px; opacity:0;
+  filter:drop-shadow(0 2px 6px rgba(255,120,170,.6));
   animation:sparklePop .42s ease-out forwards;
 }
+.sparkle svg{width:100%; height:100%; fill:#ff76b4}
 @keyframes sparklePop{
   0%{opacity:0; transform:translate(-50%,-50%) scale(.6)}
   30%{opacity:1; transform:translate(-50%,-60%) scale(1.05)}
   100%{opacity:0; transform:translate(-50%,-80%) scale(.8)}
 }
+
+/* TISSUE BOX (giữ nguyên từ bản trước) */
+.tissue-card{background:var(--card); padding:20px; border-radius:22px; box-shadow:var(--shadow); margin-top:16px}
+.tissue-wrap{display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--ink)}
+.tissue-box{position:relative; width:220px; height:120px; border-radius:14px; background:linear-gradient(180deg,#ffb3cf,#ff86b8); box-shadow:var(--shadow); transform:translateY(0); animation:floaty 3.2s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.tissue-slot{position:absolute; left:50%; top:14px; transform:translateX(-50%); width:120px; height:24px; background:#ff5fa0; border-radius:999px; box-shadow:inset 0 4px 10px rgba(0,0,0,.15)}
+.tissue-leaf{position:absolute; left:50%; top:-10px; transform:translateX(-50%); width:90px; height:80px; background:linear-gradient(180deg,#fff,#ffe8f3); border-radius:10px; clip-path:polygon(50% 0, 100% 20%, 90% 100%, 10% 100%, 0 20%); box-shadow:0 10px 18px rgba(0,0,0,.1)}
+.tissue-count{font-weight:800; color:#fff; position:absolute; right:8px; bottom:8px; background:rgba(255,255,255,.25); padding:4px 8px; border-radius:999px}
+.tissue-tap{margin-top:8px; font-weight:700; color:var(--ink-2)}
+
+/* embed YouTube card (shared) */
+.embed-card{background:var(--card); padding:18px; border-radius:22px; box-shadow:var(--shadow)}
+.embed-card h4{margin:0 0 10px; color:var(--ink); font-weight:800}
+.embed-card iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:14px; box-shadow:var(--shadow)}
+
+/* ==== NEW: Helpers for subpage tabs (Book images motion & signature bg) ==== */
+.media-row{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:10px}
+.media-row img{max-width:min(260px,32vw); border-radius:16px; box-shadow:var(--shadow)}
+.floatL{animation:slideL 6s ease-in-out infinite}
+.floatR{animation:slideR 6s ease-in-out infinite}
+@keyframes slideL{0%,100%{transform:translateX(0)}50%{transform:translateX(-6px)}}
+@keyframes slideR{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+
+.sig-wrap{position:relative}
+.sig-wrap .sig-bg{position:absolute; right:8px; bottom:8px; opacity:.7; width:min(220px,35%); pointer-events:none; user-select:none}
+
+/* small spacing text under embeds */
+.caption{font-style:italic; margin-top:8px; text-align:center; color:var(--ink-2); font-weight:600}
 </style>
 </head>
 <body>
 
-<!-- floating cute icons: only flowers -->
+<!-- floating cute icons: flowers, stars & pink paws -->
 <div class="bg-decor" aria-hidden="true" id="bgDecor">
   <span style="left:6%; animation-delay:-2s">❀</span>
-  <span style="left:18%; animation-delay:-6s">❀</span>
-  <span style="left:34%; animation-delay:-4s">❀</span>
-  <span style="left:50%; animation-delay:-9s">❀</span>
-  <span style="left:68%; animation-delay:-11s">❀</span>
-  <span style="left:82%; animation-delay:-1s">❀</span>
-  <span style="left:92%; animation-delay:-7s">❀</span>
+  <span style="left:12%; animation-delay:-5s">✦</span>
+  <span style="left:18%; animation-delay:-6s">★</span>
+  <span style="left:26%; animation-delay:-3s">❁</span>
+  <span style="left:34%; animation-delay:-4s">❃</span>
+  <span style="left:42%; animation-delay:-9s">❀</span>
+  <span style="left:50%; animation-delay:-7s">★</span>
+  <span style="left:58%; animation-delay:-11s">✦</span>
+  <span style="left:66%; animation-delay:-8s">❁</span>
+  <span style="left:74%; animation-delay:-1s">❃</span>
+  <span style="left:82%; animation-delay:-10s">❀</span>
+  <span style="left:90%; animation-delay:-12s">✦</span>
+  <!-- pink paw SVGs -->
+  <svg viewBox="0 0 64 64" style="left:8%; top:70%; width:18px; height:18px; animation-delay:-3s">
+    <circle cx="20" cy="20" r="6"/><circle cx="44" cy="20" r="6"/><circle cx="29" cy="12" r="5"/><circle cx="35" cy="12" r="5"/><ellipse cx="32" cy="38" rx="14" ry="10"/>
+  </svg>
+  <svg viewBox="0 0 64 64" style="left:72%; top:75%; width:20px; height:20px; animation-delay:-7s">
+    <circle cx="20" cy="20" r="6"/><circle cx="44" cy="20" r="6"/><circle cx="29" cy="12" r="5"/><circle cx="35" cy="12" r="5"/><ellipse cx="32" cy="38" rx="14" ry="10"/>
+  </svg>
 </div>
 
 <!-- ===== NAV ===== -->
@@ -271,7 +311,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </nav>
 
-<!-- ===== From Tinkerbell tag + CAROUSEL (giữ nguyên) ===== -->
+<!-- ===== From Tinkerbell + Vertical Carousel (keeping) ===== -->
 <section class="container section reveal" id="memories">
   <div class="corner-tag">From Tinkerbell with luv</div>
 
@@ -295,7 +335,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </p>
 </section>
 
-<!-- ===== SWEET LETTER (hero) ===== -->
+<!-- ===== SWEET LETTER hero (giữ nguyên) ===== -->
 <section class="container section hero reveal" id="sweet">
   <div class="media">
     <div class="img-wrap"><img src="assets/Tinkerbell.jpg" alt="Thiên Vi Tinkerbell" loading="eager"></div>
@@ -308,13 +348,13 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- ===== Calendar ===== -->
+<!-- ===== Calendar (giữ nguyên) ===== -->
 <section class="container section reveal">
   <h3 class="title">Hô biến ra quả lịch vạn niên</h3>
   <div class="cal-wrap" id="calendar"></div>
 </section>
 
-<!-- ===== Test mic + Music + GIFs ===== -->
+<!-- ===== Music test (giữ nguyên) ===== -->
 <section class="container section reveal" id="musicbox">
   <div class="card">
     <h3 style="margin:0 0 12px; font-weight:800; color:var(--ink)">Test mic, test mic, chuẩn bị lên nhạc chưa ạ? Gòi, Hà Thanh bấm dzo nhạc i ạ =))</h3>
@@ -327,7 +367,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- ===== ANGEL title + gifs ===== -->
+<!-- ===== ANGEL + gifs + wishes (giữ nguyên) ===== -->
 <main class="container section reveal" id="oldSite">
   <h1>HAPPY BIRTHDAY MY ANGEL</h1>
   <h2>Wishing you a day as lovely as you are ฅ^>⩊<^ ฅ</h2>
@@ -340,7 +380,6 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
     </div>
   </div>
 
-  <!-- wishes postcard -->
   <section class="container section">
     <div class="postcard">
       <div class="wish-title"><strong>Chúc Hà Thanh không chỉ vui vào mỗi ngày sinh nhật, mà là cả tháng, cả năm và nhiều năm 🐎i 🐎i về sau ạ ( ˶˘ ³˘)♡</strong></div>
@@ -355,7 +394,6 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
     </div>
   </section>
 
-  <!-- marquee gallery -->
   <section class="container section">
     <div class="marquee" aria-hidden="true">
       <div class="mtrack">
@@ -376,7 +414,28 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </section>
 </main>
 
-<!-- Candle -->
+<!-- ===== RESTORED: BIRTHDAY LETTER ENVELOPE ===== -->
+<section class="container section reveal" id="letter">
+  <div class="envelope" id="env">
+    <div class="flap"><div class="hint">Chạm vào để xem ^.^</div></div>
+    <div class="paper-wrap">
+      <div class="paper-inner" id="paper">
+        <!-- subtle paw pop -->
+        <div class="paw-pop" id="pawPop" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><circle cx="20" cy="20" r="8"/><circle cx="44" cy="20" r="8"/><circle cx="28" cy="12" r="6"/><circle cx="36" cy="12" r="6"/><ellipse cx="32" cy="40" rx="16" ry="12"/></svg>
+        </div>
+        <div class="postcard" style="margin-top:6px">
+          <div class="wish-title"><strong>Còn đây là những điều đơn giản, không cầu kỳ mà Thiên Vi muốn nhắn nhủ:</strong></div>
+          <div style="white-space:pre-line">
+Cảm ơn người vì đã mang đến cho em rất nhiều những cảm xúc và cả suy nghĩ, trải nghiệm - mà em chưa từng có bao giờ. Có thể Hà Thanh thấy em cũng giỏi, cũng làm được nhiều thứ, nhưng, em cũng chỉ là người bình thường, vẫn có rất nhiều hạn chế và vẫn chông chênh mỗi ngày - ý là vẫn nằm suy nghĩ và cũng chẳng biết phải làm gì tiếp theo. Mấy tháng gần đây em rảnh hơn nhiều và còn thấy mình ngốc đi nữa. Giỏi giang âu cũng chỉ là cái mác đẹp đẽ mà mọi người hay gán cho ta thôi, chứ điều mà em có thực ra chỉ là sự chân thành và tử tế, tận tâm này. Tuổi mới đừng khóc nhiều nhoé. Từ lần đầu em thấy người khóc, em đã tự hứa với lòng là nếu em còn ở cạnh người, em sẽ không để người phải khóc vì những uất ức đó nữa. Bây giờ và sau này chắc sẽ có người khác thay em làm điều này rồi, nên chỉ mong người cười nhiều hơn thôi. Niềm vui vốn dĩ đơn giản như khi mình xem meme, lướt web, thấy chiếc tin nhắn quan tâm hay là ngắm hoàng hôn mỗi chiều - kiểu vậy, nhỉ? Thật vui khi thấy story của Hà Thanh là những buổi chiều hoàng hôn và những buổi sáng đi làm trên metro đấy ạ. Ngày đấy, khi thấy người lướt xem điện thoại, rồi nhìn sang xung quanh team mình cũng hay thế, em đã nghĩ: Ôi *lắc đầu*. Thiên Vi mà người thấy luôn hustle thực ra nó cũng chỉ thích ngắm mưa, nhìn trời, nựng mèo và rung cảm với tất cả mọi thứ nhỏ nhất diễn ra mọi ngày thôi người ạ. Sự có mặt trọn vẹn là điều tốt nhất mà em có thể dành cho người (lần đó có share bài này về tag mà chắc người quên rồi quá hoặc là hỏng xem luôn éc). Ai cũng có những điều đẹp đẽ để mình nhìn vào đó mà cảm thông cho họ hơn. Nên là: hãy luôn dịu dàng với chính mình và dịu dàng với cả vết thương của người khác nha angel ơi *biến mất cùng làn khói*....
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Candle (giữ nguyên) -->
 <section class="candle-section reveal">
   <div class="candle-card">
     <div id="message">Ba là cây nến vàng, mẹ là cây nến xanh, Hà Thanh thổi nến nhẹ nhàng thôi nha (˵ •̀ ᴗ - ˵ ) ✧</div>
@@ -387,7 +446,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 <!-- Wish granted -->
 <section class="container section reveal" style="padding-top:12px"><div class="card"><strong>Wish granted (∩˃o˂∩)♡</strong></div></section>
 
-<!-- Gift -->
+<!-- Gift (giữ nguyên) -->
 <section class="gift-section container reveal">
   <div class="gift-wrap">
     <div class="gift" id="gift"><div class="lid"></div></div>
@@ -396,7 +455,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- LOOK BACK -->
+<!-- LOOK BACK (giữ nguyên) -->
 <section class="container section reveal">
   <div class="card" style="text-align:left; position:relative; color:var(--ink)">
     <h3 style="margin:0 0 10px; font-weight:800">Mình cùng look back một chút không nhỉ?</h3>
@@ -417,7 +476,29 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- Footer line -->
+<!-- Playlist embed (giữ nguyên từ bản trước) -->
+<section class="container section reveal">
+  <div class="embed-card">
+    <h4>Chiếc playlist này nè ạ ^.^</h4>
+    <iframe src="https://www.youtube.com/embed/videoseries?list=PLz301c-yfQZ8YEHu6Jn-g9q8KxXaveREV" title="YouTube playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- Tissue Box (giữ nguyên từ bản trước) -->
+<section class="container section reveal">
+  <div class="tissue-card">
+    <div class="tissue-wrap">
+      <div class="tissue-box" id="tissueBox" title="Click lấy 1 tờ nè">
+        <div class="tissue-slot"></div>
+        <div class="tissue-leaf" id="tissuePeek"></div>
+        <div class="tissue-count" id="tissueCount">x12</div>
+      </div>
+      <div class="tissue-tap">Sau khi xem hết chiếc web này ời, nếu Hà Thanh củm động quá thì lại đây Thiên Vi ôm một miếng và lau nước mắt một tẹo nha ạ ૮₍˶ ╥ ‸ ╥ ⑅₎ა</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
 <div class="container" style="padding-top:0; padding-bottom:48px; color:var(--ink)">
   Sẽ luôn có người dịu dàng với Hà Thanh, nên Hà Thanh hãy luôn dịu dàng với chính mình và mọi người nha ạ. I meow you ≽^-⩊-^≼
 </div>
@@ -450,7 +531,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- ===== Vi Trô hello! (UPDATED) ===== -->
+<!-- Vi Trô hello! -->
 <section id="vtroPage" class="subpage" aria-hidden="true">
   <div class="wrap">
     <a class="brand" href="#">Home Sweet Home</a>
@@ -458,19 +539,20 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
     <div class="card">
       <h2>Vi Trô hello!</h2>
 
-      <!-- 5 buttons -->
-      <div class="pill-row" id="pillBar">
-        <span class="pill" data-tab="love" aria-current="true">Love Letter</span>
+      <!-- 5 nút -->
+      <div class="pill-row" id="pillRow">
+        <span class="pill active" data-tab="love">Love Letter</span>
         <span class="pill" data-tab="music">Nhạc</span>
-        <span class="pill" data-tab="movie">Phim</span>
+        <span class="pill" data-tab="film">Phim</span>
         <span class="pill" data-tab="book">Sách</span>
         <span class="pill" data-tab="play">I chơi</span>
       </div>
 
-      <!-- Intro long text (giữ nguyên) -->
-      <div class="postcard" style="margin-top:8px; text-align:left">
-        <div class="wish-title"><strong>Fresh mind & gentle heart</strong></div>
-        <div style="white-space:pre-line">
+      <!-- LOVE LETTER tab -->
+      <div class="tab show" id="tab-love">
+        <div class="love-title">Love Letter</div>
+        <div class="love-box">
+<div style="white-space:pre-line">
 Hà Thanh từng hỏi Thiên Vi là làm sao để fresh mind hơn ạ. Đó cũng luôn là điều em mong được thấy ở người. Tại vì nếu nội tâm mình vững vàng và não mình fresh thì mình mới đón nhận nhiều điều tốt đẹp hoặc không tốt lắm trong cuộc sống, dễ cảm nhận được những điều tuyệt vời xung quanh mình hơn ạ. Nếu lòng mình cứ bão tố mãi thì thực ra mình sẽ hơi khó tiếp nhận và mở lòng với mọi thứ ạ. Thiên Vi biết này một phần là basic identity, mindset và rule của mỗi người rồi ạ. Cơ mà người đừng chọn giữ sự bực tức trong lòng nha, mình tìm cách chia sẻ nó ra - dù là dưới hình thức nào: kể ra, viết ra, viết nhạc diss (như dành cho mắm Thi),…chả hạn ạ. Thiên Vi thực sự là có tâm hồn phóng khoáng thật, ý là để nhớ được tất cả mọi thứ một cách clearly thì em thường chọn tha thứ, nói ra, không giữ lại bực tức và bao dung với mọi thứ hơn. Mà Thiên Vi tha thứ là tha thứ thật đấy haha. Còn cái gì không quan trọng thì thực ra nó còn chẳng chui vào não em được cơ ạ - người thấy điều này mà. Em nghĩ nếu mình cứ dành space cho những người không đáng thì mình chẳng có thời gian làm những điều đáng yêu khác - ví dụ như là ngồi dei làm chiếc web này cho Hà Thanh nè ạ. Thiên Vi ngồi viết rap cho nhỏ Thi vì muốn tụi mình xả ra hết chuyện này cùng nhau, cũm muốn giải trí nựa ạ - và hi vọng Hà Thanh cũng hào hứng diss nó lần này nữa rồi chôn cái tên của nó luôn hẹ hẹ. Thiên Vi thấy chửi thề vui tại nó thể hiện cảm xúc và sự stress bên ngoài của mình, còn để chửi ai cay đắng thì Thiên Vi hong nặng lời với ai được - vì dỗi ai thì cũng chỉ có kỳ hạn thôi ò, và chắc là chỉ dỗi những người mình thực sự thương. Người em thương thì em chỉ thương thôi, còn người em ghét thì vứt. Người ta bảo là đã thương thì thương cho trọn vẹn, thương hết cả những lỗi lầm đấy ạ. 
 
 Vui biết mấy vì tụi mình đã đi được đến đây cùng nhau ạ. Xin lỗi Hà Thanh vì cuộc sống, cảm nhận, và cách hành xử của em khác người nhiều quá nên hay làm người mệt mỏi ạ. Hà Thanh hơi giống mẹ em ở chỗ là Thiên Vi từng nghĩ mình sẽ rất khó để tiến gần nhau hơn một bước nữa trong journey yêu thương này, nhưng, cuối cùng thì thực ra mình vẫn cố gắng để làm. Thật khó tin vì Thiên Vi chọn ở quê 2 tháng mấy rồi, chỉ để mỗi đêm đi chơi, đi dạo với mẹ, cả ngày nói chuyện với mẹ rất nhiều chỉ để hiểu nhau nhiều hơn. Thực sự là “Good things take time”, và điều gì cần xảy ra thì nó sẽ xảy ra thôi, nhỉ? 
@@ -488,149 +570,117 @@ Ba chúc con đủ."
 Em chưa học được cách self-care và đôi khi không trân trọng mình lắm, chắc là do mission của em là take care cho mọi người hix. Em vẫn đang học thôi ạ, nhưng, những điều còn lại, em nghĩ là em biết đủ, nhất là việc “yêu cả những niềm vui nhỏ nhất” và “yêu quý những gì con có” ấy ạ. 
 
 Có một fun fact là chiếc thư chúc năm mới mà em viết cho người, em từng viết là hi vọng năm nay mình có thể khám phá thế giới với nhau (có thể là Hà Thanh hong nhớ nên để em repeat lại hehe) cơ mà thực ra cuộc sống của Thiên Vi nó cũng như một chiếc thế giới thu nhỏ và có nhiều điều trong đó thật, nên Thiên Vi luôn muốn share với người - mà tại hong có dịp. Cơ mà, đấy, em hứa gì với người thì em có làm thật đấy ạ =)) Thiên Vi ngồi gom và bookmark trên maps tại nghĩ là mình i cũng nhiều và mình muốn giới thiệu nó với Hà Thanh hoặc là i với Hà Thanh. Tại vì Thiên Vi cũng hay thử cái này cái kia, ý là xưa giờ sống cũng kín nên không có hay đăng gì, chỉ có gặp Thiên Vi bên ngoài thì mới biết em đang làm gì và thực sự như nào thoai à. Một năm nay thì em bắt đầu sợ hong có gì lưu giữ nên bắt đầu share lên IG nhiều hơn roài ạ. Mong là Hà Thanh cũng tìm được những điều mình thấy hứng thú, những nơi mình muốn đến, việc mình muốn làm và làm nó cùng với những người mình yêu thương, khiến mình cảm thấy thoải mái nhất. Vì cảm giác đó sẽ tuyệt lắm. Như Thiên Vi share trên story ấy ạ - cảm giác i làm một thời gian dài, chỉ tập trung cho công việc và cuộc sống cũng chỉ xoay quanh 1 người, nhưng mà, sau khoảng đó mình thấy mình lớn hơn, mình để dành được một cục để mua đàn, mua sách, rồi mình boost expertise của mình sau khi enjoy mấy hobbies này - Thiên Vi thấy mình là người giàu nhất cuộc đời này roài ạ. Cuộc sống của em nó thường hoạt động theo cái nguyên lý đấy thôi ạ. Ngoài mấy chiếc button Thiên Vi để trong trang này thì thực ra Thiên Vi luôn plan là cuối tuần này mình sẽ đi xem kịch, cuối tuần kia mình đi bảo tàng, xem xiếc, i uống rụ,…plan tùm lum hết mà hong biết khi nào mình mới enjoy được hết. Cơ mà chúc tụi mình sẽ luôn có nhiều plan, nhiều điều muốn làm (và cảm thấy vui khi làm), để có được nhiều nhất những trải nghiệm trong cuộc sống nhen ạ. Thiên Vi build chiếc sub-page này để giới thiệu mấy chiếc thi vị (hoặc hong) trong cuộc sống của Thiên Vi thoai ạ. Hi vọng là một ngày nào đó - khi buồn hoặc muốn thử những cái mới này thì mình sẽ có những checklist chung ở các hạng mục này nha ạ. Hope so i ^.^
+</div>
+
+          <!-- (1) EMBED "Giữ cho em một thế giới" ngay sau đoạn trên -->
+          <iframe src="https://www.youtube.com/embed/dBfVghoqNkE"
+                  title="Giữ cho em một thế giới"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+          <div class="caption">Luôn giữ cho mình một thế giới trước khi trở thành cả thế giới của ai đó nha cục dzang ơi. Meow meow you ạ ^.^</div>
         </div>
       </div>
 
-      <!-- Embed "Giữ cho em một thế giới" + caption (ngay sau đoạn trên) -->
-      <div style="margin-top:14px">
-        <div class="iframe-wrap">
-          <iframe src="https://www.youtube.com/embed/dBfVghoqNkE?rel=0"
-                  title="Giữ cho em một thế giới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-        <p style="margin:10px 0 0; text-align:center; font-weight:700; color:var(--ink)">
-          Luôn giữ cho mình một thế giới trước khi trở thành cả thế giới của ai đó nha cục dzang ơi. Meow meow you ạ ^.^
-        </p>
-      </div>
+      <!-- MUSIC tab -->
+      <div class="tab" id="tab-music">
+        <div class="sheet">
+          <div class="notes">🎼 🎵 🎶 🎵 🎶 🎼</div>
+          <h4>VĂN TẾ NGHĨA SĨ CẦN GIUỘC - RAP THIS “CUỘC SỐNG NÀY THI VI.”</h4>
+<div style="white-space:pre-line">
+(LỜI VĂN TẾ) 
+SỐNG CHO RA SỐNG, CHỨ SỐNG MÀ CỨ RỐNG CÁI HỌNG LÊN NÓI XẤU NGƯỜI KHÁC THÌ
+CÓ BIẾT VÌ SAO TAO KHÔNG LÀM RAPPER MÀ LẠI LÀM COPYWRITER KHÔNG HẢ?
+VÌ TAO SỢ PHẢI VIẾT NHẠC DISS MÀY SUỐT CẢ MỘT NGÀY ĐẤY, HOMIE À…
+THÔI THÌ BÀI NÀY TẶNG RIÊNG CHO MÀY NHA HOMIE (T)! 
 
-      <!-- ===== TABS CONTENT ===== -->
-      <!-- Love Letter -->
-      <div id="tab-love" class="tab show" style="margin-top:16px; text-align:left">
-        <div class="postcard">
-          <div class="wish-title" style="text-align:center; font-size:22px; letter-spacing:.5px"><strong>Love Letter</strong></div>
-          <div style="white-space:pre-line; margin-top:8px; color:var(--ink)">
-Hà Thanh từng hỏi Thiên Vi là làm sao để fresh mind hơn ạ. Đó cũng luôn là điều em mong được thấy ở người. Tại vì nếu nội tâm mình vững vàng và não mình fresh thì mình mới đón nhận nhiều điều tốt đẹp hoặc không tốt lắm trong cuộc sống, dễ cảm nhận được những điều tuyệt vời xung quanh mình hơn ạ. Nếu lòng mình cứ bão tố mãi thì thực ra mình sẽ hơi khó tiếp nhận và mở lòng với mọi thứ ạ. Thiên Vi biết này một phần là basic identity, mindset và rule của mỗi người rồi ạ. Cơ mà người đừng chọn giữ sự bực tức trong lòng nha, mình tìm cách chia sẻ nó ra - dù là dưới hình thức nào: kể ra, viết ra, viết nhạc diss (như dành cho mắm Thi),…chả hạn ạ. Thiên Vi thực sự là có tâm hồn phóng khoáng thật, ý là để nhớ được tất cả mọi thứ một cách clearly thì em thường chọn tha thứ, nói ra, không giữ lại bực tức và bao dung với mọi thứ hơn. Mà Thiên Vi tha thứ là tha thứ thật đấy haha. Còn cái gì không quan trọng thì thực ra nó còn chẳng chui vào não em được cơ ạ - người thấy điều này mà. Em nghĩ nếu mình cứ dành space cho những người không đáng thì mình chẳng có thời gian làm những điều đáng yêu khác - ví dụ như là ngồi dei làm chiếc web này cho Hà Thanh nè ạ. Thiên Vi ngồi viết rap cho nhỏ Thi vì muốn tụi mình xả ra hết chuyện này cùng nhau, cũm muốn giải trí nựa ạ - và hi vọng Hà Thanh cũng hào hứng diss nó lần này nữa rồi chôn cái tên của nó luôn hẹ hẹ. Thiên Vi thấy chửi thề vui tại nó thể hiện cảm xúc và sự stress bên ngoài của mình, còn để chửi ai cay đắng thì Thiên Vi hong nặng lời với ai được - vì dỗi ai thì cũng chỉ có kỳ hạn thôi ò, và chắc là chỉ dỗi những người mình thực sự thương. Người em thương thì em chỉ thương thôi, còn người em ghét thì vứt. Người ta bảo là đã thương thì thương cho trọn vẹn, thương hết cả những lỗi lầm đấy ạ. 
+(DZO BÀI)
+MONG MUỐN MÀY THAY ĐỔI KHÔNG PHẢI VÌ TAO LÀ ĐỨA HAY DỖI 
+NÓI CHUYỆN MÀ BIẾT UỐN LƯỠI THÌ ĐÂU ĐẾN NỖI BỊ RÉO LÊN ĐÂY 
+BIẾT SỐNG KHÔN SỐNG KHÉO CHỨ SAO LẠI ĐI NÓI XÀM NÓI XÉO 
+TAO BIẾT MÀY NÓI GÌ NHƯNG (WINNER THÌ) SỢ ĐẾCH GÌ MẤY ĐỨA LEO TEO…
 
-Vui biết mấy vì tụi mình đã đi được đến đây cùng nhau ạ. Xin lỗi Hà Thanh vì cuộc sống, cảm nhận, và cách hành xử của em khác người nhiều quá nên hay làm người mệt mỏi ạ. Hà Thanh hơi giống mẹ em ở chỗ là Thiên Vi từng nghĩ mình sẽ rất khó để tiến gần nhau hơn một bước nữa trong journey yêu thương này, nhưng, cuối cùng thì thực ra mình vẫn cố gắng để làm. Thật khó tin vì Thiên Vi chọn ở quê 2 tháng mấy rồi, chỉ để mỗi đêm đi chơi, đi dạo với mẹ, cả ngày nói chuyện với mẹ rất nhiều chỉ để hiểu nhau nhiều hơn. Thực sự là “Good things take time”, và điều gì cần xảy ra thì nó sẽ xảy ra thôi, nhỉ? 
+DÁM DISS TAO? MÀY ĐÚNG LÀ HẢO HÁN! 
+NHƯNG MÀ CÒN NON LẮM, HAIZ, LẠI ĐÂY TAO BẢO BAN 
+THÍCH ĂN HÀNG THÌ ĐƯỢC, NHƯNG NHÂN CÁCH MÀY THÌ LẠI BẦN HÀN TRƯỚC
+CUỘC SỐNG MÀY CẰN CỖI, CHỈ NHÌN ĐƯỢC NHỮNG CÁI ĐIỀU MÀY MUỐN NÓI! 
 
-Thiên Vi thấy mình cười nhiều và lạc quan lắm, chắc tại vì em luôn thấy đủ. Em có nhiều ước mơ và sở thích quá, cũng có nhiều người em muốn chăm lo, nên chỉ chú trọng bồi đắp cho những điều đó thôi ạ. Và cũng không có lý do lắm khi em làm điều gì đâu, đơn giản là em muốn làm thôi ạ. Em có nhiều thứ cần làm như vậy nên thực ra chả dành thời gian để suy nghĩ lý do làm gì ạ, vì nghĩ xem thể hiện yêu thương bằng cách nào thì nó đã hết time rùi. Em thương Hà Thanh là thật tâm đấy đồ tồi ạ. Chỉ đơn giản là mình nhìn thấy chiếc gì đó thì mình sẽ muốn dành cho người ta thôi. Người hỏi em lý do thì đến cuối đời em cũng chẳng trả lời được đâu ạ. Thiên Vi muốn trích lại đoạn này để chúc Hà Thanh nè ạ. Bài này tên là I Wish You Enough. Nó là khúc mở đầu cho cuốn sách cùng tên của Bob Perks, thay lời chia tay mà một người cha hấp hối gửi đến con gái. Phiên bản trọn vẹn như thế này:
-"Ba chúc con đủ ánh mặt trời, để giữ cho tâm hồn con trong sáng
-Ba chúc con đủ những ngày mưa, để biết trân trọng những ngày nắng
-Ba chúc con đủ hạnh phúc, để giữ cho tinh thần con luôn sống
-Ba chúc con đủ đau thương, để biết yêu cả những niềm vui nhỏ nhất
-Ba chúc con đủ những gì con muốn, để con có thể hài lòng
-Ba chúc con đủ mất mát, để con yêu quý những gì con có
-Và ba chúc con đủ lời chào để vượt qua những câu tạm biệt
-Ba chúc con đủ."
+CÙNG MỘT PHỤ ÂM - NHƯNG TAO LÀ VI VI, CÒN MÀY LÀ KI KI,
+KHÔNG PHẢI LÀ CON BÒ MÀ CỨ NHAI LẠI MẤY CÁI CHUYỆN ĐƯƠM ĐẶT
+CÂU NÀO CŨNG BẮT TAI NHIỀU KHI TAO TỰ HỎI MÀY ĐANG MUỐN DẮT AI? 
+SỐNG PHẢI CÓ CHÍNH KIẾN CÒN ĐỤNG TỚI Ổ KIẾN (LỬA) THÌ HÃY BẤM NÚT BIẾN! 
 
-Em chưa học được cách self-care và đôi khi không trân trọng mình lắm, chắc là do mission của em là take care cho mọi người hix. Em vẫn đang học thôi ạ, nhưng, những điều còn lại, em nghĩ là em biết đủ, nhất là việc “yêu cả những niềm vui nhỏ nhất” và “yêu quý những gì con có” ấy ạ. 
+TAO LÀ THIÊN VI NGHĨA LÀ THI VIÊN,
+CÒN MÀY CHỈ BIẾT THI TRIỂN BA TRÒ LỐ BỊCH ĐỂ MÀ MÚA CHUYỆN (PHIỀN THIỆT CHỨ) 
+CHÂN THÀNH, TRÂN TRỌNG CHỨ ĐỪNG CÓ MÀ LẬT LỌNG TỚI NGƯỜI NÀY NGƯỜI KIA,
+TAO CÓ MỘT SỨC CHỊU ĐỰNG RẤT LÀ RẮN RỎI. CÒN MÀY Ở ĐÂY THÌ CHẮN CHẮN LÀ RẮN RỒI ^.^
 
-Có một fun fact là chiếc thư chúc năm mới mà em viết cho người, em từng viết là hi vọng năm nay mình có thể khám phá thế giới với nhau (có thể là Hà Thanh hong nhớ nên để em repeat lại hehe) cơ mà thực ra cuộc sống của Thiên Vi nó cũng như một chiếc thế giới thu nhỏ và có nhiều điều trong đó thật, nên Thiên Vi luôn muốn share với người - mà tại hong có dịp. Cơ mà, đấy, em hứa gì với người thì em có làm thật đấy ạ =)) Thiên Vi ngồi gom và bookmark trên maps tại nghĩ là mình i cũng nhiều và mình muốn giới thiệu nó với Hà Thanh hoặc là i với Hà Thanh. Tại vì Thiên Vi cũng hay thử cái này cái kia, ý là xưa giờ sống cũng kín nên không có hay đăng gì, chỉ có gặp Thiên Vi bên ngoài thì mới biết em đang làm gì và thực sự như nào thoai à. Một năm nay thì em bắt đầu sợ hong có gì lưu giữ nên bắt đầu share lên IG nhiều hơn roài ạ. Mong là Hà Thanh cũng tìm được những điều mình thấy hứng thú, những nơi mình muốn đến, việc mình muốn làm và làm nó cùng với những người mình yêu thương, khiến mình cảm thấy thoải mái nhất. Vì cảm giác đó sẽ tuyệt lắm. Như Thiên Vi share trên story ấy ạ - cảm giác i làm một thời gian dài, chỉ tập trung cho công việc và cuộc sống cũng chỉ xoay quanh 1 người, nhưng mà, sau khoảng đó mình thấy mình lớn hơn, mình để dành được một cục để mua đàn, mua sách, rồi mình boost expertise của mình sau khi enjoy mấy hobbies này - Thiên Vi thấy mình là người giàu nhất cuộc đời này roài ạ. Cuộc sống của em nó thường hoạt động theo cái nguyên lý đấy thôi ạ. Ngoài mấy chiếc button Thiên Vi để trong trang này thì thực ra Thiên Vi luôn plan là cuối tuần này mình sẽ đi xem kịch, cuối tuần kia mình đi bảo tàng, xem xiếc, i uống rụ,…plan tùm lum hết mà hong biết khi nào mình mới enjoy được hết. Cơ mà chúc tụi mình sẽ luôn có nhiều plan, nhiều điều muốn làm (và cảm thấy vui khi làm), để có được nhiều nhất những trải nghiệm trong cuộc sống nhen ạ. Thiên Vi build chiếc sub-page này để giới thiệu mấy chiếc thi vị (hoặc hong) trong cuộc sống của Thiên Vi thoai ạ. Hi vọng là một ngày nào đó - khi buồn hoặc muốn thử những cái mới này thì mình sẽ có những checklist chung ở các hạng mục này nha ạ. Hope so i ^.^
-          </div>
-          <p style="margin:10px 0 0; text-align:center; font-weight:700">Luôn giữ cho mình một thế giới trước khi trở thành cả thế giới của ai đó nha cục dzang ơi. Meow meow you ạ ^.^</p>
-          <div class="iframe-wrap" style="margin-top:10px">
-            <iframe src="https://www.youtube.com/embed/dBfVghoqNkE?rel=0"
-                    title="Giữ cho em một thế giới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
+(LỜI VĂN TẾ: KÉO TAO XUỐNG KHÔNG LÀM MÀY TIẾN LÊN VÌ MUỐN NHÌN TAO MÀY LUÔN PHẢI NGƯỚC LÊN
+HÀ THANH KÊU TAO VIẾT NHẠC DISS CỔ, NHƯNG Ồ… THÔI TAO THÍCH CỔ ^.^)
 
-      <!-- Nhạc -->
-      <div id="tab-music" class="tab" style="margin-top:16px; text-align:left">
-        <div class="postcard" style="text-align:left">
-          <div class="wish-title" style="text-align:center"><strong>VĂN TẾ NGHĨA SĨ CẦN GIUỘC - RAP THIS “CUỘC SỐNG NÀY THI VI.”</strong></div>
-          <div style="white-space:pre-line; margin-top:8px">
-(Lời văn tế) 
-Sống cho ra sống, chứ sống mà cứ rống cái họng lên nói xấu người khác thì
-Có biết vì sao tao không làm Rapper mà lại làm Copywriter không hả?
-Vì tao sợ phải viết nhạc diss mày suốt cả một ngày đấy, homie à…
-Thôi thì bài này tặng riêng cho mày nha homie (T)! 
+TAO CÓ NGƯỜI TAO YÊU, CÓ NHẠC ĐỂ CHILL, CÓ CHỮ ĐỂ DEAL,
+CÒN MÀY YẾU NGHỀ, YẾU SỨC, ĐIỂM ĐẠO ĐỨC THÌ DƯỚI MỨC TRUNG BÌNH
+MÀY KHÔNG CHƠI SAO MÀY HIỂU BAO NHIÊU ĐIỀU “THI VỊ” CỦA CUỘC ĐỜI,
+LÀM BÀI MÀ CÓ 5 SLIDES THÌ ĐỪNG CÓ BẢO AI ĐÚNG AI SAI! 
 
-(Dzo bài)
-Mong muốn mày thay đổi không phải vì tao là đứa hay dỗi 
-Nói chuyện mà biết uốn lưỡi thì đâu đến nỗi bị réo lên đây 
-Biết sống khôn sống khéo chứ sao lại đi nói xàm nói xéo 
-Tao biết mày nói gì nhưng (winner thì) sợ đếch gì mấy đứa leo teo…
+THANH GỌI TAO LÀ VI TRÔ TẠI VÌ SỐNG VỚI MÀY TAO CHỈ CẦN VÔ TRI
+CHẲNG CẦN DÙNG ĐẾN LÍ TRÍ ĐÃ CÓ THỂ THẤY MÀY LÀM MẤY CÁI TRÒ KHỈ
+NHÌN TAO VỚI ĐÔI MẮT LẦM LÌ LÀM TAO CỨ TƯỞNG MÀY ĐANG BỊ MẤT TRÍ
+TITLE BÉ TÍ, LÀM VIỆC TÍ TI MÀ DRAMA QUEEN THÌ PHẢI GỌI LÀ TỶ TỶ >⩊<
 
-Dám diss tao? Mày đúng là hảo hán! 
-Nhưng mà còn non lắm, haiz, lại đây tao bảo ban 
-Thích ăn hàng thì được, nhưng nhân cách mày thì lại bần hàn trước
-Cuộc sống mày cằn cỗi, chỉ nhìn được những cái điều mày muốn nói! 
+BÀI NÀY KHÔNG ĐỂ HẠ BỆ, CHỈ ĐỂ NHẮC MÀY ĐI LẠI MÀ SOI GƯƠNG
+AI SỐNG THẬT THÌ ĐƯỢC THƯƠNG, CÒN DỞ DỞ ƯƠNG ƯƠNG THÌ SỚM MUỘN CŨNG TAN THƯƠNG
+HỒN TRƯƠNG BA, DA HÀNG THỊT 
+TAO DISS ĐẾN ĐÂY CŨNG CẢM THẤY KHÁ LÀ THOẢ THÍCH! 
 
-Cùng một phụ âm - nhưng tao là Vi Vi, còn mày là Ki Ki,
-Không phải là con bò mà cứ nhai lại mấy cái chuyện đươm đặt
-Câu nào cũng bắt tai nhiều khi tao tự hỏi mày đang muốn dắt ai? 
-Sống phải có chính kiến còn đụng tới ổ kiến (lửa) thì hãy bấm nút biến! 
+NGAI VÀNG THÌ CHỈ CÓ MỘT NÊN THÔI TAO XIN PHÉP ĐƯỢC NHƯỜNG MÀY ĐẤY
+NHẤT MÀY RỒI TẠI VÌ PHÉP VUA PHẢI THUA LỆ NÀNG, NÊN MÀY ĐỪNG CÓ MÀ LA LÀNG
+YẾU QUÁ PHẢI DÙNG ĐẾN NƯỚC MẮT TRƯỚC KHI PHẢI NÓI TỚI CÁI CÂU ĐẦU HÀNG…
+TAO VỚI MÀY KHÔNG THÂN, NÊN THÔI CẦN ĐẾCH GÌ PHẢI BĂN KHOĂN…(NHỈ?) 
 
-Tao là Thiên Vi nghĩa là Thi Viên,
-Còn mày chỉ biết Thi triển ba trò lố bịch để mà múa chuyện (phiền thiệt chứ) 
-Chân thành, trân trọng chứ đừng có mà lật lọng tới người này người kia,
-Tao có một sức chịu đựng rất là rắn rỏi. Còn mày ở đây thì chắn chắn là rắn rồi ^.^
+(LỜI VĂN TẾ: THẬT RA BÀI NÀY LÀ ĐỂ TÁN DƯƠNG VI, CHỨ KHÔNG PHẢI ĐỂ PHÊ PHÁN CƯƠNG THI ^.^ MÀY DÁM DISS THANH LÀ PEOPLE PLEASURE HẢ? OK, VẬY THÌ CHÚC MÀY LUÔN ĐƯỢC PEOPLE NGHI NGỜ NHA!)
+</div>
 
-(Lời văn tế: Kéo tao xuống không làm mày tiến lên vì muốn nhìn tao mày luôn phải ngước lên
-Hà Thanh kêu tao viết nhạc diss cổ, nhưng ồ… thôi tao thích cổ ^.^)
-
-Tao có người tao yêu, có nhạc để chill, có chữ để deal,
-Còn mày yếu nghề, yếu sức, điểm đạo đức thì dưới mức trung bình
-Mày không chơi sao mày hiểu bao nhiêu điều “thi vị” của cuộc đời,
-Làm bài mà có 5 slides thì đừng có bảo ai đúng ai sai! 
-
-Thanh gọi tao là Vi Trô tại vì sống với mày tao chỉ cần vô tri
-Chẳng cần dùng đến lí trí đã có thể thấy mày làm mấy cái trò khỉ
-Nhìn tao với đôi mắt lầm lì làm tao cứ tưởng mày đang bị mất trí
-Title bé tí, làm việc tí ti mà drama queen thì phải gọi là tỷ tỷ >⩊<
-
-Bài này không để hạ bệ, chỉ để nhắc mày đi lại mà soi gương
-Ai sống thật thì được thương, còn dở dở ương ương thì sớm muộn cũng tan thương
-Hồn Trương Ba, da hàng thịt 
-Tao diss đến đây cũng cảm thấy khá là thoả thích! 
-
-Ngai vàng thì chỉ có một nên thôi tao xin phép được nhường mày đấy
-Nhất mày rồi tại vì phép vua phải thua lệ nàng, nên mày đừng có mà la làng
-Yếu quá phải dùng đến nước mắt trước khi phải nói tới cái câu đầu hàng…
-Tao với mày không thân, nên thôi cần đếch gì phải băn khoăn…(nhỉ?) 
-
-(Lời văn tế: Thật ra bài này là để tán dương Vi, chứ không phải để phê phán cương Thi ^.^ Mày dám diss Thanh là people pleasure hả? Ok, vậy thì chúc mày luôn được people nghi ngờ nha!)
-          </div>
-
-          <!-- Embed thêm video sau đoạn trên -->
-          <div class="iframe-wrap" style="margin-top:10px">
-            <iframe src="https://www.youtube.com/embed/aWON05tnvHY?rel=0"
-                    title="Track" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <!-- (2) EMBED video thêm trong tab Nhạc -->
+          <div class="embed-card" style="margin-top:10px">
+            <iframe src="https://www.youtube.com/embed/aWON05tnvHY"
+                    title="Embed music"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
           </div>
         </div>
       </div>
 
-      <!-- Phim -->
-      <div id="tab-movie" class="tab" style="margin-top:16px; text-align:left">
-        <div class="postcard">
+      <!-- FILM tab -->
+      <div class="tab" id="tab-film">
+        <div class="love-box">
           <div style="white-space:pre-line">
 Tặng HT list mấy chiếc phim Thiên Vi eo nè ạ (mà Thiên Vi xem nhiều quá hong nhớ hớt hẹ hẹ), hồi trước người ta thích bắn máy chiếu lên tường coi phim hoặc là coi phim dới mèo mà lâu roài bận quá em hong keep routine này được ạ. Cơ mà này cũng là một trong những thứ có thể giúp Thiên Vi fresh mind hơn và trông ngầu hơn (hoặc hong ạ) haha. Nhớ là người bảo xem phim người hay tua với bị buồn ngủ, thực ra em cũng vậy ò, cơ mà rồi cũng có phim khiến em chăm chú xem không tua và cảm thấy nó giúp mình mở mang cá thật nhiều. Thiên Vi là kiểu i chơi cũng kha khá nhưng nhiều quá thì bị mất năng lượng và cần một mình, rồi có nhiều thời gian cũng chỉ muốn me-time như này thôi ò, nên này cũng là một người bạn của em đấy ạ. Xem một mình cũng vui, có người xem cùng để bàn luận cũng vui, hoặc là Netflx & chill để phim nó xem mình thì cũng vui luôn ạ lol 𐔌՞ ܸ.ˬ.ܸ՞𐦯
           </div>
 
-          <!-- Playlist embed -->
-          <div class="iframe-wrap" style="margin-top:10px">
+          <div class="embed-card" style="margin-top:10px">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PLz301c-yfQZ8ldmglG6BQQ4IjAK-NHfx-"
-                    title="Playlist phim" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    title="Playlist phim"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
           </div>
 
-          <!-- Quote ảnh beforeu -->
-          <div style="margin-top:12px; text-align:center">
-            <img src="assets/beforeu.png" alt="beforeu" style="max-width:min(420px,90%); border-radius:16px; box-shadow:var(--shadow)">
+          <div class="caption">Thiên Vi nói nhiều quá nên xin phép được sum up lại bằng chiếc quote phim đáng eo này - ý là em giống vậy ấy hẹ hẹ ^.^</div>
+
+          <!-- Ảnh beforeu dưới quote -->
+          <div class="media-row" style="margin-top:8px">
+            <img src="assets/beforeu.png" alt="beforeu">
           </div>
         </div>
       </div>
 
-      <!-- Sách -->
-      <div id="tab-book" class="tab" style="margin-top:16px; text-align:left">
-        <div class="postcard">
+      <!-- BOOK tab -->
+      <div class="tab" id="tab-book">
+        <div class="love-box">
           <div style="white-space:pre-line">
 Field này để sau này Hà Thanh đọc nhiều rồi cho Thiên Vi infor để fill vào nha ạ 😂 Xưa Thiên Vi ngốc lắm, tiền lãnh thưởng hay lấy mua đàn với mua sách hết lắm ạ, nhờ vậy chắc trông cũng “có tri” một xíu huhu hoặc hong. Từng plan rủ người i Cá Chép mà chưa được rủ thì Cá Chép đóng cửa mất tiêu òi. Thiên Vi hay i Nhã Nam với Cá Chép đọc sách nhắm. Thoai em thả đỡ vào dei mấy chiếc ảnh “vô tri” cho page này có tri xíu nha ạ ^.^
           </div>
-          <div class="books-row">
+
+          <div class="media-row">
             <img class="floatL" src="assets/deo.jpg" alt="deo">
             <img class="floatR" src="assets/ngu.jpg" alt="ngu">
             <img class="floatL" src="assets/dangiu.jpg" alt="dangiu">
@@ -640,16 +690,18 @@ Field này để sau này Hà Thanh đọc nhiều rồi cho Thiên Vi infor đ�
         </div>
       </div>
 
-      <!-- I chơi -->
-      <div id="tab-play" class="tab" style="margin-top:16px; text-align:left">
-        <div class="postcard signature">
+      <!-- PLAY tab -->
+      <div class="tab" id="tab-play">
+        <div class="love-box sig-wrap">
           <div style="white-space:pre-line">
 Kính thưa quý toà, từ hồi em pin maps kỹ càng để i chơi với quý toà thì thật kỳ diệu là mình khom i chơi với nhau nữa. Nói chớ, mọi thứ vẫn luôn ở đó thoai, em vẫn luôn như vậy. Gần quá thì không ổn lắm, nhưng xa quá thì lại không nỡ đành. Thôi thì “sông xanh nguyện chảy theo ý trời” chớ em bé Thiên Vi cũng chả biết phải làm thao rồi ạ. Chỉ muốn chúc người sẽ luôn taste the world, i thật nhiều, trải nghiệm thật nhiều, khám phá thật nhiều nha ạ ✈️
           </div>
-          <img src="assets/signature.png" alt="signature">
+
+          <!-- Signature nền trong suốt, như chữ ký cuối thư -->
+          <img class="sig-bg" src="assets/signature.png" alt="signature">
         </div>
       </div>
-      <!-- ===== END TABS ===== -->
+
     </div>
 
     <a href="#" class="back">← Quay về trang chủ</a>
@@ -657,35 +709,25 @@ Kính thưa quý toà, từ hồi em pin maps kỹ càng để i chơi với qu�
 </section>
 
 <script>
-/* ========== Micro reveal on scroll ========== */
+/* ========== Reveal on scroll ========== */
 const revealer = new IntersectionObserver((ents)=>{
   ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); revealer.unobserve(e.target) } })
 },{threshold:0.2});
 document.querySelectorAll('.reveal').forEach(el=>revealer.observe(el));
 
-/* ========== Vertical carousel (auto + controls) ========== */
+/* ========== Vertical carousel ========== */
 const vtrack=document.getElementById('vtrack');
 const slides=[...document.querySelectorAll('.vslide')];
 const dotsWrap=document.getElementById('vdots');
 let idx=0, timer=null;
-function renderDots(){
-  slides.forEach((_,i)=>{
-    const b=document.createElement('button');
-    if(i===0) b.classList.add('active');
-    b.addEventListener('click',()=>go(i));
-    dotsWrap.appendChild(b);
-  });
-}
+function renderDots(){ slides.forEach((_,i)=>{ const b=document.createElement('button'); if(i===0) b.classList.add('active'); b.addEventListener('click',()=>go(i)); dotsWrap.appendChild(b); }); }
 function mark(){ [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active',i===idx)); }
 function go(i){ idx=(i+slides.length)%slides.length; vtrack.style.transform=`translateX(${-idx*100}%)`; mark(); restart(); }
-function next(){ go(idx+1) }
-function prev(){ go(idx-1) }
+function next(){ go(idx+1) } function prev(){ go(idx-1) }
 function restart(){ clearInterval(timer); timer=setInterval(next, 3500); }
-document.getElementById('vnext').onclick=next;
-document.getElementById('vprev').onclick=prev;
-renderDots(); restart();
+document.getElementById('vnext').onclick=next; document.getElementById('vprev').onclick=prev; renderDots(); restart();
 
-/* ========== Calendar (client-side) ========== */
+/* ========== Calendar ========== */
 const calEl=document.getElementById('calendar');
 function buildCalendar(d=new Date()){
   const view=new Date(d.getFullYear(), d.getMonth(), 1);
@@ -694,7 +736,6 @@ function buildCalendar(d=new Date()){
   const days=new Date(year,month+1,0).getDate();
   const today=new Date();
   const title=`tháng ${month+1} năm ${year}`;
-
   calEl.innerHTML=`
     <div class="cal-head">
       <button id="prevM">‹ Tháng trước</button>
@@ -715,9 +756,8 @@ function buildCalendar(d=new Date()){
 }
 buildCalendar();
 
-/* ========== Music autoplay & toggle (giữ nguyên) ========== */
-const bgm=document.getElementById('bgm');
-const musicBtn=document.getElementById('musicBtn');
+/* ========== Music autoplay & toggle ========== */
+const bgm=document.getElementById('bgm'); const musicBtn=document.getElementById('musicBtn');
 if(bgm){ bgm.volume=.6; }
 async function tryPlay(){ try{ await bgm.play(); musicBtn?.setAttribute('aria-pressed','true'); }catch(e){} }
 ['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.addEventListener(ev, tryPlay, {passive:true, once:true}));
@@ -729,7 +769,7 @@ document.addEventListener('visibilitychange', async ()=>{
   if (!document.hidden && musicBtn?.getAttribute('aria-pressed')==='true' && bgm.paused){ try{ await bgm.play(); }catch(e){} }
 });
 
-/* ========== Candle & Gift (with whoosh) ========== */
+/* ========== Candle & Gift ========== */
 const candle=document.getElementById('candle'), smoke=document.getElementById('smoke');
 let blown=false;
 function whoosh(){
@@ -763,50 +803,12 @@ gift?.addEventListener('click', ()=>{
   else { for(let i=0;i<6;i++) setTimeout(()=>spawnBalloon(i), i*140); }
 });
 
-/* ========== Envelope click (giữ nguyên hành vi nếu có trong DOM) ========== */
-const env=document.getElementById('env'), paper=document.getElementById('paper'), paw=document.getElementById('paw');
-env?.addEventListener('click', ()=>{
-  env.classList.toggle('open');
-  const opening = env.classList.contains('open');
-  if (opening){
-    paw?.classList.remove('show'); if(paw){ void paw.offsetWidth; paw.classList.add('show'); }
-    setTimeout(()=>{ env.scrollIntoView({behavior:'smooth', block:'start'}); }, 150);
-  }
-});
-
-/* ========== Subpages with hash (#lazy/#busy/#vtro) ========== */
-const lazyPage=document.getElementById('lazyPage'),
-      busyPage=document.getElementById('busyPage'),
-      vtroPage=document.getElementById('vtroPage');
-function onHash(){
-  const h=location.hash.replace('#','');
-  lazyPage.classList.toggle('show', h==='lazy');
-  busyPage.classList.toggle('show', h==='busy');
-  vtroPage.classList.toggle('show', h==='vtro');
-}
-window.addEventListener('hashchange', onHash); onHash();
-
-/* ========== Equal nav spacing safeguard ========== */
-function fixNavSpacing(){
-  const left = document.querySelectorAll('.nav .group')[0];
-  const right = document.querySelectorAll('.nav .group')[1];
-  if(!left || !right) return;
-  const wL = left.getBoundingClientRect().width;
-  const wR = right.getBoundingClientRect().width;
-  left.style.transform = right.style.transform = '';
-  const diff = Math.abs(wL - wR);
-  if (diff > 40){
-    if (wL > wR) left.style.transform = 'scale(.95)';
-    else right.style.transform = 'scale(.95)';
-  }
-}
-window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing, 300);
-
-/* ========== Sparkle trail on click (flower only) ========== */
+/* ========== Pink Paw Sparkle on click ========== */
+const PAW_SVG = `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="20" cy="20" r="8"/><circle cx="44" cy="20" r="8"/><circle cx="28" cy="12" r="6"/><circle cx="36" cy="12" r="6"/><ellipse cx="32" cy="40" rx="16" ry="12"/></svg>`;
 function makeSparkle(x,y,delay=0){
   const s=document.createElement('span');
   s.className='sparkle';
-  s.textContent='❀';
+  s.innerHTML=PAW_SVG;
   s.style.left=x+'px'; s.style.top=y+'px';
   s.style.animationDelay=delay+'ms';
   document.body.appendChild(s);
@@ -819,27 +821,112 @@ window.addEventListener('click', (e)=>{
   }
 },{passive:true});
 
-/* ========== Vi Trô tabs ========== */
-const pillBar=document.getElementById('pillBar');
-const tabs={
-  love: document.getElementById('tab-love'),
-  music: document.getElementById('tab-music'),
-  movie: document.getElementById('tab-movie'),
-  book: document.getElementById('tab-book'),
-  play: document.getElementById('tab-play'),
-};
-pillBar?.addEventListener('click', (ev)=>{
-  const pill=ev.target.closest('.pill');
-  if(!pill) return;
-  const name=pill.dataset.tab;
-  if(!tabs[name]) return;
-  // toggle aria
-  [...pillBar.children].forEach(p=>p.setAttribute('aria-current','false'));
-  pill.setAttribute('aria-current','true');
-  // show tab
-  Object.values(tabs).forEach(t=>t.classList.remove('show'));
-  tabs[name].classList.add('show');
+/* ========== Tissue Box interactions (giữ nguyên) ========== */
+const tissueBox=document.getElementById('tissueBox');
+const tissueCount=document.getElementById('tissueCount');
+let tissueLeft=12;
+function tissueSound(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='triangle'; o.frequency.setValueAtTime(660, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(220, ctx.currentTime+0.18);
+    g.gain.setValueAtTime(0.2, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.22);
+    o.connect(g).connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.24);
+  }catch(e){}
+}
+function flyTissue(){
+  const leaf=document.createElement('div');
+  leaf.className='tissue-leaf';
+  leaf.style.left='50%'; leaf.style.top='-6px'; leaf.style.opacity='1';
+  const dx=(Math.random()-.5)*60;
+  leaf.animate([
+    { transform:'translate(-50%,0) rotate(0deg)', opacity:1 },
+    { transform:`translate(calc(-50% + ${dx/2}px), -60px) rotate(10deg)`, opacity:.9 },
+    { transform:`translate(calc(-50% + ${dx}px), -140px) rotate(-6deg)`, opacity:.0 }
+  ], { duration:1400, easing:'ease-out' });
+  setTimeout(()=>leaf.remove(), 1500);
+  tissueBox.appendChild(leaf);
+}
+tissueBox?.addEventListener('click', ()=>{
+  if (navigator.vibrate) navigator.vibrate(8);
+  if (tissueLeft>0){ tissueLeft--; tissueCount.textContent='x'+tissueLeft; flyTissue(); tissueSound(); }
+  else{ tissueSound(); }
 });
+
+/* ========== Subpages (#lazy/#busy/#vtro) ========== */
+const lazyPage=document.getElementById('lazyPage'),
+      busyPage=document.getElementById('busyPage'),
+      vtroPage=document.getElementById('vtroPage');
+function onHash(){
+  const h=location.hash.replace('#','');
+  lazyPage.classList.toggle('show', h==='lazy');
+  busyPage.classList.toggle('show', h==='busy');
+  vtroPage.classList.toggle('show', h==='vtro');
+}
+window.addEventListener('hashchange', onHash); onHash();
+
+/* ========== Vi Trô hello! tabs ========== */
+const pills=[...document.querySelectorAll('#pillRow .pill')];
+const tabs={ love:document.getElementById('tab-love'), music:document.getElementById('tab-music'), film:document.getElementById('tab-film'), book:document.getElementById('tab-book'), play:document.getElementById('tab-play') };
+pills.forEach(p=>{
+  p.addEventListener('click', ()=>{
+    pills.forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+    const key=p.dataset.tab;
+    Object.values(tabs).forEach(t=>t.classList.remove('show'));
+    tabs[key]?.classList.add('show');
+    if(key==='love'){ // re-trigger handwriting each time tab opens
+      const t=document.querySelector('.love-title');
+      if(t){ t.style.animation='none'; t.offsetHeight; t.style.animation='handwrite 2.6s ease forwards'; }
+    }
+  });
+});
+
+/* ========== Envelope: open + pink paw & petals pop ========== */
+const env=document.getElementById('env'), pawPop=document.getElementById('pawPop');
+function popPetals(target){
+  const rect=target.getBoundingClientRect();
+  for(let i=0;i<6;i++){
+    const span=document.createElement('span');
+    span.textContent='❀';
+    span.style.position='fixed';
+    span.style.left=(rect.left+rect.width/2 + (Math.random()-.5)*80)+'px';
+    span.style.top=(rect.top+20 + (Math.random()-.5)*20)+'px';
+    span.style.color='#ff76b4';
+    span.style.fontSize=(14+Math.random()*8)+'px';
+    span.style.opacity='0';
+    span.style.transition='transform 900ms ease-out, opacity 900ms ease-out';
+    document.body.appendChild(span);
+    requestAnimationFrame(()=>{
+      span.style.opacity='1';
+      span.style.transform='translateY(-40px)';
+    });
+    setTimeout(()=>span.remove(), 1000);
+  }
+}
+env?.addEventListener('click', ()=>{
+  env.classList.toggle('open');
+  const opening = env.classList.contains('open');
+  if (opening){
+    pawPop.classList.remove('show'); void pawPop.offsetWidth; pawPop.classList.add('show');
+    popPetals(env);
+    setTimeout(()=>{ env.scrollIntoView({behavior:'smooth', block:'start'}); },150);
+  }
+});
+
+/* ========== Equal nav spacing safeguard ========== */
+function fixNavSpacing(){
+  const groups=document.querySelectorAll('.nav .group');
+  const left=groups[0], right=groups[1];
+  if(!left||!right) return;
+  const wL=left.getBoundingClientRect().width, wR=right.getBoundingClientRect().width;
+  left.style.transform=right.style.transform='';
+  const diff=Math.abs(wL-wR);
+  if(diff>40){ if(wL>wR) left.style.transform='scale(.95)'; else right.style.transform='scale(.95)'; }
+}
+window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing, 300);
 </script>
 </body>
 </html>
