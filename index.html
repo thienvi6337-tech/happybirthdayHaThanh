@@ -269,6 +269,19 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 
 /* small spacing text under embeds */
 .caption{font-style:italic; margin-top:8px; text-align:center; color:var(--ink-2); font-weight:600}
+
+/* ==== NEW: BOOK marquee (giữ nguyên size ảnh, không ép chiều cao) ==== */
+.book-marquee{overflow:hidden; margin-top:10px}
+.book-track{display:flex; gap:12px; width:max-content; margin:12px auto 0; animation:scroll 25s linear infinite}
+.book-track img{height:auto; width:auto; border-radius:16px; box-shadow:var(--shadow)}
+
+/* ==== NEW: Signature inline variant for PLAY tab (không đè text, đổi màu hồng) ==== */
+.sig-inline{
+  position:relative !important; right:auto !important; bottom:auto !important;
+  display:block; margin:14px auto 0; width:min(260px,60%); opacity:1 !important;
+  /* đổi màu ảnh chữ ký sang hồng gần #ff76b4 */
+  filter: brightness(0) saturate(100%) invert(29%) sepia(58%) saturate(1242%) hue-rotate(305deg) brightness(102%) contrast(96%);
+}
 </style>
 </head>
 <body>
@@ -577,7 +590,10 @@ Có một fun fact là chiếc thư chúc năm mới mà em viết cho người,
                   title="Giữ cho em một thế giới"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen></iframe>
-          <div class="caption">Luôn giữ cho mình một thế giới trước khi trở thành cả thế giới của ai đó nha cục dzang ơi. Meow meow you ạ ^.^</div>
+          <div class="caption">
+            Luôn giữ cho mình một thế giới trước khi trở thành cả thế giới của ai đó nha cục dzang ơi.<br/>
+            Meow meow you ạ ^.^
+          </div>
         </div>
       </div>
 
@@ -587,57 +603,57 @@ Có một fun fact là chiếc thư chúc năm mới mà em viết cho người,
           <div class="notes">🎼 🎵 🎶 🎵 🎶 🎼</div>
           <h4>VĂN TẾ NGHĨA SĨ CẦN GIUỘC - RAP THIS “CUỘC SỐNG NÀY THI VI.”</h4>
 <div style="white-space:pre-line">
-(LỜI VĂN TẾ) 
-SỐNG CHO RA SỐNG, CHỨ SỐNG MÀ CỨ RỐNG CÁI HỌNG LÊN NÓI XẤU NGƯỜI KHÁC THÌ
-CÓ BIẾT VÌ SAO TAO KHÔNG LÀM RAPPER MÀ LẠI LÀM COPYWRITER KHÔNG HẢ?
-VÌ TAO SỢ PHẢI VIẾT NHẠC DISS MÀY SUỐT CẢ MỘT NGÀY ĐẤY, HOMIE À…
-THÔI THÌ BÀI NÀY TẶNG RIÊNG CHO MÀY NHA HOMIE (T)! 
+(Lời văn tế) 
+Sống cho ra sống, chứ sống mà cứ rống cái họng lên nói xấu người khác thì
+Có biết vì sao tao không làm Rapper mà lại làm Copywriter không hả?
+Vì tao sợ phải viết nhạc diss mày suốt cả một ngày đấy, homie à…
+Thôi thì bài này tặng riêng cho mày nha homie (T)! 
 
-(DZO BÀI)
-MONG MUỐN MÀY THAY ĐỔI KHÔNG PHẢI VÌ TAO LÀ ĐỨA HAY DỖI 
-NÓI CHUYỆN MÀ BIẾT UỐN LƯỠI THÌ ĐÂU ĐẾN NỖI BỊ RÉO LÊN ĐÂY 
-BIẾT SỐNG KHÔN SỐNG KHÉO CHỨ SAO LẠI ĐI NÓI XÀM NÓI XÉO 
-TAO BIẾT MÀY NÓI GÌ NHƯNG (WINNER THÌ) SỢ ĐẾCH GÌ MẤY ĐỨA LEO TEO…
+(Dzo bài)
+Mong muốn mày thay đổi không phải vì tao là đứa hay dỗi 
+Nói chuyện mà biết uốn lưỡi thì đâu đến nỗi bị réo lên đây 
+Biết sống khôn sống khéo chứ sao lại đi nói xàm nói xéo 
+Tao biết mày nói gì nhưng (winner thì) sợ đếch gì mấy đứa leo teo…
 
-DÁM DISS TAO? MÀY ĐÚNG LÀ HẢO HÁN! 
-NHƯNG MÀ CÒN NON LẮM, HAIZ, LẠI ĐÂY TAO BẢO BAN 
-THÍCH ĂN HÀNG THÌ ĐƯỢC, NHƯNG NHÂN CÁCH MÀY THÌ LẠI BẦN HÀN TRƯỚC
-CUỘC SỐNG MÀY CẰN CỖI, CHỈ NHÌN ĐƯỢC NHỮNG CÁI ĐIỀU MÀY MUỐN NÓI! 
+Dám diss tao? Mày đúng là hảo hán! 
+Nhưng mà còn non lắm, haiz, lại đây tao bảo ban 
+Thích ăn hàng thì được, nhưng nhân cách mày thì lại bần hàn trước
+Cuộc sống mày cằn cỗi, chỉ nhìn được những cái điều mày muốn nói! 
 
-CÙNG MỘT PHỤ ÂM - NHƯNG TAO LÀ VI VI, CÒN MÀY LÀ KI KI,
-KHÔNG PHẢI LÀ CON BÒ MÀ CỨ NHAI LẠI MẤY CÁI CHUYỆN ĐƯƠM ĐẶT
-CÂU NÀO CŨNG BẮT TAI NHIỀU KHI TAO TỰ HỎI MÀY ĐANG MUỐN DẮT AI? 
-SỐNG PHẢI CÓ CHÍNH KIẾN CÒN ĐỤNG TỚI Ổ KIẾN (LỬA) THÌ HÃY BẤM NÚT BIẾN! 
+Cùng một phụ âm - nhưng tao là Vi Vi, còn mày là Ki Ki,
+Không phải là con bò mà cứ nhai lại mấy cái chuyện đươm đặt
+Câu nào cũng bắt tai nhiều khi tao tự hỏi mày đang muốn dắt ai? 
+Sống phải có chính kiến còn đụng tới ổ kiến (lửa) thì hãy bấm nút biến! 
 
-TAO LÀ THIÊN VI NGHĨA LÀ THI VIÊN,
-CÒN MÀY CHỈ BIẾT THI TRIỂN BA TRÒ LỐ BỊCH ĐỂ MÀ MÚA CHUYỆN (PHIỀN THIỆT CHỨ) 
-CHÂN THÀNH, TRÂN TRỌNG CHỨ ĐỪNG CÓ MÀ LẬT LỌNG TỚI NGƯỜI NÀY NGƯỜI KIA,
-TAO CÓ MỘT SỨC CHỊU ĐỰNG RẤT LÀ RẮN RỎI. CÒN MÀY Ở ĐÂY THÌ CHẮN CHẮN LÀ RẮN RỒI ^.^
+Tao là Thiên Vi nghĩa là Thi Viên,
+Còn mày chỉ biết Thi triển ba trò lố bịch để mà múa chuyện (phiền thiệt chứ) 
+Chân thành, trân trọng chứ đừng có mà lật lọng tới người này người kia,
+Tao có một sức chịu đựng rất là rắn rỏi. Còn mày ở đây thì chắn chắn là rắn rồi ^.^
 
-(LỜI VĂN TẾ: KÉO TAO XUỐNG KHÔNG LÀM MÀY TIẾN LÊN VÌ MUỐN NHÌN TAO MÀY LUÔN PHẢI NGƯỚC LÊN
-HÀ THANH KÊU TAO VIẾT NHẠC DISS CỔ, NHƯNG Ồ… THÔI TAO THÍCH CỔ ^.^)
+(Lời văn tế: Kéo tao xuống không làm mày tiến lên vì muốn nhìn tao mày luôn phải ngước lên
+Hà Thanh kêu tao viết nhạc diss cổ, nhưng ồ… thôi tao thích cổ ^.^)
 
-TAO CÓ NGƯỜI TAO YÊU, CÓ NHẠC ĐỂ CHILL, CÓ CHỮ ĐỂ DEAL,
-CÒN MÀY YẾU NGHỀ, YẾU SỨC, ĐIỂM ĐẠO ĐỨC THÌ DƯỚI MỨC TRUNG BÌNH
-MÀY KHÔNG CHƠI SAO MÀY HIỂU BAO NHIÊU ĐIỀU “THI VỊ” CỦA CUỘC ĐỜI,
-LÀM BÀI MÀ CÓ 5 SLIDES THÌ ĐỪNG CÓ BẢO AI ĐÚNG AI SAI! 
+Tao có người tao yêu, có nhạc để chill, có chữ để deal,
+Còn mày yếu nghề, yếu sức, điểm đạo đức thì dưới mức trung bình
+Mày không chơi sao mày hiểu bao nhiêu điều “thi vị” của cuộc đời,
+Làm bài mà có 5 slides thì đừng có bảo ai đúng ai sai! 
 
-THANH GỌI TAO LÀ VI TRÔ TẠI VÌ SỐNG VỚI MÀY TAO CHỈ CẦN VÔ TRI
-CHẲNG CẦN DÙNG ĐẾN LÍ TRÍ ĐÃ CÓ THỂ THẤY MÀY LÀM MẤY CÁI TRÒ KHỈ
-NHÌN TAO VỚI ĐÔI MẮT LẦM LÌ LÀM TAO CỨ TƯỞNG MÀY ĐANG BỊ MẤT TRÍ
-TITLE BÉ TÍ, LÀM VIỆC TÍ TI MÀ DRAMA QUEEN THÌ PHẢI GỌI LÀ TỶ TỶ >⩊<
+Thanh gọi tao là Vi Trô tại vì sống với mày tao chỉ cần vô tri
+Chẳng cần dùng đến lí trí đã có thể thấy mày làm mấy cái trò khỉ
+Nhìn tao với đôi mắt lầm lì làm tao cứ tưởng mày đang bị mất trí
+Title bé tí, làm việc tí ti mà drama queen thì phải gọi là tỷ tỷ >⩊<
 
-BÀI NÀY KHÔNG ĐỂ HẠ BỆ, CHỈ ĐỂ NHẮC MÀY ĐI LẠI MÀ SOI GƯƠNG
-AI SỐNG THẬT THÌ ĐƯỢC THƯƠNG, CÒN DỞ DỞ ƯƠNG ƯƠNG THÌ SỚM MUỘN CŨNG TAN THƯƠNG
-HỒN TRƯƠNG BA, DA HÀNG THỊT 
-TAO DISS ĐẾN ĐÂY CŨNG CẢM THẤY KHÁ LÀ THOẢ THÍCH! 
+Bài này không để hạ bệ, chỉ để nhắc mày đi lại mà soi gương
+Ai sống thật thì được thương, còn dở dở ương ương thì sớm muộn cũng tan thương
+Hồn Trương Ba, da hàng thịt 
+Tao diss đến đây cũng cảm thấy khá là thoả thích! 
 
-NGAI VÀNG THÌ CHỈ CÓ MỘT NÊN THÔI TAO XIN PHÉP ĐƯỢC NHƯỜNG MÀY ĐẤY
-NHẤT MÀY RỒI TẠI VÌ PHÉP VUA PHẢI THUA LỆ NÀNG, NÊN MÀY ĐỪNG CÓ MÀ LA LÀNG
-YẾU QUÁ PHẢI DÙNG ĐẾN NƯỚC MẮT TRƯỚC KHI PHẢI NÓI TỚI CÁI CÂU ĐẦU HÀNG…
-TAO VỚI MÀY KHÔNG THÂN, NÊN THÔI CẦN ĐẾCH GÌ PHẢI BĂN KHOĂN…(NHỈ?) 
+Ngai vàng thì chỉ có một nên thôi tao xin phép được nhường mày đấy
+Nhất mày rồi tại vì phép vua phải thua lệ nàng, nên mày đừng có mà la làng
+Yếu quá phải dùng đến nước mắt trước khi phải nói tới cái câu đầu hàng…
+Tao với mày không thân, nên thôi cần đếch gì phải băn khoăn…(nhỉ?) 
 
-(LỜI VĂN TẾ: THẬT RA BÀI NÀY LÀ ĐỂ TÁN DƯƠNG VI, CHỨ KHÔNG PHẢI ĐỂ PHÊ PHÁN CƯƠNG THI ^.^ MÀY DÁM DISS THANH LÀ PEOPLE PLEASURE HẢ? OK, VẬY THÌ CHÚC MÀY LUÔN ĐƯỢC PEOPLE NGHI NGỜ NHA!)
+(Lời văn tế: Thật ra bài này là để tán dương Vi, chứ không phải để phê phán cương Thi ^.^ Mày dám diss Thanh là people pleasure hả? Ok, vậy thì chúc mày luôn được people nghi ngờ nha!)
 </div>
 
           <!-- (2) EMBED video thêm trong tab Nhạc -->
@@ -665,11 +681,11 @@ Tặng HT list mấy chiếc phim Thiên Vi eo nè ạ (mà Thiên Vi xem nhiề
           </div>
 
           <div class="caption">Thiên Vi nói nhiều quá nên xin phép được sum up lại bằng chiếc quote phim đáng eo này - ý là em giống vậy ấy hẹ hẹ ^.^</div>
+        </div>
 
-          <!-- Ảnh beforeu dưới quote -->
-          <div class="media-row" style="margin-top:8px">
-            <img src="assets/beforeu.png" alt="beforeu">
-          </div>
+        <!-- Ảnh dưới quote (đổi tên file thành 'u', dùng fallback .png nếu cần) -->
+        <div class="media-row" style="margin-top:8px">
+          <img id="filmImg" src="assets/u.jpg" alt="beforeu">
         </div>
       </div>
 
@@ -679,13 +695,16 @@ Tặng HT list mấy chiếc phim Thiên Vi eo nè ạ (mà Thiên Vi xem nhiề
           <div style="white-space:pre-line">
 Field này để sau này Hà Thanh đọc nhiều rồi cho Thiên Vi infor để fill vào nha ạ 😂 Xưa Thiên Vi ngốc lắm, tiền lãnh thưởng hay lấy mua đàn với mua sách hết lắm ạ, nhờ vậy chắc trông cũng “có tri” một xíu huhu hoặc hong. Từng plan rủ người i Cá Chép mà chưa được rủ thì Cá Chép đóng cửa mất tiêu òi. Thiên Vi hay i Nhã Nam với Cá Chép đọc sách nhắm. Thoai em thả đỡ vào dei mấy chiếc ảnh “vô tri” cho page này có tri xíu nha ạ ^.^
           </div>
+        </div>
 
-          <div class="media-row">
-            <img class="floatL" src="assets/deo.jpg" alt="deo">
-            <img class="floatR" src="assets/ngu.jpg" alt="ngu">
-            <img class="floatL" src="assets/dangiu.jpg" alt="dangiu">
-            <img class="floatR" src="assets/paw.jpg" alt="paw">
-            <img class="floatL" src="assets/cafe.jpg" alt="cafe">
+        <!-- Dải ảnh chạy ngang ngoài khung trắng, giữ nguyên size -->
+        <div class="book-marquee" aria-hidden="true">
+          <div class="book-track">
+            <img src="assets/deo.jpg" alt="deo">
+            <img src="assets/ngu.jpg" alt="ngu">
+            <img src="assets/dangiu.jpg" alt="dangiu">
+            <img src="assets/paw.jpg" alt="paw">
+            <img src="assets/cafe.jpg" alt="cafe">
           </div>
         </div>
       </div>
@@ -697,8 +716,8 @@ Field này để sau này Hà Thanh đọc nhiều rồi cho Thiên Vi infor đ�
 Kính thưa quý toà, từ hồi em pin maps kỹ càng để i chơi với quý toà thì thật kỳ diệu là mình khom i chơi với nhau nữa. Nói chớ, mọi thứ vẫn luôn ở đó thoai, em vẫn luôn như vậy. Gần quá thì không ổn lắm, nhưng xa quá thì lại không nỡ đành. Thôi thì “sông xanh nguyện chảy theo ý trời” chớ em bé Thiên Vi cũng chả biết phải làm thao rồi ạ. Chỉ muốn chúc người sẽ luôn taste the world, i thật nhiều, trải nghiệm thật nhiều, khám phá thật nhiều nha ạ ✈️
           </div>
 
-          <!-- Signature nền trong suốt, như chữ ký cuối thư -->
-          <img class="sig-bg" src="assets/signature.png" alt="signature">
+          <!-- Signature hiển thị dưới text, cách khoảng, đổi màu hồng đồng bộ -->
+          <img class="sig-inline" src="assets/signature.png" alt="signature">
         </div>
       </div>
 
@@ -927,6 +946,18 @@ function fixNavSpacing(){
   if(diff>40){ if(wL>wR) left.style.transform='scale(.95)'; else right.style.transform='scale(.95)'; }
 }
 window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing, 300);
+
+/* ==== NEW: Film image fallback to .png if .jpg not found ==== */
+(function(){
+  const img=document.getElementById('filmImg');
+  if(!img) return;
+  img.addEventListener('error', ()=>{
+    if(!img.dataset.triedPng){
+      img.dataset.triedPng="1";
+      img.src="assets/u.png";
+    }
+  }, {once:true});
+})();
 </script>
 </body>
 </html>
