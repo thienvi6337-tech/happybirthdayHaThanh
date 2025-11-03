@@ -96,7 +96,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .cal-wrap{background:var(--card); padding:20px; border-radius:22px; box-shadow:var(--shadow)}
 .cal-head{display:flex; align-items:center; justify-content:space-between}
 .cal-head h4{margin:6px 0 14px; font-size:clamp(18px,3.2vw,28px); color:var(--ink)}
-.cal-head button{border:0; background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow); font-weight:800; color:#ff4d94}
+.cal-head button{border:0; background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow); font-weight:800; color:var(--ink)}
 .grid{display:grid; grid-template-columns:repeat(7,1fr); gap:14px}
 .cell,.dow{background:#fff; border-radius:16px; padding:18px 0; box-shadow:var(--shadow)}
 .dow{background:linear-gradient(180deg,#fff,#fff0); font-weight:800; color:#ff66a3}
@@ -174,7 +174,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 @media(prefers-reduced-motion:reduce){ .mtrack{animation:none} }
 
 /* Music button */
-.music-btn{border:0; border-radius:999px; padding:10px 18px; background:#ffe5f3; color:#ff4d94; font-weight:800; box-shadow:var(--shadow); cursor:pointer}
+.music-btn{border:0; border-radius:999px; padding:10px 18px; background:#ffe5f3; color:var(--ink); font-weight:800; box-shadow:var(--shadow); cursor:pointer}
 .music-btn[aria-pressed="true"]{background:#ffccdf}
 
 /* sub-pages (hash) */
@@ -247,7 +247,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .tissue-box{position:relative; width:220px; height:120px; border-radius:14px; background:linear-gradient(180deg,#ffb3cf,#ff86b8); box-shadow:var(--shadow); transform:translateY(0); animation:floaty 3.2s ease-in-out infinite}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .tissue-slot{position:absolute; left:50%; top:14px; transform:translateX(-50%); width:120px; height:24px; background:#ff5fa0; border-radius:999px; box-shadow:inset 0 4px 10px rgba(0,0,0,.15)}
-.tissue-leaf{position:absolute; left:50%; top:-10px; transform:translateX(-50%); width:90px; height:80px; background:linear-gradient(180deg,#fff,#ffe8f3); border-radius:10px; clip-path:polygon(50% 0, 100% 20%, 90% 100%, 10% 100%, 0 20%); box-shadow:0 10px 18px rgba(0,0,0,.1)}
+.tissue-leaf{position:absolute; left:50%; top:-10px; transform:translateX(-50%); width:90px; height:80px; background:linear-gradient(180deg,#fff,#ffe8f3); border-radius:10px; clip-path:polygon(50% 0, 100% 20%, 90% 100%, 10% 100%, 0 20%)}
 .tissue-count{font-weight:800; color:#fff; position:absolute; right:8px; bottom:8px; background:rgba(255,255,255,.25); padding:4px 8px; border-radius:999px}
 .tissue-tap{margin-top:8px; font-weight:700; color:var(--ink-2)}
 
@@ -273,12 +273,24 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 /* ==== NEW: BOOK marquee (giữ nguyên size ảnh, không ép chiều cao) ==== */
 .book-marquee{overflow:hidden; margin-top:10px}
 .book-track{display:flex; gap:12px; width:max-content; margin:12px auto 0; animation:scroll 25s linear infinite}
-.book-track img{height:auto; width:auto; border-radius:16px; box-shadow:var(--shadow)}
+/* Quan trọng: giữ NGUYÊN kích thước ảnh gốc, không bị CSS nào khác bóp/crop */
+.book-track img{
+  display:block;
+  width:auto !important;
+  height:auto !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  image-rendering:auto;
+}
 
 /* ==== NEW: Signature inline variant for PLAY tab (không đè text, đổi màu hồng) ==== */
 .sig-inline{
   position:relative !important; right:auto !important; bottom:auto !important;
   display:block; margin:14px auto 0; width:min(260px,60%); opacity:1 !important;
+  /* đổi màu ảnh chữ ký sang hồng gần #ff76b4 */
   filter: brightness(0) saturate(100%) invert(29%) sepia(58%) saturate(1242%) hue-rotate(305deg) brightness(102%) contrast(96%);
 }
 </style>
@@ -691,8 +703,8 @@ Tặng HT list mấy chiếc phim Thiên Vi eo nè ạ (mà Thiên Vi xem nhiề
       <!-- BOOK tab -->
       <div class="tab" id="tab-book">
         <div class="love-box">
-          <div style="white-space:pre-line">Field này để sau này Hà Thanh đọc nhiều rồi cho Thiên Vi infor để fill vào nha ạ 😂 Xưa Thiên Vi ngốc lắm, tiền lãnh thưởng hay lấy mua đàn với mua sách hết lắm ạ, nhờ vậy chắc trông cũng “có tri” một xíu huhu hoặc hong. Từng plan rủ người i Cá Chép mà chưa được rủ thì Cá Chép đóng cửa mất tiêu òi. Thiên Vi hay i Nhã Nam với Cá Chép đọc sách nhắm. Thoai em thả đỡ vào dei mấy chiếc ảnh “vô tri” cho page này có tri xíu nha ạ ^.^
-          </div>
+          <!-- GỠ khoảng trắng đầu đoạn: phiên bản trong markup đã bỏ leading blank line -->
+          <div id="bookText" style="white-space:pre-line">Field này để sau này Hà Thanh đọc nhiều rồi cho Thiên Vi infor để fill vào nha ạ 😂 Xưa Thiên Vi ngốc lắm, tiền lãnh thưởng hay lấy mua đàn với mua sách hết lắm ạ, nhờ vậy chắc trông cũng “có tri” một xíu huhu hoặc hong. Từng plan rủ người i Cá Chép mà chưa được rủ thì Cá Chép đóng cửa mất tiêu òi. Thiên Vi hay i Nhã Nam với Cá Chép đọc sách nhắm. Thoai em thả đỡ vào dei mấy chiếc ảnh “vô tri” cho page này có tri xíu nha ạ ^.^</div>
         </div>
 
         <!-- Dải ảnh chạy ngang ngoài khung trắng, giữ nguyên size -->
@@ -955,6 +967,12 @@ window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing, 300)
       img.src="assets/u.png";
     }
   }, {once:true});
+})();
+
+/* ==== NEW: BOOK tab – remove leading whitespace defensively ==== */
+(function(){
+  const t=document.getElementById('bookText');
+  if(t){ t.textContent = (t.textContent||"").replace(/^\s+/, ""); }
 })();
 </script>
 </body>
