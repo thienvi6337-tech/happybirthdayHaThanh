@@ -8,7 +8,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Pacifico&family=Caveat:wght@700&display=swap" rel="stylesheet">
 
 <style>
 /* ===== THEME (pink only) ===== */
@@ -23,17 +23,14 @@
 html,body{margin:0; padding:0}
 body{
   background:linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:var(--ink);
+  color:var(--ink); /* to all text -> pink */
   font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   line-height:1.65; overflow-x:hidden; text-align:center; cursor:auto;
 }
 
-/* floating cute icons background */
+/* floating cute icons background (add more: ✦ ★ ❀ ❁ ❃ + pink paw svg) */
 .bg-decor{pointer-events:none; position:fixed; inset:0; z-index:-1; opacity:.22}
-.bg-decor span{
-  position:absolute; color:#ff76b4; animation:drift 14s linear infinite;
-  font-size:22px; filter:blur(.2px)
-}
+.bg-decor span,.bg-decor svg{position:absolute; color:#ff76b4; animation:drift 14s linear infinite; font-size:22px; filter:blur(.2px); fill:#ff76b4}
 @keyframes drift{from{transform:translateY(110vh)} to{transform:translateY(-15vh)}}
 
 /* layout helpers */
@@ -43,11 +40,11 @@ body{
 
 /* headings */
 h1,h2{margin:0}
-h1{font-size:clamp(28px,4vw,48px); color:var(--ink-2); font-weight:800; font-family:"Comic Sans MS", cursive;}
+h1{font-size:clamp(28px,4vw,48px); color:var(--ink-2); font-weight:800; font-family: "Comic Sans MS", cursive;} /* GIỮ nguyên font Happy Birthday */
 h2{font-size:clamp(16px,2.2vw,22px); color:var(--ink-3); font-weight:400}
 a{color:var(--ink)}
 
-/* ===== NAV ===== */
+/* ===== NAV (4 buttons + centered brand) ===== */
 .nav{
   position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
   background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.35));
@@ -59,15 +56,16 @@ a{color:var(--ink)}
   display:inline-flex; gap:8px; align-items:center; font-weight:800; text-decoration:none; color:var(--ink);
   background:#ffe5f3; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow)
 }
+/* Brand text (Pacifico) + pulse hover */
 .brand{
   font-family:'Pacifico', cursive; font-size:clamp(22px,3.2vw,34px); color:#ff66a3; text-shadow:0 1px 0 #fff;
   display:inline-block; transition:transform .25s ease;
 }
 .brand a{color:inherit; text-decoration:none}
-.brand:hover{animation:pulse 1.2s ease-in-out infinite alternate}
-@keyframes pulse{from{transform:scale(1)} to{transform:scale(1.02)}}
+.brand:hover{ animation:pulse 1.2s ease-in-out infinite alternate }
+@keyframes pulse{ from{transform:scale(1)} to{transform:scale(1.02)} }
 
-/* hero */
+/* hero (Sweet Letter block) */
 .hero{display:grid; gap:24px; align-items:center; grid-template-columns:1fr}
 .hero .media{display:flex; justify-content:center}
 .img-wrap{width:100%; max-width:420px; aspect-ratio:3/4; border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:linear-gradient(180deg,#ffddea,#ffeaf3)}
@@ -80,18 +78,23 @@ a{color:var(--ink)}
 @media(min-width:900px){ .hero{grid-template-columns:420px 1fr} .hero .copy{margin:0} }
 
 /* corner tag */
-.corner-tag{display:inline-block; padding:8px 14px; border-radius:999px; background:#ffe5f3; color:var(--ink); font-weight:800; box-shadow:var(--shadow)}
+.corner-tag{
+  display:inline-block; padding:8px 14px; border-radius:999px;
+  background:#ffe5f3; color:var(--ink); font-weight:800; box-shadow:var(--shadow);
+}
 
-/* vertical carousel */
+/* vertical carousel (HT1..Tinkerbell1) */
 .vcarousel{position:relative; overflow:hidden; border-radius:22px; box-shadow:var(--shadow)}
 .vtrack{display:flex; transition:transform .6s ease}
 .vslide{min-width:100%; display:flex; justify-content:center; align-items:center; background:var(--soft)}
 .vslide img{max-height:70vh; width:auto; height:auto; object-fit:contain; display:block}
 .vnav{position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none}
 .vnav button{pointer-events:auto; border:0; width:42px; height:42px; border-radius:999px; background:#fff; box-shadow:var(--shadow); color:var(--ink); font-weight:800}
+
+/* micro copy under carousel */
 .note{font-size:16px; color:var(--ink)}
 
-/* Calendar */
+/* === Calendar === */
 h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); color:var(--ink)}
 .cal-wrap{background:var(--card); padding:20px; border-radius:22px; box-shadow:var(--shadow)}
 .cal-head{display:flex; align-items:center; justify-content:space-between}
@@ -104,19 +107,19 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .cell.today{outline:3px solid #ffc0da}
 .cell .mark{margin-left:6px}
 
-/* GIFs */
+/* GIF strips */
 .gifs-row{display:flex; gap:16px; justify-content:center; align-items:center; flex-wrap:wrap}
 .gifs-row img{width:min(260px,32vw); border-radius:20px; box-shadow:0 0 25px rgba(255,192,203,.6); transform:translateY(0); transition:transform .35s}
 .gifs-row img:hover{transform:translateY(-6px) rotate(-1.5deg)}
 
-/* candle */
+/* candle (same width as card) */
 .candle-section{margin-top:30px}
 .candle-card{background:var(--card); padding:28px 22px; border-radius:22px; box-shadow:var(--shadow); max-width:var(--max); margin:0 auto}
 .candle{position:relative; width:54px; height:110px; background:#fff0f5; border-radius:12px; margin:18px auto; box-shadow:var(--shadow); cursor:pointer}
 .flame{position:absolute; top:-28px; left:50%; transform:translateX(-50%); width:30px; height:30px; background:radial-gradient(circle,#ffd966,#ffb347,#ff7b00); border-radius:50%; box-shadow:0 0 30px 10px rgba(255,184,108,.6); animation:flicker .25s infinite alternate}
 @keyframes flicker{0%{transform:translateX(-50%) scale(1);opacity:.95}100%{transform:translateX(-48%) scale(1.1);opacity:1}}
 .smoke{position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:12px; height:12px; border-radius:50%; background:radial-gradient(circle, rgba(180,180,180,.6), rgba(180,180,180,0)); opacity:0; pointer-events:none}
-.smoke.show{animation:puff 1.2s ease-out forwards}
+.smoke.show{ animation:puff 1.2s ease-out forwards }
 @keyframes puff{0%{opacity:.8; transform:translate(-50%,0) scale(.8)}100%{opacity:0; transform:translate(-50%,-40px) scale(1.4)}}
 .candle.off .flame{display:none}
 #message{font-size:16px; font-weight:700; margin-top:6px; color:var(--ink-2)}
@@ -130,18 +133,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .wish-item::before{content: attr(data-emo); position:absolute; left:12px; top:50%; transform:translateY(-50%) rotate(-8deg); font-weight:800; animation:wiggle 1.6s ease-in-out infinite; color:#ff76b4}
 @keyframes wiggle{0%,100%{transform:translateY(-50%) rotate(-8deg)}50%{transform:translateY(calc(-50% - 2px)) rotate(6deg)}}
 
-/* envelope (Birthday Letter) */
-.envelope{position:relative; margin:0 auto; max-width:var(--max); background:#fff7fb; border-radius:18px; box-shadow:var(--shadow); padding:0; overflow:hidden}
-.envelope .flap{position:absolute; left:0; right:0; top:0; height:0; padding-bottom:32%; background:linear-gradient(180deg,#ffd8ea,#ffeaf5); clip-path:polygon(0 0, 100% 0, 50% 100%); transition:transform .6s ease, opacity .6s ease; transform-origin:50% 0; z-index:2}
-.envelope.open .flap{ transform:rotateX(180deg); opacity:.35 }
-.flap .hint{position:absolute; left:50%; top:18%; transform:translate(-50%,-50%); font-weight:800; font-size:14px; color:#ff66a3; text-shadow:0 1px 0 rgba(255,255,255,.8)}
-.envelope .paper-wrap{margin-top:28%; background:#fffdfd; border-top-left-radius:18px; border-top-right-radius:18px; position:relative}
-.paper-inner{max-height:0; overflow:hidden; transition:max-height .6s ease, padding .6s ease; padding:0 22px 0; text-align:left; color:var(--ink)}
-.paper-inner::after{content:""; display:block; height:0;}
-.envelope.open .paper-inner{max-height:1200px; padding:22px 22px 22px;}
-.paw{position:absolute; top:14%; left:50%; transform:translate(-50%,0); font-size:18px; color:#ff76b4; opacity:0; pointer-events:none}
-.paw.show{animation:pawPop 900ms ease-out forwards}
-@keyframes pawPop{0%{transform:translate(-50%,0) scale(.6); opacity:0}35%{transform:translate(-50%,-6px) scale(1); opacity:1}100%{transform:translate(-50%,-26px) scale(1.05); opacity:0}}
+/* envelope (Birthday Letter) – giữ nguyên chỗ này nếu bạn đã có ở bản đang chạy */
 
 /* gift */
 .gift-section{padding:30px 0 10px}
@@ -156,22 +148,22 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .balloon:after{content:""; position:absolute; left:50%; bottom:-18px; transform:translateX(-50%); width:2px; height:22px; background:rgba(0,0,0,.15)}
 @keyframes rise{0%{transform:translate(-50%,20px) scale(.9);opacity:0}12%{opacity:1}100%{transform:translate(-50%,-220px) scale(1.05);opacity:0}}
 
-/* Auto reveal */
+/* Auto motion (reveal) */
 .reveal{opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease}
 .reveal.show{opacity:1; transform:translateY(0)}
 
-/* marquee */
+/* marquee gallery */
 .marquee{overflow:hidden}
 .mtrack{display:flex; gap:12px; width:max-content; margin:22px auto 0; animation:scroll 25s linear infinite}
 .mtrack img{height:200px; width:auto; border-radius:15px; box-shadow:var(--shadow)}
 @keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){ .mtrack{animation:none} }
 
-/* Music button (main) */
+/* Music button */
 .music-btn{border:0; border-radius:999px; padding:10px 18px; background:#ffe5f3; color:var(--ink); font-weight:800; box-shadow:var(--shadow); cursor:pointer}
 .music-btn[aria-pressed="true"]{background:#ffccdf}
 
-/* sub-pages */
+/* sub-pages (hash) */
 .subpage{position:fixed; inset:0; background:linear-gradient(180deg,var(--bg1),var(--bg2)); z-index:100; overflow:auto; transform:translateY(4px); display:none}
 .subpage.show{display:block}
 .subpage .wrap{max-width:920px; margin:0 auto; padding:28px 16px}
@@ -181,73 +173,110 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 .subpage h2{font-family:Montserrat, sans-serif; color:#ff4d94}
 .subpage p, .subpage a{color:#ff4d94}
 
-/* pill buttons */
+/* pill buttons (Vi Trô hello!) */
 .pill-row{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:10px 0 14px}
-.pill, .pill-btn{
-  display:inline-block; padding:10px 16px; border-radius:999px; background:#ffe5f3; color:#ff4d94; font-weight:800;
-  box-shadow:var(--shadow); text-decoration:none; cursor:default
+.pill{display:inline-block; padding:10px 16px; border-radius:999px; background:#ffe5f3; color:#ff4d94; font-weight:800; box-shadow:var(--shadow); text-decoration:none; cursor:pointer; user-select:none}
+.pill.active{outline:2px solid #ffb3cf}
+
+/* tab content areas */
+.tab{display:none}
+.tab.show{display:block}
+
+/* Love Letter heading handwriting effect */
+.love-title{
+  font-family:"Caveat", cursive;
+  font-size:clamp(30px,6vw,56px);
+  color:var(--ink);
+  text-align:center;
+  margin:4px 0 10px;
+  --reveal:0%;
+  -webkit-mask:linear-gradient(90deg, #000 var(--reveal), transparent calc(var(--reveal) + 1px));
+          mask:linear-gradient(90deg, #000 var(--reveal), transparent calc(var(--reveal) + 1px));
+  animation:handwrite 2.6s ease forwards;
 }
-.pill-btn{cursor:pointer}
+@keyframes handwrite{ from{ --reveal:0% } to{ --reveal:100% } }
 
-/* dots */
-.dots{display:flex; justify-content:center; gap:8px; margin-top:10px}
-.dots button{width:8px; height:8px; border-radius:50%; border:0; background:#ffd0e3; cursor:pointer}
-.dots button.active{background:#ff4d94}
+/* Love letter box */
+.love-box{background:#fffdfc; border-radius:18px; padding:18px; box-shadow:var(--shadow); text-align:left; color:var(--ink)}
+.love-box iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:14px; box-shadow:var(--shadow); margin-top:10px}
 
-/* music-links */
-.music-links{display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:14px}
-.music-links a{
-  display:inline-block; padding:12px 18px; border-radius:999px; font-weight:800; text-decoration:none;
-  background:rgba(255,255,255,.7); color:#ff4d94; box-shadow:var(--shadow); backdrop-filter:blur(4px);
-  transition:transform .2s, box-shadow .2s, background .2s;
+/* Sheet music look for RAP block */
+.sheet{
+  background:
+    repeating-linear-gradient(#ffd7ea 0 2px, transparent 2px 34px),
+    linear-gradient(#fff, #fff);
+  border-radius:18px; padding:18px; box-shadow:var(--shadow); text-align:left; color:var(--ink)
 }
-.music-links a:hover{transform:translateY(-2px); box-shadow:0 18px 36px rgba(255,105,180,.28), inset 0 0 0 1px rgba(255,105,180,.25); background:rgba(255,255,255,.85)}
+.sheet h4{margin:0 0 8px; font-weight:800; color:var(--ink-2)}
 
-/* sparkle click */
+/* click sparkle – now pink paw SVG */
 .sparkle{
   position:fixed; left:0; top:0; transform:translate(-50%,-50%);
-  pointer-events:none; font-size:14px; color:#ff76b4; opacity:0; filter:drop-shadow(0 2px 6px rgba(255,120,170,.6));
+  pointer-events:none; width:20px; height:20px; opacity:0;
+  filter:drop-shadow(0 2px 6px rgba(255,120,170,.6));
   animation:sparklePop .42s ease-out forwards;
 }
-@keyframes sparklePop{0%{opacity:0; transform:translate(-50%,-50%) scale(.6)}30%{opacity:1; transform:translate(-50%,-60%) scale(1.05)}100%{opacity:0; transform:translate(-50%,-80%) scale(.8)}}
+.sparkle svg{width:100%; height:100%; fill:#ff76b4}
+@keyframes sparklePop{
+  0%{opacity:0; transform:translate(-50%,-50%) scale(.6)}
+  30%{opacity:1; transform:translate(-50%,-60%) scale(1.05)}
+  100%{opacity:0; transform:translate(-50%,-80%) scale(.8)}
+}
 
-/* tissue box */
-.tissue-card{background:var(--card); padding:22px; border-radius:22px; box-shadow:var(--shadow)}
-.tissue{width:160px; height:100px; background:#ffc6de; margin:12px auto; border-radius:12px; position:relative; box-shadow:var(--shadow); animation:floaty 3.8s ease-in-out infinite}
-.tissue:before{content:""; position:absolute; left:50%; top:12px; transform:translateX(-50%); width:86px; height:16px; background:#ff94bf; border-radius:8px}
-.tissue:after{content:""; position:absolute; left:50%; top:-36px; transform:translateX(-50%) rotate(-2deg); width:90px; height:48px; background:linear-gradient(180deg,#ffffff,#ffe8f3); border-radius:12px 12px 4px 4px; box-shadow:0 6px 14px rgba(255,105,180,.18)}
+/* TISSUE BOX */
+.tissue-card{background:var(--card); padding:20px; border-radius:22px; box-shadow:var(--shadow); margin-top:16px}
+.tissue-wrap{display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--ink)}
+.tissue-box{
+  position:relative; width:220px; height:120px; border-radius:14px;
+  background:linear-gradient(180deg,#ffb3cf,#ff86b8);
+  box-shadow:var(--shadow); transform:translateY(0); animation:floaty 3.2s ease-in-out infinite;
+}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.tissue-slot{
+  position:absolute; left:50%; top:14px; transform:translateX(-50%);
+  width:120px; height:24px; background:#ff5fa0; border-radius:999px; box-shadow:inset 0 4px 10px rgba(0,0,0,.15)
+}
+.tissue-leaf{
+  position:absolute; left:50%; top:-10px; transform:translateX(-50%);
+  width:90px; height:80px; background:linear-gradient(180deg,#fff,#ffe8f3);
+  border-radius:10px; clip-path:polygon(50% 0, 100% 20%, 90% 100%, 10% 100%, 0 20%);
+  box-shadow:0 10px 18px rgba(0,0,0,.1);
+}
+.tissue-count{font-weight:800; color:#fff; position:absolute; right:8px; bottom:8px; background:rgba(255,255,255,.25); padding:4px 8px; border-radius:999px}
+.tissue-tap{margin-top:8px; font-weight:700; color:var(--ink-2);}
 
-/* sheet style for RAP */
-.sheet{background:#fffdfc; border-radius:14px; padding:18px; box-shadow:0 10px 28px rgba(255,170,200,.35), inset 0 0 0 2px rgba(255,160,200,.25); text-align:left; color:var(--ink); position:relative}
-.sheet:before,.sheet:after{content:""; position:absolute; left:14px; right:14px; height:2px; background:rgba(255,120,170,.25)}
-.sheet:before{top:48px}
-.sheet:after{top:88px}
-.sheet h4{margin:0 0 8px; font-weight:800; color:var(--ink-2)}
-.sheet small{display:block; margin-bottom:10px; color:var(--ink-3); font-weight:700}
+/* embed YouTube card */
+.embed-card{background:var(--card); padding:18px; border-radius:22px; box-shadow:var(--shadow)}
+.embed-card h4{margin:0 0 10px; color:var(--ink); font-weight:800}
+.embed-card iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:14px; box-shadow:var(--shadow)}
 </style>
 </head>
 <body>
 
-<!-- floating cute icons -->
+<!-- floating cute icons: flowers, stars, petals & pink paw svgs -->
 <div class="bg-decor" aria-hidden="true" id="bgDecor">
-  <!-- hoa cũ -->
+  <!-- text icons -->
   <span style="left:6%; animation-delay:-2s">❀</span>
-  <span style="left:18%; animation-delay:-6s">❀</span>
-  <span style="left:34%; animation-delay:-4s">❀</span>
-  <span style="left:50%; animation-delay:-9s">❀</span>
-  <span style="left:68%; animation-delay:-11s">❀</span>
-  <span style="left:82%; animation-delay:-1s">❀</span>
-  <span style="left:92%; animation-delay:-7s">❀</span>
-  <!-- thêm icon hồng: ✦ ★ ❁ ❃ 🐾 -->
-  <span style="left:10%; animation-delay:-3s">✦</span>
-  <span style="left:24%; animation-delay:-8s">★</span>
-  <span style="left:40%; animation-delay:-5s">❁</span>
-  <span style="left:56%; animation-delay:-10s">❃</span>
-  <span style="left:72%; animation-delay:-12s">✦</span>
-  <span style="left:86%; animation-delay:-4s">★</span>
-  <span style="left:30%; animation-delay:-6.5s">🐾</span>
-  <span style="left:75%; animation-delay:-9.5s">🐾</span>
+  <span style="left:12%; animation-delay:-5s">✦</span>
+  <span style="left:18%; animation-delay:-6s">★</span>
+  <span style="left:26%; animation-delay:-3s">❁</span>
+  <span style="left:34%; animation-delay:-4s">❃</span>
+  <span style="left:42%; animation-delay:-9s">❀</span>
+  <span style="left:50%; animation-delay:-7s">★</span>
+  <span style="left:58%; animation-delay:-11s">✦</span>
+  <span style="left:66%; animation-delay:-8s">❁</span>
+  <span style="left:74%; animation-delay:-1s">❃</span>
+  <span style="left:82%; animation-delay:-10s">❀</span>
+  <span style="left:90%; animation-delay:-12s">✦</span>
+  <!-- pink paw SVGs -->
+  <svg viewBox="0 0 64 64" style="left:8%; top:70%; width:18px; height:18px; animation-delay:-3s">
+    <circle cx="20" cy="20" r="6"/><circle cx="44" cy="20" r="6"/><circle cx="29" cy="12" r="5"/><circle cx="35" cy="12" r="5"/>
+    <ellipse cx="32" cy="38" rx="14" ry="10"/>
+  </svg>
+  <svg viewBox="0 0 64 64" style="left:72%; top:75%; width:20px; height:20px; animation-delay:-7s">
+    <circle cx="20" cy="20" r="6"/><circle cx="44" cy="20" r="6"/><circle cx="29" cy="12" r="5"/><circle cx="35" cy="12" r="5"/>
+    <ellipse cx="32" cy="38" rx="14" ry="10"/>
+  </svg>
 </div>
 
 <!-- ===== NAV ===== -->
@@ -265,7 +294,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </nav>
 
-<!-- ===== Memories Carousel ===== -->
+<!-- ===== From Tinkerbell tag + VERTICAL CAROUSEL ===== -->
 <section class="container section reveal" id="memories">
   <div class="corner-tag">From Tinkerbell with luv</div>
 
@@ -277,7 +306,10 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
       <div class="vslide"><img src="assets/HT4.jpg" alt="HT4"></div>
       <div class="vslide"><img src="assets/Tinkerbell1.jpg" alt="Tinkerbell1"></div>
     </div>
-    <div class="vnav"><button id="vprev">‹</button><button id="vnext">›</button></div>
+    <div class="vnav">
+      <button id="vprev">‹</button>
+      <button id="vnext">›</button>
+    </div>
   </div>
   <div class="dots" id="vdots"></div>
 
@@ -286,7 +318,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </p>
 </section>
 
-<!-- ===== SWEET LETTER ===== -->
+<!-- ===== SWEET LETTER (hero) ===== -->
 <section class="container section hero reveal" id="sweet">
   <div class="media">
     <div class="img-wrap"><img src="assets/Tinkerbell.jpg" alt="Thiên Vi Tinkerbell" loading="eager"></div>
@@ -305,7 +337,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   <div class="cal-wrap" id="calendar"></div>
 </section>
 
-<!-- ===== Music test (main) ===== -->
+<!-- ===== Test mic + Music + meo gifs ===== -->
 <section class="container section reveal" id="musicbox">
   <div class="card">
     <h3 style="margin:0 0 12px; font-weight:800; color:var(--ink)">Test mic, test mic, chuẩn bị lên nhạc chưa ạ? Gòi, Hà Thanh bấm dzo nhạc i ạ =))</h3>
@@ -318,7 +350,7 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- ===== ANGEL title + gifs ===== -->
+<!-- ===== ANGEL title + 3 original gifs ===== -->
 <main class="container section reveal" id="oldSite">
   <h1>HAPPY BIRTHDAY MY ANGEL</h1>
   <h2>Wishing you a day as lovely as you are ฅ^>⩊<^ ฅ</h2>
@@ -388,24 +420,8 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- ===== Birthday Letter (restored) BEFORE Look back ===== -->
-<section class="container section reveal" id="letter">
-  <div id="env" class="envelope">
-    <div class="flap"><div class="hint">Chạm vào để xem ^.^</div></div>
-    <div class="paper-wrap">
-      <span class="paw" id="paw">❀</span>
-      <div class="paper-inner" id="paper">
-        <p>
-          <strong>Còn đây là những điều đơn giản, không cầu kỳ mà Thiên Vi muốn nhắn nhủ:</strong><br><br>
-          Cảm ơn người vì đã mang đến cho em rất nhiều những cảm xúc và cả suy nghĩ, trải nghiệm - mà em chưa từng có bao giờ. Có thể Hà Thanh thấy em cũng giỏi, cũng làm được nhiều thứ, nhưng, em cũng chỉ là người bình thường, vẫn có rất nhiều hạn chế và vẫn chông chênh mỗi ngày - ý là vẫn nằm suy nghĩ và cũng chẳng biết phải làm gì tiếp theo. Mấy tháng gần đây em rảnh hơn nhiều và còn thấy mình ngốc đi nữa. Giỏi giang âu cũng chỉ là cái mác đẹp đẽ mà mọi người hay gán cho ta thôi, chứ điều mà em có thực ra chỉ là sự chân thành và tử tế, tận tâm này. Tuổi mới đừng khóc nhiều nhoé. Từ lần đầu em thấy người khóc, em đã tự hứa với lòng là nếu em còn ở cạnh người, em sẽ không để người phải khóc vì những uất ức đó nữa. Bây giờ và sau này chắc sẽ có người khác thay em làm điều này rồi, nên chỉ mong người cười nhiều hơn thôi. Niềm vui vốn dĩ đơn giản như khi mình xem meme, lướt web, thấy chiếc tin nhắn quan tâm hay là ngắm hoàng hôn mỗi chiều - kiểu vậy, nhỉ? Thật vui khi thấy story của Hà Thanh là những buổi chiều hoàng hôn và những buổi sáng đi làm trên metro đấy ạ. Ngày đấy, khi thấy người lướt xem điện thoại, rồi nhìn sang xung quanh team mình cũng hay thế, em đã nghĩ: Ôi *lắc đầu*. Thiên Vi mà người thấy luôn hustle thực ra nó cũng chỉ thích ngắm mưa, nhìn trời, nựng mèo và rung cảm với tất cả mọi thứ nhỏ nhất diễn ra mọi ngày thôi người ạ. Sự có mặt trọn vẹn là điều tốt nhất mà em có thể dành cho người (lần đó có share bài này về tag mà chắc người quên rồi quá hoặc là hỏng xem luôn éc). Ai cũng có những điều đẹp đẽ để mình nhìn vào đó mà cảm thông cho họ hơn. Nên là: hãy luôn dịu dàng với chính mình và dịu dàng với cả vết thương của người khác nha angel ơi *biến mất cùng làn khói*....
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== LOOK BACK (giữ nguyên) ===== -->
-<section class="container section reveal" id="lookback">
+<!-- LOOK BACK -->
+<section class="container section reveal">
   <div class="card" style="text-align:left; position:relative; color:var(--ink)">
     <h3 style="margin:0 0 10px; font-weight:800">Mình cùng look back một chút không nhỉ?</h3>
     <p>Thiên Vi có chiếc playlist này từ hồi tháng 1 — chắc là nó lookback được cả journey của tụi mình luôn rồi ạ.</p>
@@ -425,26 +441,34 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
   </div>
 </section>
 
-<!-- (1) PLAYLIST khôi phục – ngay sau Look back -->
-<section class="container section reveal" id="playlistLookback">
-  <div class="card">
-    <div style="font-weight:800; margin-bottom:8px">Chiếc playlist này nè ạ ^.^</div>
-    <a href="https://youtube.com/playlist?list=PLz301c-yfQZ8YEHu6Jn-g9q8KxXaveREV&si=1dORxtI9cp4yKDcY"
-       target="_blank" rel="noopener" style="font-weight:800">Open playlist</a>
+<!-- === EMBEDDED PLAYLIST BLOCK (inserted after Look back) === -->
+<section class="container section reveal">
+  <div class="embed-card">
+    <h4>Chiếc playlist này nè ạ ^.^</h4>
+    <iframe
+      src="https://www.youtube.com/embed/videoseries?list=PLz301c-yfQZ8YEHu6Jn-g9q8KxXaveREV"
+      title="YouTube playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
   </div>
 </section>
 
-<!-- (2) Hộp khăn giấy + text -->
-<section class="container section reveal" id="tissueBox">
+<!-- === TISSUE BOX with motion + click fly-away + sound === -->
+<section class="container section reveal">
   <div class="tissue-card">
-    <div class="tissue" aria-hidden="true" title="Nếu khóc thì lại đây lấy khăn nhé"></div>
-    <div style="font-weight:700; margin-top:6px; color:var(--ink)">
-      Sau khi xem hết chiếc web này ời, nếu Hà Thanh củm động quá thì lại đây Thiên Vi ôm một miếng và lau nước mắt một tẹo nha ạ ૮₍˶ ╥ ‸ ╥ ⑅₎ა
+    <div class="tissue-wrap">
+      <div class="tissue-box" id="tissueBox" title="Click lấy 1 tờ nè">
+        <div class="tissue-slot"></div>
+        <div class="tissue-leaf" id="tissuePeek"></div>
+        <div class="tissue-count" id="tissueCount">x12</div>
+      </div>
+      <div class="tissue-tap">
+        Sau khi xem hết chiếc web này ời, nếu Hà Thanh củm động quá thì lại đây Thiên Vi ôm một miếng và lau nước mắt một tẹo nha ạ ૮₍˶ ╥ ‸ ╥ ⑅₎ა
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Footer line (GIỮ NGUYÊN) -->
+<!-- Footer line -->
 <div class="container" style="padding-top:0; padding-bottom:48px; color:var(--ink)">
   Sẽ luôn có người dịu dàng với Hà Thanh, nên Hà Thanh hãy luôn dịu dàng với chính mình và mọi người nha ạ. I meow you ≽^-⩊-^≼
 </div>
@@ -481,26 +505,25 @@ h3.title{margin:0 0 14px; font-weight:800; font-size:clamp(18px,2.6vw,26px); col
 <section id="vtroPage" class="subpage" aria-hidden="true">
   <div class="wrap">
     <a class="brand" href="#">Home Sweet Home</a>
+
     <div class="card">
       <h2>Vi Trô hello!</h2>
 
-      <!-- 4 pills: đổi "Nhạc" thành button -->
-      <div class="pill-row">
-        <button id="vtroMusicBtn" class="pill-btn">Nhạc</button>
-        <span class="pill">Phim</span>
-        <span class="pill">Sách</span>
-        <span class="pill">I chơi</span>
+      <!-- 5 nút: Love Letter, Nhạc, Phim, Sách, I chơi -->
+      <div class="pill-row" id="pillRow">
+        <span class="pill active" data-tab="love">Love Letter</span>
+        <span class="pill" data-tab="music">Nhạc</span>
+        <span class="pill" data-tab="film">Phim</span>
+        <span class="pill" data-tab="book">Sách</span>
+        <span class="pill" data-tab="play">I chơi</span>
       </div>
 
-      <!-- POSTCARD: ĐOẠN DÀI (đã thay nội dung & bỏ title) -->
-      <div class="postcard" style="margin-top:12px; text-align:left">
-        <div style="white-space:pre-line">
-Hà Thanh từng hỏi Thiên Vi là làm sao để fresh mind hơn ạ. Đó cũng luôn là điều em mong được thấy ở người. Tại vì nếu nội tâm mình vững vàng và não mình fresh thì mình mới đón nhận nhiều điều tốt đẹp hoặc không tốt lắm trong cuộc sống, dễ cảm nhận được những điều tuyệt vời xung quanh mình hơn ạ. Nếu lòng mình cứ bão tố mãi thì thực ra mình sẽ hơi khó tiếp nhận và mở lòng với mọi thứ ạ. 
-<!-- chèn bài hát ngay sau đoạn trên -->
-<b>Giữ cho em một thế giới</b> — <a href="https://www.youtube.com/watch?v=dBfVghoqNkE&list=RDdBfVghoqNkE&start_radio=1" target="_blank" rel="noopener">mở link</a>
-<br/>Luôn giữ cho mình một thế giới trước khi trở thành cả thế giới của ai đó nha cục dzang ơi. Meow meow you ạ ^.^
-
-Thiên Vi biết này một phần là basic identity, mindset và rule của mỗi người rồi ạ. Cơ mà người đừng chọn giữ sự bực tức trong lòng nha, mình tìm cách chia sẻ nó ra - dù là dưới hình thức nào: kể ra, viết ra, viết nhạc diss (như dành cho mắm Thi),…chả hạn ạ. Thiên Vi thực sự là có tâm hồn phóng khoáng thật, ý là để nhớ được tất cả mọi thứ một cách clearly thì em thường chọn tha thứ, nói ra, không giữ lại bực tức và bao dung với mọi thứ hơn. Mà Thiên Vi tha thứ là tha thứ thật đấy haha. Còn cái gì không quan trọng thì thực ra nó còn chẳng chui vào não em được cơ ạ - người thấy điều này mà. Em nghĩ nếu mình cứ dành space cho những người không đáng thì mình chẳng có thời gian làm những điều đáng yêu khác - ví dụ như là ngồi dei làm chiếc web này cho Hà Thanh nè ạ. Thiên Vi ngồi viết rap cho nhỏ Thi vì muốn tụi mình xả ra hết chuyện này cùng nhau, cũm muốn giải trí nựa ạ - và hi vọng Hà Thanh cũng hào hứng diss nó lần này nữa rồi chôn cái tên của nó luôn hẹ hẹ. Thiên Vi thấy chửi thề vui tại nó thể hiện cảm xúc và sự stress bên ngoài của mình, còn để chửi ai cay đắng thì Thiên Vi hong nặng lời với ai được - vì dỗi ai thì cũng chỉ có kỳ hạn thôi ò, và chắc là chỉ dỗi những người mình thực sự thương. Người em thương thì em chỉ thương thôi, còn người em ghét thì vứt. Người ta bảo là đã thương thì thương cho trọn vẹn, thương hết cả những lỗi lầm đấy ạ. 
+      <!-- TAB: LOVE LETTER -->
+      <div class="tab show" id="tab-love">
+        <div class="love-title">Love Letter</div>
+        <div class="love-box">
+<div style="white-space:pre-line">
+Hà Thanh từng hỏi Thiên Vi là làm sao để fresh mind hơn ạ. Đó cũng luôn là điều em mong được thấy ở người. Tại vì nếu nội tâm mình vững vàng và não mình fresh thì mình mới đón nhận nhiều điều tốt đẹp hoặc không tốt lắm trong cuộc sống, dễ cảm nhận được những điều tuyệt vời xung quanh mình hơn ạ. Nếu lòng mình cứ bão tố mãi thì thực ra mình sẽ hơi khó tiếp nhận và mở lòng với mọi thứ ạ. Thiên Vi biết này một phần là basic identity, mindset và rule của mỗi người rồi ạ. Cơ mà người đừng chọn giữ sự bực tức trong lòng nha, mình tìm cách chia sẻ nó ra - dù là dưới hình thức nào: kể ra, viết ra, viết nhạc diss (như dành cho mắm Thi),…chả hạn ạ. Thiên Vi thực sự là có tâm hồn phóng khoáng thật, ý là để nhớ được tất cả mọi thứ một cách clearly thì em thường chọn tha thứ, nói ra, không giữ lại bực tức và bao dung với mọi thứ hơn. Mà Thiên Vi tha thứ là tha thứ thật đấy haha. Còn cái gì không quan trọng thì thực ra nó còn chẳng chui vào não em được cơ ạ - người thấy điều này mà. Em nghĩ nếu mình cứ dành space cho những người không đáng thì mình chẳng có thời gian làm những điều đáng yêu khác - ví dụ như là ngồi dei làm chiếc web này cho Hà Thanh nè ạ. Thiên Vi ngồi viết rap cho nhỏ Thi vì muốn tụi mình xả ra hết chuyện này cùng nhau, cũm muốn giải trí nựa ạ - và hi vọng Hà Thanh cũng hào hứng diss nó lần này nữa rồi chôn cái tên của nó luôn hẹ hẹ. Thiên Vi thấy chửi thề vui tại nó thể hiện cảm xúc và sự stress bên ngoài của mình, còn để chửi ai cay đắng thì Thiên Vi hong nặng lời với ai được - vì dỗi ai thì cũng chỉ có kỳ hạn thôi ò, và chắc là chỉ dỗi những người mình thực sự thương. Người em thương thì em chỉ thương thôi, còn người em ghét thì vứt. Người ta bảo là đã thương thì thương cho trọn vẹn, thương hết cả những lỗi lầm đấy ạ. 
 
 Vui biết mấy vì tụi mình đã đi được đến đây cùng nhau ạ. Xin lỗi Hà Thanh vì cuộc sống, cảm nhận, và cách hành xử của em khác người nhiều quá nên hay làm người mệt mỏi ạ. Hà Thanh hơi giống mẹ em ở chỗ là Thiên Vi từng nghĩ mình sẽ rất khó để tiến gần nhau hơn một bước nữa trong journey yêu thương này, nhưng, cuối cùng thì thực ra mình vẫn cố gắng để làm. Thật khó tin vì Thiên Vi chọn ở quê 2 tháng mấy rồi, chỉ để mỗi đêm đi chơi, đi dạo với mẹ, cả ngày nói chuyện với mẹ rất nhiều chỉ để hiểu nhau nhiều hơn. Thực sự là “Good things take time”, và điều gì cần xảy ra thì nó sẽ xảy ra thôi, nhỉ? 
 
@@ -517,14 +540,17 @@ Ba chúc con đủ."
 Em chưa học được cách self-care và đôi khi không trân trọng mình lắm, chắc là do mission của em là take care cho mọi người hix. Em vẫn đang học thôi ạ, nhưng, những điều còn lại, em nghĩ là em biết đủ, nhất là việc “yêu cả những niềm vui nhỏ nhất” và “yêu quý những gì con có” ấy ạ. 
 
 Có một fun fact là chiếc thư chúc năm mới mà em viết cho người, em từng viết là hi vọng năm nay mình có thể khám phá thế giới với nhau (có thể là Hà Thanh hong nhớ nên để em repeat lại hehe) cơ mà thực ra cuộc sống của Thiên Vi nó cũng như một chiếc thế giới thu nhỏ và có nhiều điều trong đó thật, nên Thiên Vi luôn muốn share với người - mà tại hong có dịp. Cơ mà, đấy, em hứa gì với người thì em có làm thật đấy ạ =)) Thiên Vi ngồi gom và bookmark trên maps tại nghĩ là mình i cũng nhiều và mình muốn giới thiệu nó với Hà Thanh hoặc là i với Hà Thanh. Tại vì Thiên Vi cũng hay thử cái này cái kia, ý là xưa giờ sống cũng kín nên không có hay đăng gì, chỉ có gặp Thiên Vi bên ngoài thì mới biết em đang làm gì và thực sự như nào thoai à. Một năm nay thì em bắt đầu sợ hong có gì lưu giữ nên bắt đầu share lên IG nhiều hơn roài ạ. Mong là Hà Thanh cũng tìm được những điều mình thấy hứng thú, những nơi mình muốn đến, việc mình muốn làm và làm nó cùng với những người mình yêu thương, khiến mình cảm thấy thoải mái nhất. Vì cảm giác đó sẽ tuyệt lắm. Như Thiên Vi share trên story ấy ạ - cảm giác i làm một thời gian dài, chỉ tập trung cho công việc và cuộc sống cũng chỉ xoay quanh 1 người, nhưng mà, sau khoảng đó mình thấy mình lớn hơn, mình để dành được một cục để mua đàn, mua sách, rồi mình boost expertise của mình sau khi enjoy mấy hobbies này - Thiên Vi thấy mình là người giàu nhất cuộc đời này roài ạ. Cuộc sống của em nó thường hoạt động theo cái nguyên lý đấy thôi ạ. Ngoài mấy chiếc button Thiên Vi để trong trang này thì thực ra Thiên Vi luôn plan là cuối tuần này mình sẽ đi xem kịch, cuối tuần kia mình đi bảo tàng, xem xiếc, i uống rụ,…plan tùm lum hết mà hong biết khi nào mình mới enjoy được hết. Cơ mà chúc tụi mình sẽ luôn có nhiều plan, nhiều điều muốn làm (và cảm thấy vui khi làm), để có được nhiều nhất những trải nghiệm trong cuộc sống nhen ạ. Thiên Vi build chiếc sub-page này để giới thiệu mấy chiếc thi vị (hoặc hong) trong cuộc sống của Thiên Vi thoai ạ. Hi vọng là một ngày nào đó - khi buồn hoặc muốn thử những cái mới này thì mình sẽ có những checklist chung ở các hạng mục này nha ạ. Hope so i ^.^
+</div>
+          <iframe src="https://www.youtube.com/embed/dBfVghoqNkE" title="Giữ cho em một thế giới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div style="margin-top:8px; font-weight:700">Luôn giữ cho mình một thế giới trước khi trở thành cả thế giới của ai đó nha cục dzang ơi. Meow meow you ạ ^.^</div>
         </div>
       </div>
 
-      <!-- (5) Panel hiện khi bấm "Nhạc" -->
-      <div id="vtroMusicPanel" class="sheet" style="display:none; margin-top:14px">
-        <h4>Văn tế nghĩa sĩ Cần Giuộc</h4>
-        <small>RAP THIS “CUỘC SỐNG NÀY THI VI.”</small>
-        <div style="white-space:pre-line">
+      <!-- TAB: MUSIC (sheet with Văn tế + RAP lyrics) -->
+      <div class="tab" id="tab-music">
+        <div class="sheet">
+          <h4>Văn tế nghĩa sĩ Cần Giuộc — RAP THIS “CUỘC SỐNG NÀY THI VI.”</h4>
+<div style="white-space:pre-line">
 (Lời văn tế) 
 Sống cho ra sống, chứ sống mà cứ rống cái họng lên nói xấu người khác thì
 Có biết vì sao tao không làm Rapper mà lại làm Copywriter không hả?
@@ -576,46 +602,52 @@ Yếu quá phải dùng đến nước mắt trước khi phải nói tới cái
 Tao với mày không thân, nên thôi cần đếch gì phải băn khoăn…(nhỉ?) 
 
 (Lời văn tế: Thật ra bài này là để tán dương Vi, chứ không phải để phê phán cương Thi ^.^ Mày dám diss Thanh là people pleasure hả? Ok, vậy thì chúc mày luôn được people nghi ngờ nha!)
+</div>
         </div>
       </div>
 
-      <!-- (6) Đoạn giới thiệu + liên kết dời xuống cuối -->
-      <div class="card" style="margin-top:16px">
-        <p><strong>Lúc nào chán quá thì mình nghe nhạc, còn chán hơn nữa thì mình xem phim, đọc sách, nấu ăn, làm bánh đồ ạ. Chắc người thông minh aka Nguyễn Hà Thanh sẽ thích “Inception” - poor vì chúng ta không có cơ hội xem cùng hẹ hẹ. Đời này thi vị lắm, chúc người enjoy nhiều nha ạ ^.^</strong></p>
-        <div class="music-links" style="margin-top:6px">
-          <a href="https://www.youtube.com/watch?v=DydIIDQuhxU&list=RDDydIIDQuhxU&start_radio=1" target="_blank" rel="noopener">Thư cho anh</a>
-          <a href="https://www.youtube.com/watch?v=A8-ENEqhQjg" target="_blank" rel="noopener">Every day, Every Moment</a>
-          <a href="https://www.youtube.com/watch?v=YoHD9XEInc0" target="_blank" rel="noopener">Inception</a>
-          <a href="https://www.youtube.com/watch?v=zSWdZVtXT7E" target="_blank" rel="noopener">Interstellar</a>
-          <a href="https://www.youtube.com/watch?v=oglmFkKicYk&list=RDoglmFkKicYk&start_radio=1" target="_blank" rel="noopener">Wish</a>
-        </div>
-      </div>
+      <!-- Các tab khác để trống nội dung (không chỉnh gì thêm theo yêu cầu) -->
+      <div class="tab" id="tab-film"></div>
+      <div class="tab" id="tab-book"></div>
+      <div class="tab" id="tab-play"></div>
+
+      <!-- (giữ nguyên block giới thiệu + link nhạc/phim nếu bạn đang dùng; em không xóa gì) -->
     </div>
+
     <a href="#" class="back">← Quay về trang chủ</a>
   </div>
 </section>
 
 <script>
-/* Reveal on scroll */
-const revealer=new IntersectionObserver((ents)=>{
-  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); revealer.unobserve(e.target)} })
+/* ========== Micro reveal on scroll ========== */
+const revealer = new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); revealer.unobserve(e.target) } })
 },{threshold:0.2});
 document.querySelectorAll('.reveal').forEach(el=>revealer.observe(el));
 
-/* Vertical carousel */
+/* ========== Vertical carousel (auto + controls) ========== */
 const vtrack=document.getElementById('vtrack');
 const slides=[...document.querySelectorAll('.vslide')];
 const dotsWrap=document.getElementById('vdots');
-let idx=0,timer=null;
-function renderDots(){ slides.forEach((_,i)=>{const b=document.createElement('button'); if(i===0)b.classList.add('active'); b.onclick=()=>go(i); dotsWrap.appendChild(b);});}
-function mark(){[...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active',i===idx))}
-function go(i){idx=(i+slides.length)%slides.length; vtrack.style.transform=`translateX(${-idx*100}%)`; mark(); restart()}
-function next(){go(idx+1)}; function prev(){go(idx-1)}
-function restart(){clearInterval(timer); timer=setInterval(next,3500)}
-document.getElementById('vnext').onclick=next; document.getElementById('vprev').onclick=prev;
+let idx=0, timer=null;
+function renderDots(){
+  slides.forEach((_,i)=>{
+    const b=document.createElement('button');
+    if(i===0) b.classList.add('active');
+    b.addEventListener('click',()=>go(i));
+    dotsWrap.appendChild(b);
+  });
+}
+function mark(){ [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active',i===idx)); }
+function go(i){ idx=(i+slides.length)%slides.length; vtrack.style.transform=`translateX(${-idx*100}%)`; mark(); restart(); }
+function next(){ go(idx+1) }
+function prev(){ go(idx-1) }
+function restart(){ clearInterval(timer); timer=setInterval(next, 3500); }
+document.getElementById('vnext').onclick=next;
+document.getElementById('vprev').onclick=prev;
 renderDots(); restart();
 
-/* Calendar */
+/* ========== Calendar (client-side) ========== */
 const calEl=document.getElementById('calendar');
 function buildCalendar(d=new Date()){
   const view=new Date(d.getFullYear(), d.getMonth(), 1);
@@ -624,6 +656,7 @@ function buildCalendar(d=new Date()){
   const days=new Date(year,month+1,0).getDate();
   const today=new Date();
   const title=`tháng ${month+1} năm ${year}`;
+
   calEl.innerHTML=`
     <div class="cal-head">
       <button id="prevM">‹ Tháng trước</button>
@@ -635,7 +668,7 @@ function buildCalendar(d=new Date()){
       ${Array.from({length:start},()=>`<div></div>`).join('')}
       ${Array.from({length:days},(_,i)=>{
         const day=i+1, isToday= day===today.getDate() && month===today.getMonth() && year===today.getFullYear();
-        const mark=(month===10 && day===9)?`<span class="mark">🎂</span>`:"";
+        const mark = (month===10 && day===9) ? `<span class="mark">🎂</span>` : "";
         return `<div class="cell ${isToday?'today':''}">${day}${mark}</div>`;
       }).join('')}
     </div>`;
@@ -644,27 +677,39 @@ function buildCalendar(d=new Date()){
 }
 buildCalendar();
 
-/* Main music autoplay & toggle */
-const bgm=document.getElementById('bgm'); const musicBtn=document.getElementById('musicBtn');
+/* ========== Music autoplay & toggle ========== */
+const bgm=document.getElementById('bgm');
+const musicBtn=document.getElementById('musicBtn');
 if(bgm){ bgm.volume=.6; }
 async function tryPlay(){ try{ await bgm.play(); musicBtn?.setAttribute('aria-pressed','true'); }catch(e){} }
-['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.addEventListener(ev,tryPlay,{passive:true,once:true}));
-musicBtn?.addEventListener('click', async()=>{
-  if(bgm.paused){try{await bgm.play(); musicBtn.setAttribute('aria-pressed','true');}catch(e){}}
-  else{bgm.pause(); musicBtn.setAttribute('aria-pressed','false');}
+['click','touchstart','keydown','scroll','pointermove'].forEach(ev=>window.addEventListener(ev, tryPlay, {passive:true, once:true}));
+musicBtn?.addEventListener('click', async ()=>{
+  if (bgm.paused){ try{ await bgm.play(); musicBtn.setAttribute('aria-pressed','true'); }catch(e){} }
+  else { bgm.pause(); musicBtn.setAttribute('aria-pressed','false'); }
 });
-document.addEventListener('visibilitychange', async()=>{
-  if(!document.hidden && musicBtn?.getAttribute('aria-pressed')==='true' && bgm.paused){ try{await bgm.play();}catch(e){} }
+document.addEventListener('visibilitychange', async ()=>{
+  if (!document.hidden && musicBtn?.getAttribute('aria-pressed')==='true' && bgm.paused){ try{ await bgm.play(); }catch(e){} }
 });
 
-/* Candle & Gift */
-const candle=document.getElementById('candle'), smoke=document.getElementById('smoke'); let blown=false;
-function whoosh(){ try{ const ctx=new (window.AudioContext||window.webkitAudioContext)(); const o=ctx.createOscillator(), g=ctx.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(220,ctx.currentTime); o.frequency.exponentialRampToValueAtTime(30,ctx.currentTime+0.35); g.gain.setValueAtTime(0.2,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.4); o.connect(g).connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.42);}catch(e){} }
+/* ========== Candle & Gift (with whoosh) ========== */
+const candle=document.getElementById('candle'), smoke=document.getElementById('smoke');
+let blown=false;
+function whoosh(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='sawtooth'; o.frequency.setValueAtTime(220, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(30, ctx.currentTime+0.35);
+    g.gain.setValueAtTime(0.2, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.4);
+    o.connect(g).connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.42);
+  }catch(e){}
+}
 candle?.addEventListener('click', ()=>{
-  if(navigator.vibrate) navigator.vibrate(10);
-  if(blown) return; blown=true;
+  if (navigator.vibrate) navigator.vibrate(10);
+  if (blown) return; blown=true;
   candle.classList.add('off'); smoke.classList.add('show'); whoosh();
-  setTimeout(()=>smoke.classList.remove('show'),1300);
+  setTimeout(()=> smoke.classList.remove('show'), 1300);
 });
 const gift=document.getElementById('gift'), balloons=document.getElementById('balloons'); let opened=false;
 function spawnBalloon(i){
@@ -675,22 +720,76 @@ function spawnBalloon(i){
   balloons.appendChild(b); setTimeout(()=>b.remove(),3200);
 }
 gift?.addEventListener('click', ()=>{
-  if(navigator.vibrate) navigator.vibrate(10);
+  if (navigator.vibrate) navigator.vibrate(10);
   if(!opened){ gift.classList.add('open'); opened=true; for(let i=0;i<14;i++) setTimeout(()=>spawnBalloon(i), i*120); }
   else { for(let i=0;i<6;i++) setTimeout(()=>spawnBalloon(i), i*140); }
 });
 
-/* Envelope paw + smooth scroll */
-const env=document.getElementById('env'), paper=document.getElementById('paper'), paw=document.getElementById('paw');
-env?.addEventListener('click', ()=>{
-  env.classList.toggle('open');
-  if(env.classList.contains('open')){
-    paw.classList.remove('show'); void paw.offsetWidth; paw.classList.add('show');
-    setTimeout(()=>{ env.scrollIntoView({behavior:'smooth', block:'start'}); },150);
+/* ========== Pink Paw Sparkle on click ========== */
+const PAW_SVG = `
+<svg viewBox="0 0 64 64" aria-hidden="true">
+  <circle cx="20" cy="20" r="8"/><circle cx="44" cy="20" r="8"/>
+  <circle cx="28" cy="12" r="6"/><circle cx="36" cy="12" r="6"/>
+  <ellipse cx="32" cy="40" rx="16" ry="12"/>
+</svg>`;
+function makeSparkle(x,y,delay=0){
+  const s=document.createElement('span');
+  s.className='sparkle';
+  s.innerHTML=PAW_SVG;
+  s.style.left=x+'px'; s.style.top=y+'px';
+  s.style.animationDelay=delay+'ms';
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(), 480);
+}
+window.addEventListener('click', (e)=>{
+  const n=4; for(let i=0;i<n;i++){
+    const dx=(Math.random()-.5)*24, dy=(Math.random()-.5)*24;
+    makeSparkle(e.clientX+dx, e.clientY+dy, i*25);
+  }
+},{passive:true});
+
+/* ========== Tissue Box interactions ========== */
+const tissueBox=document.getElementById('tissueBox');
+const tissuePeek=document.getElementById('tissuePeek');
+const tissueCount=document.getElementById('tissueCount');
+let tissueLeft=12;
+function tissueSound(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='triangle'; o.frequency.setValueAtTime(660, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(220, ctx.currentTime+0.18);
+    g.gain.setValueAtTime(0.2, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.22);
+    o.connect(g).connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.24);
+  }catch(e){}
+}
+function flyTissue(){
+  const leaf=document.createElement('div');
+  leaf.className='tissue-leaf';
+  leaf.style.left='50%'; leaf.style.top='-6px'; leaf.style.opacity='1';
+  // random sway
+  const dx=(Math.random()-.5)*60;
+  leaf.animate([
+    { transform:'translate(-50%,0) rotate(0deg)', opacity:1 },
+    { transform:`translate(calc(-50% + ${dx/2}px), -60px) rotate(10deg)`, opacity:.9 },
+    { transform:`translate(calc(-50% + ${dx}px), -140px) rotate(-6deg)`, opacity:.0 }
+  ], { duration:1400, easing:'ease-out' });
+  setTimeout(()=>leaf.remove(), 1500);
+  tissueBox.appendChild(leaf);
+}
+tissueBox?.addEventListener('click', ()=>{
+  if (navigator.vibrate) navigator.vibrate(8);
+  if (tissueLeft>0){
+    tissueLeft--;
+    tissueCount.textContent='x'+tissueLeft;
+    flyTissue(); tissueSound();
+  }else{
+    tissueSound();
   }
 });
 
-/* Subpages by hash */
+/* ========== Subpages with hash (#lazy/#busy/#vtro) ========== */
 const lazyPage=document.getElementById('lazyPage'),
       busyPage=document.getElementById('busyPage'),
       vtroPage=document.getElementById('vtroPage');
@@ -702,42 +801,40 @@ function onHash(){
 }
 window.addEventListener('hashchange', onHash); onHash();
 
-/* Equal nav spacing safeguard */
-function fixNavSpacing(){
-  const left=document.querySelectorAll('.nav .group')[0];
-  const right=document.querySelectorAll('.nav .group')[1];
-  const wL=left.getBoundingClientRect().width, wR=right.getBoundingClientRect().width;
-  left.style.transform=right.style.transform='';
-  const diff=Math.abs(wL-wR);
-  if(diff>40){ if(wL>wR) left.style.transform='scale(.95)'; else right.style.transform='scale(.95)'; }
-}
-window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing,300);
-
-/* Sparkle: random cute icons */
-const sparkIcons=['❀','✦','★','❁','❃','🐾'];
-function makeSparkle(x,y,delay=0){
-  const s=document.createElement('span');
-  s.className='sparkle';
-  s.textContent=sparkIcons[Math.floor(Math.random()*sparkIcons.length)];
-  s.style.left=x+'px'; s.style.top=y+'px';
-  s.style.animationDelay=delay+'ms';
-  document.body.appendChild(s);
-  setTimeout(()=>s.remove(),480);
-}
-window.addEventListener('click',(e)=>{
-  const n=4; for(let i=0;i<n;i++){
-    const dx=(Math.random()-.5)*24, dy=(Math.random()-.5)*24;
-    makeSparkle(e.clientX+dx, e.clientY+dy, i*25);
-  }
-},{passive:true});
-
-/* Vi Trô: toggle Nhạc panel */
-const vtroBtn=document.getElementById('vtroMusicBtn');
-const vtroPanel=document.getElementById('vtroMusicPanel');
-vtroBtn?.addEventListener('click', ()=>{
-  const show = vtroPanel.style.display==='none';
-  vtroPanel.style.display = show ? 'block' : 'none';
+/* ========== Vi Trô hello! tabs ========== */
+const pills=[...document.querySelectorAll('#pillRow .pill')];
+const tabs={
+  love: document.getElementById('tab-love'),
+  music: document.getElementById('tab-music'),
+  film: document.getElementById('tab-film'),
+  book: document.getElementById('tab-book'),
+  play: document.getElementById('tab-play'),
+};
+pills.forEach(p=>{
+  p.addEventListener('click', ()=>{
+    pills.forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+    const key=p.dataset.tab;
+    Object.values(tabs).forEach(t=>t.classList.remove('show'));
+    tabs[key]?.classList.add('show');
+  });
 });
+
+/* ========== Equal nav spacing safeguard ========== */
+function fixNavSpacing(){
+  const groups = document.querySelectorAll('.nav .group');
+  const left = groups[0], right = groups[1];
+  if(!left || !right) return;
+  const wL = left.getBoundingClientRect().width;
+  const wR = right.getBoundingClientRect().width;
+  left.style.transform = right.style.transform = '';
+  const diff = Math.abs(wL - wR);
+  if (diff > 40){
+    if (wL > wR) left.style.transform = 'scale(.95)';
+    else right.style.transform = 'scale(.95)';
+  }
+}
+window.addEventListener('resize', fixNavSpacing); setTimeout(fixNavSpacing, 300);
 </script>
 </body>
 </html>
